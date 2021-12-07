@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnConfirm;
     ProgressDialog loadingBar;
 
-    TextView txttv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
