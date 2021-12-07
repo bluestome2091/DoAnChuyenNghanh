@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1026653163038",
+    "firebase_url": "https://shoesshop-ce407-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "shoesshop-ce407",
+    "storage_bucket": "shoesshop-ce407.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026653163038:android:c358bf7eb8311e10a6680f",
+        "android_client_info": {
+          "package_name": "vn.stu.edu.doancn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026653163038-rcl5pekkskk922d8t6r2oesudscndbgq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.stu.edu.doancn",
+            "certificate_hash": "fb4e7960914b35aadbf1ff7e8e0a8d30101279bb"
+          }
+        },
+        {
+          "client_id": "1026653163038-tocahusgkg2smi3bdiqbt0ck8oq61ueu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0waAXPk5HGmY2YxnYvYWsROjbt8-I--A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026653163038-tocahusgkg2smi3bdiqbt0ck8oq61ueu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
