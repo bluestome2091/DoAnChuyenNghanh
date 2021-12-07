@@ -51,6 +51,13 @@ public class Users {
 
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Users{" +
+                "Users='" + Users + '\'' +
+                ", Password='" + Password + '\'' +
+                ", Phonenumber='" + Phonenumber + '\'' +
+                ", Name='" + Name + '\'' +
+                '}';
+    }
 }
