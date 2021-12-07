@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText edtUser, edtPassword, edtConfirmPassword, edtPhuoneNumber, edtName;
     Button btnConfirm;
     ProgressDialog loadingBar;
+
+    TextView txttv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
