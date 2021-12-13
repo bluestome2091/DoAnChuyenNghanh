@@ -12,7 +12,7 @@ import vn.stu.edu.doancn.R;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
 
-    public TextView txtProductName, txtDecription;
+    public TextView txtProductName, txtDecription, txtProductPrice;
     public ImageView imageView;
     public ItemClickListner listner;
     public ProductViewHolder(@NonNull View itemView) {
@@ -28,8 +28,9 @@ public class ProductViewHolder extends RecyclerView.ViewHolder  implements View.
     }
     private void Create() {
         imageView = (ImageView) itemView.findViewById(R.id.product_image);
-        txtDecription = (TextView) itemView.findViewById(R.id.product_name);
+        txtProductName = (TextView) itemView.findViewById(R.id.product_name);
         txtDecription = (TextView) itemView.findViewById(R.id.product_description);
+        txtProductPrice = (TextView) itemView.findViewById(R.id.product_price);
     }
 
     @Override
