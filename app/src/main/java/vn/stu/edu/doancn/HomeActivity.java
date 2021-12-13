@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.databinding.ActivityHomeBinding;
+import vn.stu.edu.doancn.model.Products;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -61,6 +63,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        FirebaseRecyclerOptions<Products> options;
     }
 
     @Override
