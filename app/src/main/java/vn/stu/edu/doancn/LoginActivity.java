@@ -14,19 +14,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-
 import io.paperdb.Paper;
 import vn.stu.edu.doancn.Prevalent.Prevalent;
+import vn.stu.edu.doancn.Prevalent.PrevalentAdmin;
+import vn.stu.edu.doancn.admin.AdminCategoryActivity;
 import vn.stu.edu.doancn.model.Users;
+import vn.stu.edu.doancn.user.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
     EditText edtuser, edtpassword;
@@ -119,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Login Successfully....", Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
                             Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
+                            PrevalentAdmin.currentOnlineUser = usersData;
                             startActivity(intent);
                         }
                         else if(parentDbName.equals("Users"))

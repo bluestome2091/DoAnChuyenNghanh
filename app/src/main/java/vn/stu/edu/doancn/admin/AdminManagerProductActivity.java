@@ -1,11 +1,10 @@
-package vn.stu.edu.doancn;
+package vn.stu.edu.doancn.admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.app.appsearch.StorageInfo;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,17 +26,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.SimpleTimeZone;
+
+import vn.stu.edu.doancn.R;
 
 public class AdminManagerProductActivity extends AppCompatActivity {
     EditText InputProductName, InputProductPrice, InputProductCount, InputProductDescription;
     Button AddNewProduct;
     ImageView InputProductImage;
-    String CategoryName, Description, Count, Price, Name, saveCurrentDate, saveCurrentTime;
+    String Description, Count, Price, Name, saveCurrentDate, saveCurrentTime;
     String productRamdomKey, downloadImageURL;
     static final int GalleryPick = 1;
     Uri ImageUri;
@@ -49,7 +48,6 @@ public class AdminManagerProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_manager_product);
-        CategoryName = getIntent().getExtras().get("Category").toString();
         ProductImageRef = FirebaseStorage.getInstance().getReference().child("Product Images");
         ProductRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Create();
@@ -150,7 +148,6 @@ public class AdminManagerProductActivity extends AppCompatActivity {
         productMap.put("pid", productRamdomKey);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
-        productMap.put("Category", CategoryName);
         productMap.put("name", Name);
         productMap.put("price", Price);
         productMap.put("count", Count);

@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import io.paperdb.Paper;
 import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.model.Users;
+import vn.stu.edu.doancn.user.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button joinNowButton, loginButton;

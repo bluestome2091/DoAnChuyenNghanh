@@ -1,8 +1,7 @@
-package vn.stu.edu.doancn;
+package vn.stu.edu.doancn.user;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +30,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.paperdb.Paper;
+import vn.stu.edu.doancn.MainActivity;
 import vn.stu.edu.doancn.Prevalent.Prevalent;
+import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.ProductViewHolder;
 import vn.stu.edu.doancn.databinding.ActivityHomeBinding;
 import vn.stu.edu.doancn.model.Products;
@@ -53,7 +54,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(binding.getRoot());
 
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products"); // instance: lấy dữ liệu từ firebase, Reference là ánh xạ lại dữ liệu, child là gọi cái lớp products
-
+        //binding.appBarHome.toolbar
         setSupportActionBar(binding.appBarHome.toolbar);
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +101,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 } else if (id == R.id.nav_search) {
                     Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
                     startActivity(intent);
-                } else if (id == R.id.nav_categories) {
-
                 } else if (id == R.id.nav_settings) {
                     Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                     startActivity(intent);

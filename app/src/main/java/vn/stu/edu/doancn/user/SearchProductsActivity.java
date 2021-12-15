@@ -1,14 +1,16 @@
-package vn.stu.edu.doancn;
+package vn.stu.edu.doancn.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class CartActivity extends AppCompatActivity {
+import vn.stu.edu.doancn.R;
+
+public class SearchProductsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+        setContentView(R.layout.activity_search_products);
     }
 }

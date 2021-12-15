@@ -13,24 +13,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoAnCN">
         <activity
-            android:name=".SearchProductsActivity"
+            android:name=".admin.AdminManegerAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".CartActivity"
+            android:name=".admin.CreateAccountAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".user.SearchProductsActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".user.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.DoAnCN.NoActionBar" />
         <activity
-            android:name=".AdminManagerProductActivity"
+            android:name=".admin.AdminManagerProductActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminCategoryActivity"
+            android:name=".admin.AdminCategoryActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

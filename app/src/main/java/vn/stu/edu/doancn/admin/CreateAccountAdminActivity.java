@@ -1,14 +1,17 @@
-package vn.stu.edu.doancn;
+package vn.stu.edu.doancn.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class SearchProductsActivity extends AppCompatActivity {
+import vn.stu.edu.doancn.R;
+
+public class CreateAccountAdminActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_products);
+        setContentView(R.layout.activity_create_account_admin);
+
     }
 }
