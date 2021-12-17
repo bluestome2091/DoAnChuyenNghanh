@@ -1,17 +1,21 @@
 package vn.stu.edu.doancn.model;
 
 public class Users {
-    public Users(String users, String password, String phonenumber, String name) {
+    public Users(String users, String password, String phonenumber, String name, String image, String address) {
         Users = users;
         Password = password;
         Phonenumber = phonenumber;
         Name = name;
+        Image = image;
+        Address = address;
     }
 
     String Users;
     String Password;
     String Phonenumber;
     String Name;
+    String Image;
+    String Address;
 
     public String getName() {
         return Name;
@@ -45,6 +49,21 @@ public class Users {
         Phonenumber = phonenumber;
     }
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
 
     public Users()
     {
@@ -58,6 +77,8 @@ public class Users {
                 ", Password='" + Password + '\'' +
                 ", Phonenumber='" + Phonenumber + '\'' +
                 ", Name='" + Name + '\'' +
+                ", Image='" + Image + '\'' +
+                ", Address='" + Address + '\'' +
                 '}';
     }
 }
