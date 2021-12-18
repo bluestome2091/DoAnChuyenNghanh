@@ -1,9 +1,5 @@
 package vn.stu.edu.doancn.user;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,8 +28,8 @@ import com.google.firebase.storage.StorageTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+
 import java.util.HashMap;
-import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import vn.stu.edu.doancn.MainActivity;
@@ -59,8 +59,8 @@ public class SettingsActivity extends AppCompatActivity {
         userInfoDisplay(settings_profile_image, settings_name, settings_phone, settings_address);
     }
 
-    private void userInfoDisplay(CircleImageView settings_profile_image, EditText settings_name, EditText settings_phone, EditText settings_address) {
-        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getPhonenumber());
+    private void userInfoDisplay(CircleImageView settings_profile_image, EditText settings_name, EditText settings_phone, EditText settings_address)            {
+        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getUsers());
         UsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -118,7 +118,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && requestCode == RESULT_OK && data != null) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             imageUri = result.getUri();
             settings_profile_image.setImageURI(imageUri);
@@ -156,7 +156,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(SettingsActivity.this);
         progressDialog.setTitle("Upload Profile");
-        progressDialog.setMessage("Please wait, whilw we are updating your account information");
+        progressDialog.setMessage("Please wait, while we are updating your account information");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         if (imageUri != null) {
@@ -184,7 +184,8 @@ public class SettingsActivity extends AppCompatActivity {
                         userMap.put("address", settings_address.getText().toString());
                         userMap.put("image", myUrl);
 
-                        ref.child(Prevalent.currentOnlineUser.getPhonenumber()).updateChildren(userMap);
+
+                        ref.child(Prevalent.currentOnlineUser.getUsers()).updateChildren(userMap);
 
                         progressDialog.dismiss();
                         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
