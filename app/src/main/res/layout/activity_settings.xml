@@ -70,8 +70,8 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/settings_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_image_change_btn"
@@ -80,56 +80,109 @@
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
         android:hint="Name"
-        android:padding="10dp" />
+        android:padding="10dp">
 
-    <EditText
-        android:id="@+id/settings_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_name"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:inputType="number"
-        android:hint="Phone number"
-        android:padding="10dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lbName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:enabled="false"
+            android:hint="Name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            tools:ignore="MissingConstraints">
 
-    <EditText
-        android:id="@+id/settings_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_phone"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:hint="Address"
-        android:padding="10dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUsername_st"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/settings_password"
-        android:layout_width="267dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_address"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="15dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_address"
-        android:layout_marginStart="27dp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginBottom="15dp"
-        android:layout_toEndOf="@+id/settings_password"
-        android:layout_toRightOf="@+id/settings_password"
-        android:src="@drawable/editpassword" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lbPhone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:enabled="false"
+            android:hint="Phone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbName"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPhone_st"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lbAddress"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:enabled="false"
+            android:hint="Address"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbPhone"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtAddress_st"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lbPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:enabled="false"
+            android:hint="Password"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbAddress"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPassword_st"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit_st"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="15dp"
+            android:text="Edit Profile"
+            android:textAlignment="center"
+            android:paddingVertical="12dp"
+            app:cornerRadius="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbPassword" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

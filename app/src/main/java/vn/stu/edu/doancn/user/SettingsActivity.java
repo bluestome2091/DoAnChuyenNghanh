@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +40,7 @@ import vn.stu.edu.doancn.R;
 public class SettingsActivity extends AppCompatActivity {
 
     private CircleImageView settings_profile_image;
-    private EditText settings_name, settings_phone, settings_address;
+    private TextInputEditText settings_name, settings_phone, settings_address, settings_password;
     private TextView profile_image_change_btn, close_settings_btn, update_settings_btn;
 
     private Uri imageUri;
@@ -56,10 +57,10 @@ public class SettingsActivity extends AppCompatActivity {
         storageProfileReference = FirebaseStorage.getInstance().getReference().child("Profile pictures");
         addControls();
         addEvents();
-        userInfoDisplay(settings_profile_image, settings_name, settings_phone, settings_address);
+        userInfoDisplay(settings_profile_image, settings_name, settings_phone, settings_address, settings_password);
     }
 
-    private void userInfoDisplay(CircleImageView settings_profile_image, EditText settings_name, EditText settings_phone, EditText settings_address)            {
+    private void userInfoDisplay(CircleImageView settings_profile_image, TextInputEditText settings_name, TextInputEditText settings_phone, TextInputEditText settings_address, TextInputEditText settings_password)            {
         DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getUsers());
         UsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -70,11 +71,13 @@ public class SettingsActivity extends AppCompatActivity {
                         String name = snapshot.child("name").getValue().toString();
                         String phone = snapshot.child("phone").getValue().toString();
                         String address = snapshot.child("address").getValue().toString();
+                        String password = snapshot.child("password").getValue().toString();
 
                         Picasso.get().load(image).into(settings_profile_image);
                         settings_name.setText(name);
                         settings_phone.setText(phone);
                         settings_address.setText(address);
+                        settings_password.setText(password);
                     }
                 }
             }
@@ -135,6 +138,7 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("name", settings_name.getText().toString());
         userMap.put("phone", settings_phone.getText().toString());
         userMap.put("address", settings_address.getText().toString());
+        userMap.put("password", settings_password.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhonenumber()).updateChildren(userMap);
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
@@ -148,6 +152,8 @@ public class SettingsActivity extends AppCompatActivity {
             Toast.makeText(SettingsActivity.this, "Name is address", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(settings_phone.getText().toString())) {
             Toast.makeText(SettingsActivity.this, "Name is phone", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(settings_password.getText().toString())) {
+            Toast.makeText(SettingsActivity.this, "Name is password", Toast.LENGTH_SHORT).show();
         } else if (checker.equals("clicked")) {
             uploadImage();
         }
@@ -182,6 +188,7 @@ public class SettingsActivity extends AppCompatActivity {
                         userMap.put("name", settings_name.getText().toString());
                         userMap.put("phone", settings_phone.getText().toString());
                         userMap.put("address", settings_address.getText().toString());
+                        userMap.put("password", settings_password.getText().toString());
                         userMap.put("image", myUrl);
 
 
@@ -206,9 +213,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void addControls() {
         settings_profile_image = findViewById(R.id.settings_profile_image);
-        settings_name = findViewById(R.id.settings_name);
-        settings_phone = findViewById(R.id.settings_phone);
-        settings_address = findViewById(R.id.settings_address);
+        settings_name = findViewById(R.id.txtUsername_st);
+        settings_phone = findViewById(R.id.txtPhone_st);
+        settings_address = findViewById(R.id.txtAddress_st);
+        settings_password = findViewById(R.id.txtPassword_st);
         profile_image_change_btn = findViewById(R.id.profile_image_change_btn);
         close_settings_btn = findViewById(R.id.close_settings_btn);
         update_settings_btn = findViewById(R.id.update_settings_btn);
