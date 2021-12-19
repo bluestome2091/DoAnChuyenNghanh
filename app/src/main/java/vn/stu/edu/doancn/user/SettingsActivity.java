@@ -2,7 +2,9 @@ package vn.stu.edu.doancn.user;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
+import com.rey.material.widget.ImageButton;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -45,8 +48,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private CircleImageView settings_profile_image;
     private TextInputEditText settings_name, settings_phone, settings_address, settings_password;
-    private TextView profile_image_change_btn, close_settings_btn, update_settings_btn;
+    private TextView profile_image_change_btn, close_settings_btn, update_settings_btn, txtChange;
     private Button btnEditSt;
+
     private Uri imageUri;
     private String myUrl = "";
     private StorageReference storageProfileReference;
@@ -103,11 +107,7 @@ public class SettingsActivity extends AppCompatActivity {
         update_settings_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checker.equals("clicked")) {
-                    userInfoUpdated();
-                } else {
-                    updateOnlyUserInfo();
-                }
+               thongbaoThaydoi();
             }
         });
 
@@ -123,6 +123,76 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 xulyThaydoithongtin();
+            }
+        });
+
+        txtChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xulyThaydoiPassword();
+            }
+        });
+    }
+
+    private void thongbaoThaydoi() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(SettingsActivity.this);
+        builder.setIcon(R.drawable.iconsbell);
+        builder.setTitle("Thông báo");
+        builder.setMessage("Bạn có chắc muốn cập nhật");
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (checker.equals("clicked")) {
+                    userInfoUpdated();
+                } else {
+                    updateOnlyUserInfo();
+                }
+                Toast.makeText(SettingsActivity.this, "Đã cập nhật thành công", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { }
+        });
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void xulyThaydoiPassword() {
+        AlertDialog.Builder alert;
+        alert = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialogeditpassword, null);
+        TextInputEditText newpassword = view.findViewById(R.id.txtPassword_edt);
+        TextInputEditText confirmpassword = view.findViewById(R.id.txtConfirmPassword_edt);
+        Button btnSavePassword = view.findViewById(R.id.btnSavePassword);
+        Button btnCanclePassword = view.findViewById(R.id.btnCanclePassword);
+
+        alert.setView(view);
+        alert.setCancelable(true);
+
+        AlertDialog dialog = alert.create();
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+
+        btnSavePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String passwordmoi = newpassword.getText().toString();
+                String xacnhanpass = confirmpassword.getText().toString();
+                if(passwordmoi.equals(xacnhanpass)) {
+                    settings_password.setText(passwordmoi);
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(SettingsActivity.this, "Mật khẩu không trùng khớp, vui lòng nhập lại!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btnCanclePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
@@ -188,9 +258,10 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("name", settings_name.getText().toString());
         userMap.put("phone", settings_phone.getText().toString());
         userMap.put("address", settings_address.getText().toString());
+        userMap.put("password", settings_password.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhonenumber()).updateChildren(userMap);
-        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-        Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
+//        Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -241,7 +312,7 @@ public class SettingsActivity extends AppCompatActivity {
                         ref.child(Prevalent.currentOnlineUser.getUsers()).updateChildren(userMap);
 
                         progressDialog.dismiss();
-                        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
                         Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -267,5 +338,6 @@ public class SettingsActivity extends AppCompatActivity {
         close_settings_btn = findViewById(R.id.close_settings_btn);
         update_settings_btn = findViewById(R.id.update_settings_btn);
         btnEditSt = findViewById(R.id.btnEditSt);
+        txtChange = findViewById(R.id.txtChange);
     }
 }
