@@ -100,7 +100,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtUsername_st"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +124,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPhone_st"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -145,7 +147,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtAddress_st"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -167,7 +170,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPassword_st"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

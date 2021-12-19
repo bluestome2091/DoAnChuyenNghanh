@@ -1,11 +1,16 @@
 package vn.stu.edu.doancn.user;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +47,8 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView settings_profile_image;
     private TextInputEditText settings_name, settings_phone, settings_address, settings_password;
     private TextView profile_image_change_btn, close_settings_btn, update_settings_btn;
+    private TextInputEditText txtUsername_st_edit, txtAddress_st_edit, txtPhone_st_edit;
+    private Button btnConfirm_edit, btnEdit_st;
 
     private Uri imageUri;
     private String myUrl = "";
@@ -73,7 +80,7 @@ public class SettingsActivity extends AppCompatActivity {
                         String address = snapshot.child("address").getValue().toString();
                         String password = snapshot.child("password").getValue().toString();
 
-                        Picasso.get().load(image).into(settings_profile_image);
+                        //Picasso.get().load(image).into(settings_profile_image);
                         settings_name.setText(name);
                         settings_phone.setText(phone);
                         settings_address.setText(address);
@@ -116,6 +123,55 @@ public class SettingsActivity extends AppCompatActivity {
                         .start(SettingsActivity.this);
             }
         });
+
+        btnEdit_st.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xulyEditProfile();
+            }
+        });
+
+    }
+
+    private void xulyEditProfile() {
+        AlertDialog.Builder builder;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            builder = new AlertDialog.Builder(SettingsActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(SettingsActivity.this);
+        }
+
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_settings_profile, null);
+
+        txtUsername_st_edit = view.findViewById(R.id.txtUsername_st);
+        txtPhone_st_edit= view.findViewById(R.id.txtPhone_st_edit);
+        txtAddress_st_edit = view.findViewById(R.id.txtAddress_st_edit);
+        btnConfirm_edit = view.findViewById(R.id.btnConfirm_edit);
+
+        builder.setView(view);
+        builder.setCancelable(false);
+
+        btnConfirm_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent =getIntent();
+//                //c1:
+//                name = txtUsername_st_edit.getText().toString();
+//                String phone = txtPhone_st_edit.getText().toString();
+//                String address = txtAddress_st_edit.getText().toString();
+                //c2:
+                settings_name.setText(txtUsername_st_edit.getText().toString());
+                settings_address.setText(txtAddress_st_edit.getText().toString());
+                settings_phone.setText(txtPhone_st_edit.getText().toString());
+
+                Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
     }
 
     @Override
@@ -220,5 +276,6 @@ public class SettingsActivity extends AppCompatActivity {
         profile_image_change_btn = findViewById(R.id.profile_image_change_btn);
         close_settings_btn = findViewById(R.id.close_settings_btn);
         update_settings_btn = findViewById(R.id.update_settings_btn);
+        btnEdit_st = findViewById(R.id.btnEdit_st);
     }
 }

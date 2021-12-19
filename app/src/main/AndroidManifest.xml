@@ -16,12 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoAnCN">
         <activity
-            android:name=".user.EditPassowrdActivity"
-            android:exported="false" />
-        <activity
-            android:name=".user.EditSettingsActivity"
-            android:exported="false" />
-        <activity
             android:name=".admin.AdminManegerAccountActivity"
             android:exported="false" />
         <activity
