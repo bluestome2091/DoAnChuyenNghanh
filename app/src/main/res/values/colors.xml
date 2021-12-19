@@ -10,4 +10,5 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#6FFFB9</color>
     <color name="colorAccent">#0D67FF</color>
+    <color name="pray">#707070</color>
 </resources>

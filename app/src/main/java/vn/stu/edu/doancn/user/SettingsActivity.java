@@ -1,11 +1,14 @@
 package vn.stu.edu.doancn.user;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         storageProfileReference = FirebaseStorage.getInstance().getReference().child("Profile pictures");
         addControls();
-//        addEvents();
+        addEvents();
         userInfoDisplay();
     }
 
@@ -114,6 +117,53 @@ public class SettingsActivity extends AppCompatActivity {
                 checker = "clicked";
                 CropImage.activity(imageUri).setAspectRatio(1, 1)
                         .start(SettingsActivity.this);
+            }
+        });
+        btnEditSt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xulyThaydoithongtin();
+            }
+        });
+    }
+
+    private void xulyThaydoithongtin() {
+        AlertDialog.Builder alert;
+        alert = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        LayoutInflater inflater = getLayoutInflater();
+        View view  = inflater.inflate(R.layout.dialogeditprofile, null);
+        TextInputEditText name  = view.findViewById(R.id.txtName_edt);
+        TextInputEditText phone  = view.findViewById(R.id.txtPhone_edt);
+        TextInputEditText addresss  = view.findViewById(R.id.txtAddress_edt);
+        Button btnSave = view.findViewById(R.id.btnSaveProfile);
+        Button btnCancle = view.findViewById(R.id.btnCancleProfile);
+        name.setText(settings_name.getText().toString());
+        phone.setText(settings_phone.getText().toString());
+        addresss.setText(settings_address.getText().toString());
+
+        alert.setView(view);
+        alert.setCancelable(true);
+
+        AlertDialog dialog = alert.create();
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ten = name.getText().toString();
+                String dt = phone.getText().toString();
+                String diachi = addresss.getText().toString();
+                settings_name.setText(ten);
+                settings_phone.setText(dt);
+                settings_address.setText(diachi);
+                dialog.dismiss();
+
+            }
+        });
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
