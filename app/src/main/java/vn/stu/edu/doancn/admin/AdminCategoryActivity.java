@@ -13,7 +13,7 @@ import vn.stu.edu.doancn.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
     LinearLayout sanpham, taikhoan, hoadon;
-    String checkPermission = "nguyenkhanh";
+    String checkPermission = "123";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

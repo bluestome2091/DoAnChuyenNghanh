@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull Products products) {
                 productViewHolder.txtProductName.setText(products.getName());
-                productViewHolder.txtProductPrice.setText("Price = " + products.getPrice() + "VND");
+                productViewHolder.txtProductPrice.setText("Price: " + products.getPrice() + " VND");
                 productViewHolder.txtDecription.setText(products.getDescription());
                 Picasso.get().load(products.getImage()).into(productViewHolder.imageView);
             }
