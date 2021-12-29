@@ -3,12 +3,18 @@ package vn.stu.edu.doancn.user;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,12 +23,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+
+import vn.stu.edu.doancn.Prevalent.PrevalentAdmin;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.model.Products;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
 //    private FloatingActionButton add_product_to_cart;
+    private Button btnadd_to_cart;
     private ImageView product_image_details;
     private ElegantNumberButton number_btn;
     private TextView txtProductname_details, txtDescription_details, txtPrice_details;
@@ -62,6 +74,54 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+        btnadd_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToCartList();
+            }
+        });
+    }
+
+    private void addToCartList() {
+        String saveCurrentTime, saveCurrentDate;
+
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calForDate.getTime());
+
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        final HashMap<String, Object> cartMap = new HashMap<>();
+        cartMap.put("pid", productID);
+        cartMap.put("name", txtProductname_details.getText().toString());
+        cartMap.put("price", txtPrice_details.getText().toString());
+        cartMap.put("date", saveCurrentDate);
+        cartMap.put("time", saveCurrentTime);
+        cartMap.put("quatity", number_btn.getNumber());
+        cartMap.put("discount", "");
+
+        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhonenumber())
+                .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    cartListRef.child("User View").child(PrevalentAdmin.currentOnlineUser.getPhonenumber())
+                            .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(ProductDetailsActivity.this, "Added to cart list", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
     }
 
     private void addControls() {
@@ -72,5 +132,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         txtPrice_details=findViewById(R.id.txtPrice_details);
         txtDescription_details=findViewById(R.id.txtDescription_details);
         productID = getIntent().getStringExtra("pid");
+        btnadd_to_cart=findViewById(R.id.btnadd_to_cart);
     }
 }
