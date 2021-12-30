@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AdminManegerAccountActivity">
+    tools:context=".admin.AdminManegerAccountActivity"
+    android:background="@color/white">
 
     <TextView
         android:textAlignment="center"
@@ -20,16 +21,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
+        android:layout_marginLeft="20dp"
         android:id="@+id/lvAccoutAdmin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/textView2"
         android:scrollbars="vertical">
-
     </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabThem"
+        android:id="@+id/fabThemProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -1,9 +1,22 @@
 package vn.stu.edu.doancn.model;
 
 public class Products {
-    private String count, name, category, price, date, image, description, pid, time;
+    private String id, count, name, category, price, date, image, description, pid, time;
 
     public Products() {
+    }
+
+    public Products(String id, String count, String name, String category, String price, String date, String image, String description, String pid, String time) {
+        this.id = id;
+        this.count = count;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.date = date;
+        this.image = image;
+        this.description = description;
+        this.pid = pid;
+        this.time = time;
     }
 
     public Products(String count, String name, String category, String price, String date, String image, String description, String pid, String time) {
@@ -16,6 +29,14 @@ public class Products {
         this.description = description;
         this.pid = pid;
         this.time = time;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCount() {

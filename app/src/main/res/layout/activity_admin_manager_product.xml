@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AdminManagerProduct">
+    tools:context=".admin.AdminManagerProduct"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar1"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@color/white">
+
+        <ImageButton
+            android:id="@+id/btnManagerProductExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:src="@drawable/leftarrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Danh sách sản phẩm"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="italic|bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ListView
+        android:layout_marginTop="10dp"
+        android:id="@+id/lvManagerProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar1" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabThem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="36dp"
+
+        android:backgroundTint="@color/colorAccent"
+        app:srcCompat="@drawable/addadmin" />
+</RelativeLayout>

@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoAnCN">
         <activity
+            android:name=".admin.AdminDetailsProduct"
+            android:exported="false" />
+        <activity
             android:name=".admin.AdminManagerProduct"
             android:exported="false" />
         <activity
