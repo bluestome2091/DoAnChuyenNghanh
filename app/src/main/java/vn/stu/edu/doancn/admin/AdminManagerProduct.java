@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +29,7 @@ public class AdminManagerProduct extends AppCompatActivity {
     private ImageButton btnExit;
     private ArrayList<Products> dssp;
     private AdapterProductAdmin adapter;
+    private FloatingActionButton fabThem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,13 @@ public class AdminManagerProduct extends AppCompatActivity {
                 finish();
             }
         });
+        fabThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminManagerProduct.this, AdminAddProductActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addControls() {
@@ -54,6 +63,7 @@ public class AdminManagerProduct extends AppCompatActivity {
         dssp =  new ArrayList<>();
         adapter = new AdapterProductAdmin(this, R.layout.viewmanagerproduct,dssp);
         lv.setAdapter(adapter);
+        fabThem = findViewById(R.id.fabThemProduct);
     }
 
     @Override

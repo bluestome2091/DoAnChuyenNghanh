@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import vn.stu.edu.doancn.R;
+import vn.stu.edu.doancn.adapter.AdapterProductAdmin;
 
 public class AdminAddProductActivity extends AppCompatActivity {
     TextInputEditText InputProductId, InputProductName, InputProductPrice, InputProductSize, InputProductCount, InputProductDescription;
@@ -68,14 +69,13 @@ public class AdminAddProductActivity extends AppCompatActivity {
         AddNewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AddProduct();
             }
         });
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminAddProductActivity.this, AdminCategoryActivity.class);
+                Intent intent = new Intent(AdminAddProductActivity.this, AdapterProductAdmin.class);
                 startActivity(intent);
                 finish();
             }
