@@ -34,7 +34,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (PrevalentAdmin.currentOnlineUser.getUsers().equals(checkPermission)){
-                    Intent intent = new Intent(AdminCategoryActivity.this, AdminManegerAccountActivity.class);
+                    Intent intent = new Intent(AdminCategoryActivity.this, AdminManegerAccountActivity2.class);
                     startActivity(intent);
                     Toast.makeText(AdminCategoryActivity.this, checkPermission, Toast.LENGTH_SHORT).show();
                 }

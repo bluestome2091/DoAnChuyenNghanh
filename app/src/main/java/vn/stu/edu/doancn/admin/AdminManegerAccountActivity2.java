@@ -1,40 +1,29 @@
 package vn.stu.edu.doancn.admin;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import vn.stu.edu.doancn.R;
-import vn.stu.edu.doancn.ViewHolder.AdminAccountViewHolder;
-import vn.stu.edu.doancn.ViewHolder.ProductViewHolder;
 import vn.stu.edu.doancn.adapter.AdapterAccountAdmin;
-import vn.stu.edu.doancn.model.Products;
 import vn.stu.edu.doancn.model.Users;
 
-public class AdminManegerAccountActivity extends AppCompatActivity {
+public class AdminManegerAccountActivity2 extends AppCompatActivity {
     private DatabaseReference AdminRef;
     private ListView lvAdmin;
     private FloatingActionButton btnThem;
@@ -45,26 +34,25 @@ public class AdminManegerAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin_maneger_account2);
         addControls();
         addEvents();
     }
-
     private void addEvents() {
         fabThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminManegerAccountActivity.this, CreateAccountAdminActivity.class);
+                Intent intent = new Intent(AdminManegerAccountActivity2.this, CreateAccountAdminActivity.class);
                 startActivity(intent);
             }
         });
     }
 
     private void addControls() {
-        setContentView(R.layout.activity_admin_maneger_account);
-        btnThem = findViewById(R.id.fabThem);
+        btnThem = findViewById(R.id.fabThemAccount);
         AdminRef = FirebaseDatabase.getInstance().getReference().child("Admins");
         lvAdmin = findViewById(R.id.lvAccoutAdmin);
-        fabThem = findViewById(R.id.fabThem);
+        fabThem = findViewById(R.id.fabThemAccount);
         dsAdmin = new ArrayList<>();
         adapter = new AdapterAccountAdmin(this, R.layout.viewadminaccount, dsAdmin);
         lvAdmin.setAdapter(adapter);
@@ -90,7 +78,7 @@ public class AdminManegerAccountActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(AdminManegerAccountActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminManegerAccountActivity2.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

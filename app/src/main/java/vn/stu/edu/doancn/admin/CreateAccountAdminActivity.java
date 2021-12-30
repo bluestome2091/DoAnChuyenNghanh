@@ -94,7 +94,7 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(CreateAccountAdminActivity.this, "Your Account is created", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
-                                Intent intent = new Intent(CreateAccountAdminActivity.this, AdminManegerAccountActivity.class);
+                                Intent intent = new Intent(CreateAccountAdminActivity.this, AdminManegerAccountActivity2.class);
                                 startActivity(intent);
                             } else {
                                 loadingBar.dismiss();
