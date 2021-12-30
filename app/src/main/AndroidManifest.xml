@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoAnCN"
         tools:replace="android:theme">
-
+        <activity
+            android:name=".user.ConfirmFinalOrderActivity"
+            android:exported="false" />
         <activity
             android:name=".user.ProductDetailsActivity"
             android:exported="false" />

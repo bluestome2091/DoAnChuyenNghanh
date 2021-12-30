@@ -75,10 +75,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="15dp"
+
         android:text="Add to cart"
-        tools:layout_editor_absoluteX="-8dp"
-        tools:layout_editor_absoluteY="592dp"
-        android:textSize="18dp">
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number_btn">
 
     </Button>
 

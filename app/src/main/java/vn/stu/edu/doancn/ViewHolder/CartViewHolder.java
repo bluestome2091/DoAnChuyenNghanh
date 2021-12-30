@@ -10,7 +10,7 @@ import vn.stu.edu.doancn.R;
 
 public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView txtcart_product_name, txtcart_product_quatity, txtcart_product_price;
-    private ItemClickListner itemClickListener;
+    private ItemClickListner ClickListener;
 
     public CartViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -26,11 +26,11 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        itemClickListener.onClick(v, getAdapterPosition(), false);
+        ClickListener.onClick(v, getAdapterPosition(), false);
     }
 
     public void setItemClickListener(ItemClickListner itemClickListener) {
-        this.itemClickListener = itemClickListener;
+        this.ClickListener = itemClickListener;
 
     }
 }

@@ -1,11 +1,5 @@
 package vn.stu.edu.doancn.user;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import vn.stu.edu.doancn.Prevalent.PrevalentAdmin;
+import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.CartViewHolder;
 import vn.stu.edu.doancn.model.Cart;
@@ -34,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private Button btnnext_process;
     private TextView txttotal_price;
+//    private int overTotalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +49,20 @@ public class CartActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
-        FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>().setQuery(cartListRef.child("User View")
-        .child(Prevalent.currentOnlineUser.getPhonenumber()).child("Products"), Cart.class).build();
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
 
-        FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>() {
+        FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>().setQuery(cartListRef.child("Users")
+        .child(Prevalent.currentOnlineUser.getUsers()).child("Products"), Cart.class).build();
+
+        FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder cartViewHolder, int i, @NonNull Cart cart) {
-                cartViewHolder.txtcart_product_name.setText("Quatity: " + model.getQuaity());
-                cartViewHolder.txtcart_product_price.setText("Price: " + model.getPrice() + "$");
-                cartViewHolder.txtcart_product_name.setText(model.getName());
+                cartViewHolder.txtcart_product_quatity.setText("Quatity: " + cart.getQuatity());
+                cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + "$");
+                cartViewHolder.txtcart_product_name.setText(cart.getName());
+
+//                int oneTypeProductPrice = ((Integer.valueOf(cart.getPrice()))) * Integer.valueOf(cart.getQuatity());
+//                overTotalPrice = overTotalPrice + oneTypeProductPrice;
 
                 cartViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -72,17 +77,17 @@ public class CartActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if(which == 0){
                                     Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
-                                    intent.putExtra("pid", model.getPid());
+                                    intent.putExtra("pid", cart.getPid());
                                     startActivity(intent);
                                 }
                                 if (which == 1){
-                                    cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhonenumber()).child("Products")
-                                            .child(model.getPid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    cartListRef.child("Users").child(Prevalent.currentOnlineUser.getUsers()).child("Products")
+                                            .child(cart.getPid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
                                                 Toast.makeText(CartActivity.this, "Item remove seccessfull", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(CartActivity.this, HomeActivity.class);
+                                                Intent intent = new Intent(CartActivity.this, CartActivity.class);
                                                 startActivity(intent);
                                             }
                                         }
@@ -108,6 +113,17 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void addEvents() {
+//        btnnext_process.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                txttotal_price.setText("Total Price: $" + String.valueOf(overTotalPrice));
+//
+//                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+//                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
     }
 
     private void addControls() {

@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.Prevalent.PrevalentAdmin;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.model.Products;
@@ -92,7 +92,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
+        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
         final HashMap<String, Object> cartMap = new HashMap<>();
         cartMap.put("pid", productID);
         cartMap.put("name", txtProductname_details.getText().toString());
@@ -102,12 +102,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("quatity", number_btn.getNumber());
         cartMap.put("discount", "");
 
-        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhonenumber())
+        cartListRef.child("Users").child(Prevalent.currentOnlineUser.getUsers())
                 .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    cartListRef.child("User View").child(PrevalentAdmin.currentOnlineUser.getPhonenumber())
+                    cartListRef.child("AdminsView").child(Prevalent.currentOnlineUser.getUsers())
                             .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
