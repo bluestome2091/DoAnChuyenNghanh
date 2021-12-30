@@ -26,7 +26,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         sanpham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminManagerProductActivity.class);
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminAddProductActivity.class);
                 startActivity(intent);
             }
         });

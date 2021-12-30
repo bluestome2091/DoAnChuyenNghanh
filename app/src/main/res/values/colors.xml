@@ -11,4 +11,6 @@
     <color name="colorPrimaryDark">#6FFFB9</color>
     <color name="colorAccent">#0D67FF</color>
     <color name="pray">#707070</color>
+    <color name="pratlight">#C5C3C3</color>
+    <color name="bluelight">#6FD0FB</color>
 </resources>

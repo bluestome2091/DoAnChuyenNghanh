@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoAnCN">
         <activity
+            android:name=".admin.AdminManagerProduct"
+            android:exported="false" />
+        <activity
             android:name=".user.ProductDetailsActivity"
             android:exported="false" />
         <activity
@@ -39,7 +42,7 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.DoAnCN.NoActionBar" />
         <activity
-            android:name=".admin.AdminManagerProductActivity"
+            android:name=".admin.AdminAddProductActivity"
             android:exported="false" />
         <activity
             android:name=".admin.AdminCategoryActivity"

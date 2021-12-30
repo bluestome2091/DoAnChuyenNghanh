@@ -1,0 +1,14 @@
+package vn.stu.edu.doancn.admin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class AdminManagerProduct extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin_manager_product);
+    }
+}
