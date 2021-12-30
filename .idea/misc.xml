@@ -79,6 +79,7 @@
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_manager_product.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_maneger_account.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_cart.xml" value="0.2477355072463768" />
+        <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.23867753623188406" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_create_account_admin.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_home.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_login.xml" value="0.2477355072463768" />
@@ -87,9 +88,11 @@
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_search_products.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/activity_settings.xml" value="0.152" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/app_bar_home.xml" value="0.2477355072463768" />
+        <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/cart_item_layout.xml" value="0.23867753623188406" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/content_home.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/dialogeditpassword.xml" value="0.22010869565217392" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/dialogeditprofile.xml" value="0.22010869565217392" />
+        <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/fragment_gallery.xml" value="0.23867753623188406" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/fragment_home.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/fragment_slideshow.xml" value="0.2477355072463768" />
         <entry key="..\:/luu bai/DoAnChuyenNghanh/app/src/main/res/layout/nav_header_home.xml" value="0.2477355072463768" />
