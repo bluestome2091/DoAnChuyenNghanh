@@ -1,9 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".admin.CreateAccountAdminActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbaradmin"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/white" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/lbUsernameAdmin"
+        android:hint="Tài khoản"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbaradmin"
+        app:layout_constraintHorizontal_bias="1.0"
+
+        app:startIconDrawable="@drawable/ic_baseline_person_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtUsernameAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/lbPasswordAdmin"
+        android:layout_below="@+id/lbUsernameAdmin"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/txtPasswordAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/lbNameAdmin"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbPasswordAdmin"
+        android:hint="Tên nhân viên"
+        app:layout_constraintHorizontal_bias="1.0"
+
+        app:startIconDrawable="@drawable/ic_baseline_person_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_marginTop="20dp"
+            android:id="@+id/txtNameAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:id="@+id/lbSDTAdmin"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbNameAdmin"
+        android:hint="Số điện thoại"
+        app:layout_constraintHorizontal_bias="1.0"
+
+        app:startIconDrawable="@drawable/ic_baseline_phone_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtSDTAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnThemTkAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbSDTAdmin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/buttons"
+
+        android:text="Thêm" />
+</RelativeLayout>

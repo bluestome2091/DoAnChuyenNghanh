@@ -1,6 +1,10 @@
 package vn.stu.edu.doancn.model;
 
-public class Users {
+import com.google.firebase.database.DatabaseReference;
+
+import java.io.Serializable;
+
+public class Users implements Serializable {
     public Users(String users, String password, String phonenumber, String name, String image, String address) {
         Users = users;
         Password = password;

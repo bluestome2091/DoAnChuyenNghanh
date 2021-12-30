@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -39,10 +41,22 @@ public class AdminManegerAccountActivity extends AppCompatActivity {
     private ArrayList<Users> dsAdmin;
     private RecyclerView recyclerViewAccountAdmin;
     private AdapterAccountAdmin adapter;
+    private FloatingActionButton fabThem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addControls();
+        addEvents();
+    }
+
+    private void addEvents() {
+        fabThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminManegerAccountActivity.this, CreateAccountAdminActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void addControls() {
@@ -50,9 +64,11 @@ public class AdminManegerAccountActivity extends AppCompatActivity {
         btnThem = findViewById(R.id.fabThem);
         AdminRef = FirebaseDatabase.getInstance().getReference().child("Admins");
         lvAdmin = findViewById(R.id.lvAccoutAdmin);
+        fabThem = findViewById(R.id.fabThem);
         dsAdmin = new ArrayList<>();
         adapter = new AdapterAccountAdmin(this, R.layout.viewadminaccount, dsAdmin);
         lvAdmin.setAdapter(adapter);
+
     }
 
     @Override
@@ -74,7 +90,7 @@ public class AdminManegerAccountActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(AdminManegerAccountActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

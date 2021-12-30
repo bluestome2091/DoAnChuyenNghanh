@@ -44,8 +44,13 @@
         <entry key="..\:/DoanChuyenNganh/DoAnChuyenNghanh/app/src/main/res/layout/products_items_layout.xml" value="0.19882246376811594" />
         <entry key="..\:/DoanChuyenNganh/DoAnChuyenNghanh/app/src/main/res/menu/activity_main_drawer.xml" value="0.275" />
         <entry key="..\:/DoanChuyenNganh/DoAnChuyenNghanh/app/src/main/res/menu/home.xml" value="0.275" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/drawable-v24/ic_baseline_lock_24.xml" value="0.37864583333333335" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/drawable/desgin.xml" value="0.37864583333333335" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/drawable/ic_baseline_phone_24.xml" value="0.37864583333333335" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.37864583333333335" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_manager_product.xml" value="0.3625" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_maneger_account.xml" value="0.1953125" />
-        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_create_account_admin.xml" value="0.1953125" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_create_account_admin.xml" value="0.33" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_home.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_login.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_main.xml" value="0.1953125" />
@@ -55,13 +60,16 @@
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/activity_settings.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/app_bar_home.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/content_home.xml" value="0.1953125" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/demo.xml" value="0.3625" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/dialogeditpassword.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/dialogeditprofile.xml" value="0.1953125" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/dialogsuaaccountadmin.xml" value="0.35833333333333334" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/fragment_gallery.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/fragment_home.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/fragment_slideshow.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/nav_header_home.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/products_items_layout.xml" value="0.1953125" />
+        <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/top_app_bar.xml" value="0.3625" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/layout/viewadminaccount.xml" value="0.5" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/menu/activity_main_drawer.xml" value="0.1953125" />
         <entry key="..\:/daanchuyennghanh/DoAnChuyenNghanh/DoAnChuyenNghanh/app/src/main/res/menu/home.xml" value="0.1953125" />

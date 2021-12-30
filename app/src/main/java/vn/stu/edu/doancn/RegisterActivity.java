@@ -78,45 +78,43 @@ public class RegisterActivity extends AppCompatActivity {
     private void ValidatephoneNumber(String user, String password, String phone, String name) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
-//        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (!(snapshot.child("Users").child(user).exists())) {
-//                    HashMap<String, Object> userdataMap = new HashMap<>();
-//                    userdataMap.put("Users", user);
-//                    userdataMap.put("Password", password);
-//                    userdataMap.put("Phonenumber", phone);
-//                    userdataMap.put("Name", name);
-//                    RootRef.child("Users").child(user).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                Toast.makeText(RegisterActivity.this, "Your Account is created", Toast.LENGTH_SHORT).show();
-//                                loadingBar.dismiss();
-//                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-//                                startActivity(intent);
-//                            } else {
-//                                loadingBar.dismiss();
-//                                Toast.makeText(RegisterActivity.this, "Network error", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//
-//
-//                } else {
-//                    Toast.makeText(RegisterActivity.this, "This user is exist", Toast.LENGTH_SHORT).show();
-//                    loadingBar.dismiss();
-//                    Toast.makeText(RegisterActivity.this, "Please use another User", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!(snapshot.child("Users").child(user).exists())) {
+                    HashMap<String, Object> userdataMap = new HashMap<>();
+                    userdataMap.put("Users", user);
+                    userdataMap.put("Password", password);
+                    userdataMap.put("Phonenumber", phone);
+                    userdataMap.put("Name", name);
+                    RootRef.child("Users").child(user).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Your Account is created", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                loadingBar.dismiss();
+                                Toast.makeText(RegisterActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(RegisterActivity.this, "This user is exist", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                    Toast.makeText(RegisterActivity.this, "Please use another User", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
