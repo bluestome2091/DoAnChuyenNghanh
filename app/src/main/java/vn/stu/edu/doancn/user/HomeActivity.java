@@ -59,8 +59,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+               startActivity(intent);
             }
         });
 
@@ -107,7 +107,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 } else if (id == R.id.nav_search) {
                     Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
                     startActivity(intent);
-
                 } else if (id == R.id.nav_settings) {
                     Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
                     startActivity(intent);
@@ -135,9 +134,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             @Override
             protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull Products products) {
                 productViewHolder.txtProductName.setText(products.getName());
-                productViewHolder.txtProductPrice.setText("Price: " + products.getPrice() + " VND");
+                productViewHolder.txtProductPrice.setText("Price: " + products.getPrice() + "VND");
                 productViewHolder.txtDecription.setText(products.getDescription());
                 Picasso.get().load(products.getImage()).into(productViewHolder.imageView);
+
+                productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                        intent.putExtra("id", products.getId());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @NonNull
