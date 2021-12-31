@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,21 +34,22 @@ import vn.stu.edu.doancn.model.Products;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-//    private FloatingActionButton add_product_to_cart;
-    private Button btnadd_to_cart;
-    private ImageView product_image_details;
-    private ElegantNumberButton number_btn;
-    private TextView txtProductname_details, txtDescription_details, txtPrice_details;
-    private String productID = "";
+    //    private FloatingActionButton add_product_to_cart;
+    Button btnadd_to_cart;
+    ImageView product_image_details;
+    ElegantNumberButton number_btn;
+    TextView txtProductname_details, txtDescription_details, txtPrice_details;
+    Products tamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
         Intent intent = getIntent();
-        productID = intent.getStringExtra("id");
-        addControls();
-        addEvents();
+        tamp = (Products) intent.getSerializableExtra("id");
+        String productID = tamp.getId();
+        addControls(productID);
+        addEvents(productID);
         getProductDetails(productID);
     }
 
@@ -57,7 +59,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productsRef.child(productID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     Products products = snapshot.getValue(Products.class);
 
                     txtProductname_details.setText(products.getName());
@@ -74,16 +76,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void addEvents() {
+    private void addEvents(String productID) {
         btnadd_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToCartList();
+                addToCartList(productID);
             }
         });
     }
 
-    private void addToCartList() {
+    private void addToCartList(String productID) {
         String saveCurrentTime, saveCurrentDate;
 
         Calendar calForDate = Calendar.getInstance();
@@ -112,7 +114,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(ProductDetailsActivity.this, "Added to cart list", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                 startActivity(intent);
@@ -125,14 +127,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void addControls() {
+    private void addControls(String productID) {
 //        add_product_to_cart=findViewById(R.id.add_product_to_cart);
-        product_image_details=findViewById(R.id.product_image_details);
-        number_btn=findViewById(R.id.number_btn);
-        txtProductname_details=findViewById(R.id.txtProductname_details);
-        txtPrice_details=findViewById(R.id.txtPrice_details);
-        txtDescription_details=findViewById(R.id.txtDescription_details);
+        product_image_details = findViewById(R.id.product_image_details);
+        number_btn = findViewById(R.id.number_btn);
+        txtProductname_details = findViewById(R.id.txtProductname_details);
+        txtPrice_details = findViewById(R.id.txtPrice_details);
+        txtDescription_details = findViewById(R.id.txtDescription_details);
         productID = getIntent().getStringExtra("pid");
-        btnadd_to_cart=findViewById(R.id.btnadd_to_cart);
+        btnadd_to_cart = findViewById(R.id.btnadd_to_cart);
     }
 }

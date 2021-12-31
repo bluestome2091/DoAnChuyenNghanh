@@ -178,7 +178,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
         productMap.put("count", Count);
         productMap.put("description", Description);
         productMap.put("image", downloadImageURL);
-
+        productMap.put("id", id);
         ProductRef.child(id).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
