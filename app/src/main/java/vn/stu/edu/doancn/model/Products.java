@@ -1,9 +1,25 @@
 package vn.stu.edu.doancn.model;
 
-public class Products {
-    private String count, name, category, price, date, image, description, pid, time;
+import java.io.Serializable;
+
+public class Products implements Serializable {
+    private String id, count, name, category, price, date, image, description, pid, time, size;
 
     public Products() {
+    }
+
+    public Products(String id, String count, String name, String category, String price, String date, String image, String description, String pid, String time, String size) {
+        this.id = id;
+        this.count = count;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.date = date;
+        this.image = image;
+        this.description = description;
+        this.pid = pid;
+        this.time = time;
+        this.size = size;
     }
 
     public Products(String count, String name, String category, String price, String date, String image, String description, String pid, String time) {
@@ -16,6 +32,21 @@ public class Products {
         this.description = description;
         this.pid = pid;
         this.time = time;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCount() {

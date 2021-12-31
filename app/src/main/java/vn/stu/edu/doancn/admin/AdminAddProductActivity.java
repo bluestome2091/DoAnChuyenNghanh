@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -31,12 +33,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import vn.stu.edu.doancn.R;
+import vn.stu.edu.doancn.adapter.AdapterProductAdmin;
 
-public class AdminManagerProductActivity extends AppCompatActivity {
-    EditText InputProductName, InputProductPrice, InputProductCount, InputProductDescription;
+public class AdminAddProductActivity extends AppCompatActivity {
+    TextInputEditText InputProductId, InputProductName, InputProductPrice, InputProductSize, InputProductCount, InputProductDescription;
+    TextInputLayout lbInputProductId, lbInputProductName, lbInputProductPrice, lbInputProductSize, lbInputProductCount, lbInputProductDescription;
     Button AddNewProduct;
+    ImageButton btnExit;
     ImageView InputProductImage;
-    String Description, Count, Price, Name, saveCurrentDate, saveCurrentTime;
+    String Description, Count, Price, Name, id, size, saveCurrentDate, saveCurrentTime;
     String productRamdomKey, downloadImageURL;
     static final int GalleryPick = 1;
     Uri ImageUri;
@@ -47,7 +52,7 @@ public class AdminManagerProductActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_manager_product);
+        setContentView(R.layout.activity_admin_add_product);
         ProductImageRef = FirebaseStorage.getInstance().getReference().child("Product Images");
         ProductRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Create();
@@ -64,27 +69,46 @@ public class AdminManagerProductActivity extends AppCompatActivity {
         AddNewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AddProduct();
+            }
+        });
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminAddProductActivity.this, AdapterProductAdmin.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
     private void AddProduct() {
+        id = InputProductId.getText().toString();
         Name = InputProductName.getText().toString();
         Price = InputProductPrice.getText().toString();
+        size = InputProductSize.getText().toString();
         Count = InputProductCount.getText().toString();
         Description = InputProductDescription.getText().toString();
         if (ImageUri == null) {
-            Toast.makeText(AdminManagerProductActivity.this, "Please select image....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddProductActivity.this, "Please select image....", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(Name)) {
-            Toast.makeText(AdminManagerProductActivity.this, "Chưa điền tên sản phẩm....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddProductActivity.this, "Chưa điền tên sản phẩm....", Toast.LENGTH_SHORT).show();
+            lbInputProductName.setError("Chưa điền tên giày");
         } else if (TextUtils.isEmpty(Price)) {
-            Toast.makeText(AdminManagerProductActivity.this, "Chưa điền giá sản phẩm....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddProductActivity.this, "Chưa điền giá sản phẩm....", Toast.LENGTH_SHORT).show();
+            lbInputProductPrice.setError("Chưa điền giá");
         } else if (TextUtils.isEmpty(Count)) {
-            Toast.makeText(AdminManagerProductActivity.this, "Chưa điền số lượng sản phẩm....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddProductActivity.this, "Chưa điền số lượng sản phẩm....", Toast.LENGTH_SHORT).show();
+            lbInputProductCount.setError("Chưa điền số lượng");
         } else if (TextUtils.isEmpty(Description)) {
-            Toast.makeText(AdminManagerProductActivity.this, "Chưa điền mô tả sản phẩm....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddProductActivity.this, "Chưa điền mô tả sản phẩm....", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(id)) {
+            Toast.makeText(AdminAddProductActivity.this, "Chưa điền mã sản phẩm....", Toast.LENGTH_SHORT).show();
+            lbInputProductId.setError("Chưa điền mã giày");
+        } else if (TextUtils.isEmpty(size)) {
+            Toast.makeText(AdminAddProductActivity.this, "Chưa điền kích thước của giày....", Toast.LENGTH_SHORT).show();
+            lbInputProductSize.setError("Chưa điền kích thứcapp:boxStrokeColor=\"@color/black\"\n" +
+                    "        app:hintTextColor=\"@color/black\"");
         } else {
             StorageProductInformation();
         }
@@ -114,12 +138,12 @@ public class AdminManagerProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 String message = e.toString();
-                Toast.makeText(AdminManagerProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(AdminManagerProductActivity.this, "Tải ảnh thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminAddProductActivity.this, "Tải ảnh thành công", Toast.LENGTH_SHORT).show();
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -134,7 +158,7 @@ public class AdminManagerProductActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
                             downloadImageURL = task.getResult().toString();
-                            Toast.makeText(AdminManagerProductActivity.this, "Ảnh sản phẩm đã lưu vào database", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminAddProductActivity.this, "Ảnh sản phẩm đã lưu vào database", Toast.LENGTH_SHORT).show();
                             saveProductInformation();
                         }
                     }
@@ -148,22 +172,23 @@ public class AdminManagerProductActivity extends AppCompatActivity {
         productMap.put("pid", productRamdomKey);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
+        productMap.put("size", size);
         productMap.put("name", Name);
         productMap.put("price", Price);
         productMap.put("count", Count);
-        productMap.put("description", productRamdomKey);
+        productMap.put("description", Description);
         productMap.put("image", downloadImageURL);
 
-        ProductRef.child(productRamdomKey).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        ProductRef.child(id).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(AdminManagerProductActivity.this, AdminCategoryActivity.class);
+                    Intent intent = new Intent(AdminAddProductActivity.this, AdminManagerProduct.class);
                     startActivity(intent);
-                    Toast.makeText(AdminManagerProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminAddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
                 } else {
                     String message = task.getException().toString();
-                    Toast.makeText(AdminManagerProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -189,10 +214,21 @@ public class AdminManagerProductActivity extends AppCompatActivity {
 
     private void Create() {
         InputProductImage = (ImageView) findViewById(R.id.select_product_image);
-        InputProductDescription = (EditText) findViewById(R.id.product_description);
-        InputProductName = (EditText) findViewById(R.id.product_name);
-        InputProductPrice = (EditText) findViewById(R.id.product_price);
-        InputProductCount = (EditText) findViewById(R.id.product_count);
+        InputProductId = findViewById(R.id.product_id);
+        InputProductName = findViewById(R.id.product_name);
+        InputProductPrice = findViewById(R.id.product_price);
+        InputProductSize = findViewById(R.id.product_size);
+        InputProductCount = findViewById(R.id.product_count);
+        InputProductDescription = findViewById(R.id.product_description);
+
+        lbInputProductId = findViewById(R.id.lbproduct_id);
+        lbInputProductName = findViewById(R.id.lbproduct_name);
+        lbInputProductPrice = findViewById(R.id.lbproduct_price);
+        lbInputProductSize = findViewById(R.id.lbproduct_size);
+        lbInputProductCount = findViewById(R.id.lbproduct_count);
+        lbInputProductDescription = findViewById(R.id.lbproduct_description);
+
+        btnExit = findViewById(R.id.btnAddProductExit);
         AddNewProduct = (Button) findViewById(R.id.add_new_product);
         loadingBar = new ProgressDialog(this);
     }

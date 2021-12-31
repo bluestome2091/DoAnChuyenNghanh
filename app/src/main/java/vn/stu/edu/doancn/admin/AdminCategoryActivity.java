@@ -13,7 +13,7 @@ import vn.stu.edu.doancn.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
     LinearLayout sanpham, taikhoan, hoadon;
-    String checkPermission = "nguyenkhanh";
+    String checkPermission = "123";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +26,15 @@ public class AdminCategoryActivity extends AppCompatActivity {
         sanpham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminCategoryActivity.this, AdminManagerProductActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(AdminCategoryActivity.this, AdminManagerProduct.class);
+                startActivity(intent1);
             }
         });
         taikhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (PrevalentAdmin.currentOnlineUser.getUsers().equals(checkPermission)){
-                    Intent intent = new Intent(AdminCategoryActivity.this, AdminManegerAccountActivity.class);
+                    Intent intent = new Intent(AdminCategoryActivity.this, AdminManegerAccountActivity2.class);
                     startActivity(intent);
                     Toast.makeText(AdminCategoryActivity.this, checkPermission, Toast.LENGTH_SHORT).show();
                 }
