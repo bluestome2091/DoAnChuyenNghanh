@@ -143,7 +143,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(View view)
                     {
                         Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                        intent.putExtra("id", products.getId());
+                        intent.putExtra("id", products);
                         startActivity(intent);
                     }
                 });

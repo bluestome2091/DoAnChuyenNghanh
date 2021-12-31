@@ -6,26 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".admin.AdminAddProductActivity"
     android:background="@color/white">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleTextColor="@color/white">
+
         <ImageButton
             android:id="@+id/btnAddProductExit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/leftarrow"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorAccent"
+            android:src="@drawable/leftarrow" />
+
         <TextView
-            android:layout_marginLeft="30dp"
-            android:textSize="30dp"
-            android:textColor="@color/white"
-            android:textStyle="italic|bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thêm sản phẩm"/>
+            android:layout_marginLeft="30dp"
+            android:text="Thêm sản phẩm"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="italic|bold" />
     </com.google.android.material.appbar.MaterialToolbar>
     <ImageView
         android:layout_below="@+id/toolbar"
