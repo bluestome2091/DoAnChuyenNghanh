@@ -176,14 +176,14 @@ public class AdminAddProductActivity extends AppCompatActivity {
         productMap.put("name", Name);
         productMap.put("price", Price);
         productMap.put("count", Count);
-        productMap.put("description", productRamdomKey);
+        productMap.put("description", Description);
         productMap.put("image", downloadImageURL);
 
         ProductRef.child(id).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(AdminAddProductActivity.this, AdminCategoryActivity.class);
+                    Intent intent = new Intent(AdminAddProductActivity.this, AdminManagerProduct.class);
                     startActivity(intent);
                     Toast.makeText(AdminAddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
                 } else {

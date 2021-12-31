@@ -83,7 +83,8 @@ public class AdminManagerProduct extends AppCompatActivity {
                     String description = n.child("description").getValue().toString();
                     String pid = n.child("pid").getValue().toString();
                     String time = n.child("time").getValue().toString();
-                    dssp.add(new Products(ma, count, name, null, price, date, image, description, pid, time));
+                    String size = n.child("size").getValue().toString();
+                    dssp.add(new Products(ma, count, name, null, price, date, image, description, pid, time, size));
                 }
                 adapter.notifyDataSetChanged();
             }

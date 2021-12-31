@@ -3,6 +3,7 @@ package vn.stu.edu.doancn.adapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import vn.stu.edu.doancn.R;
+import vn.stu.edu.doancn.admin.AdminDetailsProduct;
 import vn.stu.edu.doancn.model.Products;
 import vn.stu.edu.doancn.model.Users;
 
@@ -54,7 +56,9 @@ public class AdapterProductAdmin extends ArrayAdapter<Products> {
         chitiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, AdminDetailsProduct.class);
+                intent.putExtra("product", sp);
+                context.startActivity(intent);
             }
         });
         return item;
