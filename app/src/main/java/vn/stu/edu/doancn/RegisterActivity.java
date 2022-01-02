@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText edtUser, edtPassword, edtConfirmPassword, edtPhuoneNumber, edtName;
+    TextInputEditText edtUser, edtPassword, edtConfirmPassword, edtPhuoneNumber, edtName;
+    TextInputLayout lbedtUser, lbedtPassword, lbedtConfirmPassword, lbedtPhuoneNumber, lbedtName;
     Button btnConfirm;
     ProgressDialog loadingBar;
 
@@ -54,14 +57,19 @@ public class RegisterActivity extends AppCompatActivity {
         String name = edtName.getText().toString();
         if (TextUtils.isEmpty(user)) {
             Toast.makeText(RegisterActivity.this, "please write your useraccount", Toast.LENGTH_SHORT).show();
+            lbedtUser.setError("Chưa điền thông tin");
         } else if (TextUtils.isEmpty(phone)) {
             Toast.makeText(RegisterActivity.this, "please write your phone number", Toast.LENGTH_SHORT).show();
+            lbedtPhuoneNumber.setError("Chưa điền thông tin");
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(RegisterActivity.this, "please write your password", Toast.LENGTH_SHORT).show();
+            lbedtPassword.setError("Chưa điền thông tin");
         } else if (TextUtils.isEmpty(confirmpassword)) {
             Toast.makeText(RegisterActivity.this, "please confirm your password", Toast.LENGTH_SHORT).show();
+            lbedtConfirmPassword.setError("Chưa điền thông tin");
         } else if (TextUtils.isEmpty(name)) {
             Toast.makeText(RegisterActivity.this, "Check your name", Toast.LENGTH_SHORT).show();
+            lbedtName.setError("Chưa điền thông tin");
         } else if (!password.equalsIgnoreCase(confirmpassword)) {
             Toast.makeText(RegisterActivity.this, "Confirm password not correct", Toast.LENGTH_SHORT).show();
         } else {
@@ -148,11 +156,18 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void create() {
-        edtConfirmPassword = (EditText) findViewById(R.id.editTextConfirmPassword);
-        edtPassword = (EditText) findViewById(R.id.editTextPassword2);
-        edtPhuoneNumber = (EditText) findViewById(R.id.editPhoneNumber);
-        edtUser = (EditText) findViewById(R.id.editTextUser);
-        edtName = (EditText) findViewById(R.id.editTextName);
+        edtConfirmPassword =  findViewById(R.id.editTextConfirmPassword);
+        edtPassword = findViewById(R.id.editTextPassword2);
+        edtPhuoneNumber = findViewById(R.id.editPhoneNumber);
+        edtUser = findViewById(R.id.editTextUser);
+        edtName = findViewById(R.id.editTextName);
+
+        lbedtConfirmPassword =  findViewById(R.id.lbeditTextConfirmPassword);
+        lbedtPassword = findViewById(R.id.lbeditTextPassword2);
+        lbedtPhuoneNumber = findViewById(R.id.lbeditPhoneNumber);
+        lbedtUser = findViewById(R.id.lbeditTextUser);
+        lbedtName = findViewById(R.id.lbeditTextName);
+
         btnConfirm = (Button) findViewById(R.id.buttonConfirm);
         loadingBar = new ProgressDialog(this);
     }

@@ -17,6 +17,9 @@
         android:theme="@style/Theme.DoAnCN"
         tools:replace="android:theme">
         <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.AdminManegerAccountActivity2"
             android:exported="false" />
         <activity

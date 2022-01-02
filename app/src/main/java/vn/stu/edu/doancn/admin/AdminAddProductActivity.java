@@ -186,6 +186,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
                     Intent intent = new Intent(AdminAddProductActivity.this, AdminManagerProduct.class);
                     startActivity(intent);
                     Toast.makeText(AdminAddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     String message = task.getException().toString();
                     Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();

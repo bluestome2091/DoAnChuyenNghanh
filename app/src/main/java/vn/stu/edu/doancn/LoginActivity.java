@@ -14,6 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,9 +31,10 @@ import vn.stu.edu.doancn.model.Users;
 import vn.stu.edu.doancn.user.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText edtuser, edtpassword;
-    Button buttonLogin;
-    TextView AdminLink, NotAdminLink;
+    TextInputEditText edtuser, edtpassword;
+    TextInputLayout lbedtuser, lbedtpassword;
+    MaterialButton buttonLogin;
+    TextView AdminLink, NotAdminLink, forget_password_link;
     ProgressDialog loadingBar;
     String parentDbName = "Users";
     CheckBox chkBoxRememberme;
@@ -52,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 buttonLogin.setText("Login admin");
                 AdminLink.setVisibility(View.INVISIBLE);
                 NotAdminLink.setVisibility(View.VISIBLE);
+                forget_password_link.setVisibility(View.VISIBLE);
                 parentDbName="Admins";
 
             }
@@ -65,25 +70,37 @@ public class LoginActivity extends AppCompatActivity {
                 parentDbName="Users";
             }
         });
+        forget_password_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void create()
     {
-        edtuser = (EditText) findViewById(R.id.editTextTextPersonName);
-        edtpassword = (EditText) findViewById(R.id.editTextTextPassword);
-        buttonLogin = (Button) findViewById(R.id.btn_login);
+        lbedtuser = findViewById(R.id.lbeditTextTextPersonName);
+        lbedtpassword = findViewById(R.id.lbeditTextTextPassword);
+        edtuser = findViewById(R.id.editTextTextPersonName);
+        edtpassword = findViewById(R.id.editTextTextPassword);
+        buttonLogin = findViewById(R.id.btn_login);
         loadingBar = new ProgressDialog(this);
         chkBoxRememberme = (CheckBox) findViewById(R.id.chkb_remember);
         AdminLink = (TextView) findViewById(R.id.admin_panel_link);
         NotAdminLink = (TextView) findViewById(R.id.not_admin_panel_link);
+        forget_password_link = findViewById(R.id.forget_password_link);
     }
     private void LoginAccount() {
         String user = edtuser.getText().toString();
         String password = edtpassword.getText().toString();
         if (TextUtils.isEmpty(user)) {
+            lbedtuser.setError("Chưa nhập tài khoản");
             Toast.makeText(LoginActivity.this, "please write your useraccount", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(password)) {
             Toast.makeText(LoginActivity.this, "please write your password", Toast.LENGTH_SHORT).show();
+            lbedtuser.setError("Chưa nhập mật khẩu");
         }
         else {
             loadingBar.setTitle("Login Account");
@@ -127,18 +144,19 @@ public class LoginActivity extends AppCompatActivity {
                             loadingBar.dismiss();
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             Prevalent.currentOnlineUser = usersData;
-
                             startActivity(intent);
 
                         }
                     }
                     else {
                         Toast.makeText(LoginActivity.this, "Wrong Password or Account not exists", Toast.LENGTH_SHORT).show();
+                        lbedtuser.setError("Wrong Password or Account not exists");
                         loadingBar.dismiss();
                     }
                 }
                 else {
                     Toast.makeText(LoginActivity.this, "Wrong Password or Account not exists", Toast.LENGTH_SHORT).show();
+                    lbedtuser.setError("Wrong Password or Account not exists");
                     loadingBar.dismiss();
                 }
             }

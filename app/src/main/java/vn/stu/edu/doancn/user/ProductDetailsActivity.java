@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     //    private FloatingActionButton add_product_to_cart;
     Button btnadd_to_cart;
+    ImageButton btnDetalsProductExit;
     ImageView product_image_details;
     ElegantNumberButton number_btn;
     TextView txtProductname_details, txtDescription_details, txtPrice_details;
@@ -61,11 +63,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Products products = snapshot.getValue(Products.class);
-
                     txtProductname_details.setText(products.getName());
                     txtPrice_details.setText(products.getPrice());
                     txtDescription_details.setText(products.getDescription());
                     Picasso.get().load(products.getImage()).into(product_image_details);
+                    product_image_details.setClipToOutline(true);
                 }
             }
 
@@ -81,6 +83,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addToCartList(productID);
+            }
+        });
+        btnDetalsProductExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -136,5 +146,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         txtDescription_details = findViewById(R.id.txtDescription_details);
         productID = getIntent().getStringExtra("pid");
         btnadd_to_cart = findViewById(R.id.btnadd_to_cart);
+        btnDetalsProductExit = findViewById(R.id.btnDetalsProductExit);
     }
 }
