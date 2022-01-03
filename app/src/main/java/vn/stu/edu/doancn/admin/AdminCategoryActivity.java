@@ -12,7 +12,7 @@ import vn.stu.edu.doancn.Prevalent.PrevalentAdmin;
 import vn.stu.edu.doancn.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
-    LinearLayout sanpham, taikhoan, hoadon;
+    LinearLayout sanpham, taikhoan, giohang;
     String checkPermission = "123";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +44,11 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
             }
         });
-        hoadon.setOnClickListener(new View.OnClickListener() {
+        giohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminNewOrdersActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -55,6 +56,6 @@ public class AdminCategoryActivity extends AppCompatActivity {
     private void Create() {
         sanpham = (LinearLayout) findViewById(R.id.quanlysanpham);
         taikhoan = (LinearLayout) findViewById(R.id.quanlytaikhoan);
-        hoadon = (LinearLayout) findViewById(R.id.quanlyhoadon);
+        giohang = (LinearLayout) findViewById(R.id.quanlygiohang);
     }
 }

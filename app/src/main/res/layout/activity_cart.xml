@@ -23,12 +23,24 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/txtmsg1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Congratulations, your final order has been placed successfully. Soon it will be verified"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativelayout"
-        android:layout_above="@+id/btnnext_process">
+        android:layout_above="@+id/btnnext_process"
+        android:layout_below="@+id/relativelayout">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -37,8 +49,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
         android:text="Next"
-        android:textSize="20sp"
-        android:layout_margin="10dp"/>
+        android:textSize="20sp" />
 
 </RelativeLayout>

@@ -40,6 +40,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     ElegantNumberButton number_btn;
     TextView txtProductname_details, txtDescription_details, txtPrice_details;
     Products tamp;
+    String state = "Normal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +81,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnadd_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToCartList(productID);
+                if(state.equals("Order Placed") || state.equals("Order Shipped")){
+                    Toast.makeText(ProductDetailsActivity.this, "You can add purchase more products, once your order is shipped or confirmed", Toast.LENGTH_SHORT).show();
+                } else {
+                    addToCartList(productID);
+                }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        CheckOrderState();
     }
 
     private void addToCartList(String productID) {
@@ -125,6 +137,31 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void CheckOrderState() {
+        DatabaseReference ordersRef;
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getUsers());
+
+        ordersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String shpippingState = snapshot.child("state").getValue().toString();
+
+                    if (shpippingState.equals("shipped")) {
+                        state = "Order Shipped";
+                    } else if (shpippingState.equals("not shipped")) {
+                        state = "Order Placed";
+                    }   
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void addControls(String productID) {

@@ -20,8 +20,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
@@ -33,13 +36,14 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Button btnnext_process;
-    private TextView txttotal_price;
-//    private int overTotalPrice = 0;
+    private TextView txttotal_price, txtmsg1;
+    private int overTotalPrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
 
         addControls();
         addEvents();
@@ -49,10 +53,12 @@ public class CartActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        CheckOrderState();
+
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
 
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>().setQuery(cartListRef.child("Users")
-        .child(Prevalent.currentOnlineUser.getUsers()).child("Products"), Cart.class).build();
+                .child(Prevalent.currentOnlineUser.getUsers()).child("Products"), Cart.class).build();
 
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
@@ -61,8 +67,8 @@ public class CartActivity extends AppCompatActivity {
                 cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + "$");
                 cartViewHolder.txtcart_product_name.setText(cart.getName());
 
-//                int oneTypeProductPrice = ((Integer.valueOf(cart.getPrice()))) * Integer.valueOf(cart.getQuatity());
-//                overTotalPrice = overTotalPrice + oneTypeProductPrice;
+                double oneTypeProductPrice = ((Double.parseDouble(cart.getPrice()))) * Double.parseDouble(cart.getQuatity());
+                overTotalPrice = (int) (overTotalPrice + oneTypeProductPrice);
 
                 cartViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -75,17 +81,17 @@ public class CartActivity extends AppCompatActivity {
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if(which == 0){
+                                if (which == 0) {
                                     Intent intent = new Intent(CartActivity.this, ProductDetailsActivity.class);
                                     intent.putExtra("pid", cart.getPid());
                                     startActivity(intent);
                                 }
-                                if (which == 1){
+                                if (which == 1) {
                                     cartListRef.child("Users").child(Prevalent.currentOnlineUser.getUsers()).child("Products")
                                             .child(cart.getPid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()){
+                                            if (task.isSuccessful()) {
                                                 Toast.makeText(CartActivity.this, "Item remove seccessfull", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(CartActivity.this, CartActivity.class);
                                                 startActivity(intent);
@@ -110,20 +116,55 @@ public class CartActivity extends AppCompatActivity {
         };
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+
+    }
+
+    private void CheckOrderState() {
+        DatabaseReference ordersRef;
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getUsers());
+
+        ordersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String shpippingState = snapshot.child("state").getValue().toString();
+                    String userName = snapshot.child("name").getValue().toString();
+
+                    if (shpippingState.equals("shipped")) {
+                        txttotal_price.setText("Dear " + userName + "\n order is shipped successfully");
+                        recyclerView.setVisibility(View.GONE);
+                        txtmsg1.setVisibility(View.VISIBLE);
+                        txtmsg1.setText("Congratulations, your final order has been Shipped successfully. Soon you will received your order at your door step");
+                        btnnext_process.setVisibility(View.GONE);
+                        Toast.makeText(CartActivity.this, "you can purchase more products, once you received your first final order", Toast.LENGTH_SHORT).show();
+                    } else if (shpippingState.equals("not shipped")) {
+                        txttotal_price.setText("Shipped State = Not Shipped");
+                        recyclerView.setVisibility(View.GONE);
+                        txtmsg1.setVisibility(View.VISIBLE);
+                        btnnext_process.setVisibility(View.GONE);
+                        Toast.makeText(CartActivity.this, "you can purchase more products, once you received your first final order", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void addEvents() {
-//        btnnext_process.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                txttotal_price.setText("Total Price: $" + String.valueOf(overTotalPrice));
-//
-//                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
-//                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        btnnext_process.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txttotal_price.setText("Total Price: $" + String.valueOf(overTotalPrice));
+                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void addControls() {
@@ -133,5 +174,6 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         btnnext_process = findViewById(R.id.btnnext_process);
         txttotal_price = findViewById(R.id.txttotal_price);
+        txtmsg1 = findViewById(R.id.txtmsg1);
     }
 }
