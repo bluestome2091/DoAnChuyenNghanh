@@ -22,8 +22,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -97,19 +100,33 @@ public class AdminAddProductActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(Price)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền giá sản phẩm....", Toast.LENGTH_SHORT).show();
             lbInputProductPrice.setError("Chưa điền giá");
+            lbInputProductName.setErrorEnabled(false);
         } else if (TextUtils.isEmpty(Count)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền số lượng sản phẩm....", Toast.LENGTH_SHORT).show();
             lbInputProductCount.setError("Chưa điền số lượng");
+            lbInputProductName.setErrorEnabled(false);
+            lbInputProductPrice.setErrorEnabled(false);
         } else if (TextUtils.isEmpty(Description)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền mô tả sản phẩm....", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(id)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền mã sản phẩm....", Toast.LENGTH_SHORT).show();
             lbInputProductId.setError("Chưa điền mã giày");
+            lbInputProductName.setErrorEnabled(false);
+            lbInputProductPrice.setErrorEnabled(false);
+            lbInputProductCount.setErrorEnabled(false);
         } else if (TextUtils.isEmpty(size)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền kích thước của giày....", Toast.LENGTH_SHORT).show();
-            lbInputProductSize.setError("Chưa điền kích thứcapp:boxStrokeColor=\"@color/black\"\n" +
-                    "        app:hintTextColor=\"@color/black\"");
+            lbInputProductSize.setError("Chưa điền kích thứ");
+            lbInputProductName.setErrorEnabled(false);
+            lbInputProductPrice.setErrorEnabled(false);
+            lbInputProductCount.setErrorEnabled(false);
+            lbInputProductId.setErrorEnabled(false);
         } else {
+            lbInputProductName.setErrorEnabled(false);
+            lbInputProductPrice.setErrorEnabled(false);
+            lbInputProductCount.setErrorEnabled(false);
+            lbInputProductId.setErrorEnabled(false);
+            lbInputProductSize.setErrorEnabled(false);
             StorageProductInformation();
         }
 
@@ -129,70 +146,103 @@ public class AdminAddProductActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calendar.getTime());
 
         productRamdomKey = saveCurrentDate+ " " + saveCurrentTime;
-
-        StorageReference filePath = ProductImageRef.child(ImageUri.getLastPathSegment() + productRamdomKey);
-
-        final UploadTask uploadTask = filePath.putFile(ImageUri);
-
-        uploadTask.addOnFailureListener(new OnFailureListener() {
+        ProductRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onFailure(@NonNull Exception e) {
-                String message = e.toString();
-                Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.child(id).exists()){
+                    StorageReference filePath = ProductImageRef.child(ImageUri.getLastPathSegment()+ " " + productRamdomKey);
+
+                    final UploadTask uploadTask = filePath.putFile(ImageUri);
+
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            String message = e.toString();
+                            Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(AdminAddProductActivity.this, "Tải ảnh thành công", Toast.LENGTH_SHORT).show();
+                            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
+                                    }
+                                    downloadImageURL = filePath.getDownloadUrl().toString();
+                                    return filePath.getDownloadUrl();
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        downloadImageURL = task.getResult().toString();
+                                        Toast.makeText(AdminAddProductActivity.this, "Ảnh sản phẩm đã lưu vào database", Toast.LENGTH_SHORT).show();
+                                        saveProductInformation();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }else {
+                    lbInputProductId.setError("Mã đã tồn tại");
+                    loadingBar.dismiss();
+                }
             }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
             @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(AdminAddProductActivity.this, "Tải ảnh thành công", Toast.LENGTH_SHORT).show();
-                Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        }
-                        downloadImageURL = filePath.getDownloadUrl().toString();
-                        return filePath.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-                            downloadImageURL = task.getResult().toString();
-                            Toast.makeText(AdminAddProductActivity.this, "Ảnh sản phẩm đã lưu vào database", Toast.LENGTH_SHORT).show();
-                            saveProductInformation();
-                        }
-                    }
-                });
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
+
     }
 
     private void saveProductInformation() {
-        HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRamdomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("size", size);
-        productMap.put("name", Name);
-        productMap.put("price", Price);
-        productMap.put("count", Count);
-        productMap.put("description", Description);
-        productMap.put("image", downloadImageURL);
-        productMap.put("id", id);
-        ProductRef.child(id).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        ProductRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Intent intent = new Intent(AdminAddProductActivity.this, AdminManagerProduct.class);
-                    startActivity(intent);
-                    Toast.makeText(AdminAddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    String message = task.getException().toString();
-                    Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String, Object> productMap = new HashMap<>();
+                productMap.put("pid", productRamdomKey);
+                productMap.put("date", saveCurrentDate);
+                productMap.put("time", saveCurrentTime);
+                productMap.put("size", size);
+                productMap.put("name", Name);
+                productMap.put("price", Price);
+                productMap.put("count", Count);
+                productMap.put("description", Description);
+                productMap.put("image", downloadImageURL);
+                productMap.put("id", id);
+                if(!snapshot.child(id).exists()){
+                    ProductRef.child(id).updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(AdminAddProductActivity.this, AdminManagerProduct.class);
+                                startActivity(intent);
+                                Toast.makeText(AdminAddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                                finish();
+                                loadingBar.dismiss();
+                            } else {
+                                String message = task.getException().toString();
+                                Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                            }
+                        }
+                    });
+                }else {
+                    lbInputProductId.setError("Mã đã tồn tại");
+                    loadingBar.dismiss();
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
+
     }
 
     private void openGallery() {

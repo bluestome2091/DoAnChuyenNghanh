@@ -10,7 +10,7 @@
         android:id="@+id/txtTaiKhoanAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
         android:text="Tài khoản:"
         android:textColor="@color/black"
@@ -19,22 +19,34 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTenAdmin" />
 
     <TextView
+        android:id="@+id/tamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:text="Họ và tên nhân viên:"
+        android:textColor="@color/red"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
         android:id="@+id/txtTenAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
-        android:text="Họ và tên:"
-        android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textColor="@color/red"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+       app:layout_constraintTop_toBottomOf="@+id/tamp" />
 
     <TextView
         android:id="@+id/txtMatKhauAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="16dp"
         android:text="Mật khẩu:"
         android:textColor="@color/black"
@@ -46,7 +58,7 @@
         android:id="@+id/txtSDTAdmin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
         android:text="SDT:"
         android:textColor="@color/black"
@@ -62,7 +74,8 @@
         android:background="@color/white"
         android:src="@drawable/trash"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"/>
 
     <ImageButton
         android:background="@color/white"
@@ -71,6 +84,16 @@
         android:layout_height="24dp"
         android:layout_marginEnd="12dp"
         android:src="@drawable/editicon"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteAccountAdmin" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSDTAdmin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

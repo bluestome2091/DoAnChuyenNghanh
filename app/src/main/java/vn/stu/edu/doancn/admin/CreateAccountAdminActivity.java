@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +34,7 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
     TextInputLayout lbuser, lbpassword, lbname, lbsdt;
     MaterialToolbar title;
     Button btnThem;
+    ImageButton btnExit;
     ProgressDialog loadingBar;
 
     @Override
@@ -50,6 +52,14 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
                 xuLyThem();
             }
         });
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateAccountAdminActivity.this, AdminManegerAccountActivity2.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void xuLyThem() {
@@ -63,10 +73,16 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
             lbuser.setError("Chưa điền thông tin");
         } else if (pass.equals("")) {
             lbpassword.setError("Chưa điền thông tin");
+            lbuser.setErrorEnabled(false);
         } else if (ten.equals("")) {
             lbname.setError("Chưa điền thông tin");
+            lbuser.setErrorEnabled(false);
+            lbpassword.setErrorEnabled(false);
         } else if (phone.equals("")) {
             lbsdt.setError("Chưa điền thông tin");
+            lbuser.setErrorEnabled(false);
+            lbpassword.setErrorEnabled(false);
+            lbname.setErrorEnabled(false);
         } else {
             loadingBar.setTitle("Đang xử lý");
             loadingBar.setMessage("Vui lòng đợi trong giây lát!!!");
@@ -85,7 +101,7 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
                 if (!(snapshot.child("Admins").child(taikhoan).exists())) {
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("Users", taikhoan);
-                    userdataMap.put("Password",pass);
+                    userdataMap.put("Password", pass);
                     userdataMap.put("Phonenumber", phone);
                     userdataMap.put("Name", ten);
                     adminref.child("Admins").child(taikhoan).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -120,17 +136,17 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
 
 
     private void addControls() {
-        title = findViewById(R.id.toolbaradmin);
-        title.setTitle("Thêm tài khoản admin");
         user = findViewById(R.id.txtUsernameAdmin);
         password = findViewById(R.id.txtPasswordAdmin);
         name = findViewById(R.id.txtNameAdmin);
         sdt = findViewById(R.id.txtSDTAdmin);
         btnThem = findViewById(R.id.btnThemTkAdmin);
         loadingBar = new ProgressDialog(this);
+
         lbuser = findViewById(R.id.lbUsernameAdmin);
         lbpassword = findViewById(R.id.lbPasswordAdmin);
         lbname = findViewById(R.id.lbNameAdmin);
         lbsdt = findViewById(R.id.lbSDTAdmin);
+        btnExit = findViewById(R.id.btnTaoAdminExit);
     }
 }

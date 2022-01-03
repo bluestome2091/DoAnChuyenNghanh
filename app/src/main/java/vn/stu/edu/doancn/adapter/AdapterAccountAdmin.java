@@ -51,7 +51,7 @@ public class AdapterAccountAdmin extends ArrayAdapter<Users> {
         final Users nv = objects.get(position);
         username.setText(username.getText()+ "  " +nv.getUsers());
         password.setText(password.getText()+ "  " +nv.getPassword());
-        ten.setText(ten.getText()+ "  " +nv.getName());
+        ten.setText(nv.getName());
         sdt.setText(sdt.getText()+ "  " +nv.getPhonenumber());
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
