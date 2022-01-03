@@ -4,15 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.CreateAccountAdminActivity">
+    tools:context=".admin.CreateAccountAdminActivity"
+    android:background="@color/white"
+    >
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbaradmin"
+        android:id="@+id/toolbar"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/app_name"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/white"
+        tools:ignore="MissingConstraints">
+
+        <ImageButton
+            android:id="@+id/btnTaoAdminExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:src="@drawable/leftarrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Tạo tài khoản admin"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="italic|bold" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -22,16 +41,20 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbaradmin"
+        android:layout_below="@+id/toolbar"
         app:layout_constraintHorizontal_bias="1.0"
-
-        app:startIconDrawable="@drawable/ic_baseline_person_24">
+        android:textColorHint="@color/pray"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:startIconTint="@color/pray">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtUsernameAdmin"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             />
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -42,10 +65,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="password"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+        android:textColorHint="@color/pray"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:startIconTint="@color/pray"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
-
+            android:textColor="@color/black"
             android:id="@+id/txtPasswordAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,15 +87,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbPasswordAdmin"
         android:hint="Tên nhân viên"
+        android:textColorHint="@color/pray"
         app:layout_constraintHorizontal_bias="1.0"
-
-        app:startIconDrawable="@drawable/ic_baseline_person_24">
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:startIconDrawable="@drawable/ic_baseline_person_24"
+        app:startIconTint="@color/pray">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="20dp"
             android:id="@+id/txtNameAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
            />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,15 +111,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbNameAdmin"
         android:hint="Số điện thoại"
+        android:textColorHint="@color/pray"
         app:layout_constraintHorizontal_bias="1.0"
-
-        app:startIconDrawable="@drawable/ic_baseline_phone_24">
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:startIconDrawable="@drawable/ic_baseline_phone_24"
+        app:startIconTint="@color/pray">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtSDTAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
+            android:textColor="@color/black"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,6 +135,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/buttons"
-
         android:text="Thêm" />
 </RelativeLayout>

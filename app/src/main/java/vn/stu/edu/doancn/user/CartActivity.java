@@ -95,6 +95,7 @@ public class CartActivity extends AppCompatActivity {
                                                 Toast.makeText(CartActivity.this, "Item remove seccessfull", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(CartActivity.this, CartActivity.class);
                                                 startActivity(intent);
+                                                finish();
                                             }
                                         }
                                     });
