@@ -1,10 +1,13 @@
 package vn.stu.edu.doancn.admin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -55,9 +58,34 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                 adminOrdersViewHolder.btnshow_all_products.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String uID = getRef(i).getKey();
+
                         Intent intent = new Intent(AdminNewOrdersActivity.this, AdminShowUserProductsActivity.class);
-                        intent.putExtra("id", adminOrders.getName());
+                        intent.putExtra("id", uID);
                         startActivity(intent);
+                    }
+                });
+
+                adminOrdersViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CharSequence sequence[] = new CharSequence[]{
+                                "Yes", "No"
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AdminNewOrdersActivity.this);
+                        builder.setTitle("Have you shipped this order  products ?");
+                        builder.setItems(sequence, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == 0) {
+                                    String uID = getRef(i).getKey();
+                                    RemoverOrder(uID);
+                                }else {
+                                    finish();
+                                }
+                            }
+                        });
+                        builder.show();
                     }
                 });
             }
@@ -65,12 +93,16 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
             @NonNull
             @Override
             public AdminOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-               View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
-               return new AdminOrdersViewHolder(view);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_layout, parent, false);
+                return new AdminOrdersViewHolder(view);
             }
         };
         ordersList.setAdapter(adapter);
         adapter.startListening();
+    }
+
+    private void RemoverOrder(String uID) {
+            ordersRef.child(uID).removeValue();
     }
 
     private void addEvents() {
