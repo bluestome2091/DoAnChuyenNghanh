@@ -3,10 +3,12 @@ package vn.stu.edu.doancn.user;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.CartViewHolder;
+import vn.stu.edu.doancn.admin.AdminCategoryActivity;
+import vn.stu.edu.doancn.admin.AdminNewOrdersActivity;
 import vn.stu.edu.doancn.model.Cart;
 
 public class CartActivity extends AppCompatActivity {
@@ -36,8 +40,10 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Button btnnext_process;
+    private ImageButton btnTotalPriceExit;
     private TextView txttotal_price, txtmsg1;
     private int overTotalPrice = 0;
+    private String saveID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +61,7 @@ public class CartActivity extends AppCompatActivity {
 
         CheckOrderState();
 
-        final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
+        DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("CartList");
 
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>().setQuery(cartListRef.child("Users")
                 .child(Prevalent.currentOnlineUser.getUsers()).child("Products"), Cart.class).build();
@@ -159,9 +165,18 @@ public class CartActivity extends AppCompatActivity {
         btnnext_process.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txttotal_price.setText("Total Price: $" + String.valueOf(overTotalPrice));
+                txttotal_price.setText("Total Price: " + String.valueOf(overTotalPrice) + " VND");
                 Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnTotalPriceExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -176,5 +191,7 @@ public class CartActivity extends AppCompatActivity {
         btnnext_process = findViewById(R.id.btnnext_process);
         txttotal_price = findViewById(R.id.txttotal_price);
         txtmsg1 = findViewById(R.id.txtmsg1);
+        btnTotalPriceExit=findViewById(R.id.btnTotalPriceExit);
+
     }
 }

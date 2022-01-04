@@ -9,10 +9,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,10 +25,14 @@ import java.util.HashMap;
 
 import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
+import vn.stu.edu.doancn.admin.AdminNewOrdersActivity;
+import vn.stu.edu.doancn.admin.AdminShowUserProductsActivity;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
-    private EditText shippment_name, shippment_phone_number, shippment_address, shippment_city;
+    private TextInputEditText shippment_name, shippment_phone_number, shippment_address, shippment_city;
+    private TextInputLayout lbproduct_name, lbproduct_phone, lbproduct_address, lbproduct_city;
+    private ImageButton btnconfirm_final_orderExit;
     private Button btnconfirm_final_order;
     private String totalPrice = "";
     @Override
@@ -34,7 +41,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm_final_order);
 
         totalPrice = getIntent().getStringExtra("Total Price");
-        Toast.makeText(this, "Total Price = $" + totalPrice, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Total Price: " + totalPrice + " VND", Toast.LENGTH_SHORT).show();
 
         addControls();
         addEvents();
@@ -48,18 +55,36 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             }
         });
 
+        btnconfirm_final_orderExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConfirmFinalOrderActivity.this, CartActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
     private void Check() {
         if(TextUtils.isEmpty(shippment_name.getText().toString())){
             Toast.makeText(this, "Please provide your full name", Toast.LENGTH_SHORT).show();
+            lbproduct_name.setError("Chưa nhập tên");
         } else if(TextUtils.isEmpty(shippment_phone_number.getText().toString())){
             Toast.makeText(this, "Please provide your phone number", Toast.LENGTH_SHORT).show();
+            lbproduct_phone.setError("Chưa nhập số điện thoại");
+            lbproduct_name.setErrorEnabled(false);
         } else if(TextUtils.isEmpty(shippment_address.getText().toString())){
             Toast.makeText(this, "Please provide your address", Toast.LENGTH_SHORT).show();
+            lbproduct_address.setError("Chưa nhập địa chỉ nhà");
+            lbproduct_name.setErrorEnabled(false);
+            lbproduct_phone.setErrorEnabled(false);
         } else if(TextUtils.isEmpty(shippment_city.getText().toString())){
             Toast.makeText(this, "Please provide your city name", Toast.LENGTH_SHORT).show();
+            lbproduct_city.setError("Chưa nhập thành phố");
+            lbproduct_name.setErrorEnabled(false);
+            lbproduct_phone.setErrorEnabled(false);
+            lbproduct_address.setErrorEnabled(false);
         } else{
             ConfirmOrder();
         }
@@ -87,6 +112,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("date", saveCurrentDate);
         ordersMap.put("time", saveCurrentTime);
         ordersMap.put("state", "not shipped");
+        ordersMap.put("id",Prevalent.currentOnlineUser.getUsers());
 
         orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -107,16 +133,23 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                     }
                                 }
                             });
+
                 }
             }
         });
     }
 
     private void addControls() {
+        lbproduct_name=findViewById(R.id.lbproduct_name) ;
+        lbproduct_phone=findViewById(R.id.lbproduct_phone);
+        lbproduct_address=findViewById(R.id.lbproduct_address);
+        lbproduct_city=findViewById(R.id.lbproduct_city);
+
         shippment_name=findViewById(R.id.shippment_name);
         shippment_phone_number=findViewById(R.id.shippment_phone_number);
         shippment_address=findViewById(R.id.shippment_address);
         shippment_city=findViewById(R.id.shippment_city);
         btnconfirm_final_order=findViewById(R.id.btnconfirm_final_order);
+        btnconfirm_final_orderExit=findViewById(R.id.btnconfirm_final_orderExit);
     }
 }

@@ -89,7 +89,7 @@
             android:hint="Mật khẩu"
             android:textColorHint="@color/pray"
             app:endIconMode="password_toggle"
-
+            app:endIconTint="@color/pray"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbeditTextTextPersonName"

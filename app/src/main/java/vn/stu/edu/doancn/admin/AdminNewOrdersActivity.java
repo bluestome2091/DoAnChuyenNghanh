@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -21,12 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.AdminOrdersViewHolder;
+import vn.stu.edu.doancn.adapter.AdapterProductAdmin;
 import vn.stu.edu.doancn.model.AdminOrders;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
 
     private RecyclerView ordersList;
     private DatabaseReference ordersRef;
+    ImageButton btnAddNewOrdersExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull AdminOrdersViewHolder adminOrdersViewHolder, int i, @NonNull AdminOrders adminOrders) {
                 adminOrdersViewHolder.orders_username.setText("Name: " + adminOrders.getName());
                 adminOrdersViewHolder.orders_phonenumber.setText("Phone: " + adminOrders.getPhone());
-                adminOrdersViewHolder.orders_totalprice.setText("Total Price: $ " + String.valueOf(adminOrders.getTotalPrice()));
+                adminOrdersViewHolder.orders_totalprice.setText("Total Price: " + String.valueOf(adminOrders.getTotalPrice()) + "VND");
                 adminOrdersViewHolder.orders_datetime.setText("Order at: " + adminOrders.getDate() + " " + adminOrders.getTime());
                 adminOrdersViewHolder.orders_address_city.setText("Shipping Address: " + adminOrders.getAddress() + "-" + adminOrders.getCity());
 
@@ -80,7 +84,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                 if (which == 0) {
                                     String uID = getRef(i).getKey();
                                     RemoverOrder(uID);
-                                }else {
+                                } else {
                                     finish();
                                 }
                             }
@@ -102,13 +106,25 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
     }
 
     private void RemoverOrder(String uID) {
-            ordersRef.child(uID).removeValue();
+        ordersRef.child(uID).removeValue();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(uID).child("Products");
+        reference.removeValue();
+        Toast.makeText(AdminNewOrdersActivity.this, "Đã xử lý", Toast.LENGTH_SHORT).show();
     }
 
     private void addEvents() {
+        btnAddNewOrdersExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminNewOrdersActivity.this, AdminCategoryActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void addControls() {
+        btnAddNewOrdersExit=findViewById(R.id.btnAddNewOrdersExit);
         ordersList = findViewById(R.id.orders_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));
     }

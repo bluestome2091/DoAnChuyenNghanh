@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -17,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.CartViewHolder;
+import vn.stu.edu.doancn.adapter.AdapterProductAdmin;
 import vn.stu.edu.doancn.model.Cart;
 
 public class AdminShowUserProductsActivity extends AppCompatActivity {
@@ -24,6 +27,7 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
     private RecyclerView show_product;
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference cartListRef;
+    private ImageButton btnShowProductsExit;
     private String userID="";
 
 
@@ -36,6 +40,18 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
         cartListRef= FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(userID).child("Products");
 
         addControls();
+        addEvents();
+    }
+
+    private void addEvents() {
+        btnShowProductsExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminShowUserProductsActivity.this, AdminNewOrdersActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void addControls() {
@@ -43,6 +59,7 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
         show_product.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         show_product.setLayoutManager(layoutManager);
+        btnShowProductsExit=findViewById(R.id.btnShowProductsExit);
     }
 
     @Override

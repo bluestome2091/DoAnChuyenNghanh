@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import vn.stu.edu.doancn.LoginActivity;
 import vn.stu.edu.doancn.Prevalent.PrevalentAdmin;
 import vn.stu.edu.doancn.R;
 
 public class AdminCategoryActivity extends AppCompatActivity {
+
+    RelativeLayout relativeLogout;
     LinearLayout sanpham, taikhoan, giohang;
     String checkPermission = "123";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +38,11 @@ public class AdminCategoryActivity extends AppCompatActivity {
         taikhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (PrevalentAdmin.currentOnlineUser.getUsers().equals(checkPermission)){
+                if (PrevalentAdmin.currentOnlineUser.getUsers().equals(checkPermission)) {
                     Intent intent = new Intent(AdminCategoryActivity.this, AdminManegerAccountActivity2.class);
                     startActivity(intent);
                     Toast.makeText(AdminCategoryActivity.this, checkPermission, Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     Toast.makeText(AdminCategoryActivity.this, "Không có quyền truy cập", Toast.LENGTH_SHORT).show();
                 }
 
@@ -51,11 +55,20 @@ public class AdminCategoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        relativeLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminCategoryActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void Create() {
         sanpham = (LinearLayout) findViewById(R.id.quanlysanpham);
         taikhoan = (LinearLayout) findViewById(R.id.quanlytaikhoan);
         giohang = (LinearLayout) findViewById(R.id.quanlygiohang);
+        relativeLogout = findViewById(R.id.relativeLogout);
     }
 }

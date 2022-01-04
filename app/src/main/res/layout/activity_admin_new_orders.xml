@@ -4,22 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AdminNewOrdersActivity">
+    tools:context=".admin.AdminNewOrdersActivity"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/relativelayout2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true">
-
-        <TextView
-            android:id="@+id/txtneworders"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="New Orders "
-            android:textAlignment="center"
-            android:textSize="20dp" />
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white">
+
+            <ImageButton
+                android:id="@+id/btnAddNewOrdersExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:src="@drawable/leftarrow" />
+
+            <TextView
+                android:id="@+id/txtneworders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="New Orders "
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="italic|bold" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
 
     </RelativeLayout>
 

@@ -35,7 +35,6 @@ import vn.stu.edu.doancn.model.Products;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    //    private FloatingActionButton add_product_to_cart;
     Button btnadd_to_cart;
     ImageButton btnDetalsProductExit;
     ImageView product_image_details;
@@ -126,14 +125,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("time", saveCurrentTime);
         cartMap.put("quatity", number_btn.getNumber());
         cartMap.put("discount", "");
+        cartMap.put("user", Prevalent.currentOnlineUser.getUsers());
 
         cartListRef.child("Users").child(Prevalent.currentOnlineUser.getUsers())
-                .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                .child("Products").child(saveCurrentDate + " " +saveCurrentTime).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     cartListRef.child("AdminsView").child(Prevalent.currentOnlineUser.getUsers())
-                            .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            .child("Products").child(saveCurrentDate + " " +saveCurrentTime).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -175,7 +175,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void addControls(String productID) {
-//        add_product_to_cart=findViewById(R.id.add_product_to_cart);
         product_image_details = findViewById(R.id.product_image_details);
         number_btn = findViewById(R.id.number_btn);
         txtProductname_details = findViewById(R.id.txtProductname_details);

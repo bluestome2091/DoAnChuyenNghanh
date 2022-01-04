@@ -12,14 +12,30 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true">
 
-        <TextView
-            android:id="@+id/txttotal_price"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Total Price: "
-            android:textAlignment="center"
-            android:textSize="20dp" />
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white">
+
+            <ImageButton
+                android:id="@+id/btnTotalPriceExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:src="@drawable/leftarrow" />
+
+            <TextView
+                android:id="@+id/txttotal_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Total Price: "
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="italic|bold" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </RelativeLayout>
 
