@@ -26,7 +26,6 @@
                     android:id="@+id/close_settings_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
                     android:background="@drawable/leftarrow"
                     android:textColor="#000000"
                     android:textSize="16sp"
@@ -106,7 +105,9 @@
             android:textColorHint="@color/pray"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitleLogin">
+            app:layout_constraintTop_toBottomOf="@+id/txtTitleLogin"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
 
@@ -131,21 +132,24 @@
             android:textColorHint="@color/pray"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbName">
+            app:layout_constraintTop_toBottomOf="@+id/lbName"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPhone_st"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/lbPassword"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -153,7 +157,8 @@
             android:hint="Password"
             android:textColorHint="@color/pray"
             app:layout_constraintLeft_toLeftOf="parent"
-
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/lbPhone">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -178,7 +183,9 @@
             android:textColorHint="@color/pray"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbPassword">
+            app:layout_constraintTop_toBottomOf="@+id/lbPassword"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtAddress_st"

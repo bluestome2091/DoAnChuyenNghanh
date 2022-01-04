@@ -46,9 +46,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private CircleImageView settings_profile_image;
     private TextInputEditText settings_name, settings_phone, settings_address, settings_password;
-    private TextView profile_image_change_btn, close_settings_btn, update_settings_btn;
-    private TextInputEditText txtUsername_st_edit, txtAddress_st_edit, txtPhone_st_edit;
-    private Button btnConfirm_edit, btnEdit_st;
+    TextView profile_image_change_btn, close_settings_btn, update_settings_btn, btnChagePassword;
+    private TextInputEditText txtUsername_st_edit, txtAddress_st_edit, txtPhone_st_edit, txtPassword_st_edit, txtConfirmPassword_st_edit;
+    private Button btnConfirm_edit, btnEdit_st, btnEditPassword_st;
 
     private Uri imageUri;
     private String myUrl = "";
@@ -60,7 +60,6 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
         storageProfileReference = FirebaseStorage.getInstance().getReference().child("Profile pictures");
         addControls();
         addEvents();
@@ -79,7 +78,7 @@ public class SettingsActivity extends AppCompatActivity {
                         String phone = snapshot.child("phone").getValue().toString();
                         String address = snapshot.child("address").getValue().toString();
                         String password = snapshot.child("password").getValue().toString();
-
+                        Picasso.get().load(image).into(settings_profile_image);
                         //Picasso.get().load(image).into(settings_profile_image);
                         settings_name.setText(name);
                         settings_phone.setText(phone);
@@ -130,7 +129,50 @@ public class SettingsActivity extends AppCompatActivity {
                 xulyEditProfile();
             }
         });
+        btnChagePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xulyEditPasword();
+            }
+        });
+    }
 
+    private void xulyEditPasword() {
+        AlertDialog.Builder builder;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            builder = new AlertDialog.Builder(SettingsActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(SettingsActivity.this);
+        }
+
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_settings_password, null);
+
+        txtPassword_st_edit = view.findViewById(R.id.txtNewPassword);
+        txtConfirmPassword_st_edit = view.findViewById(R.id.txtConfirmPassword_st);
+        btnEditPassword_st = view.findViewById(R.id.btnEditPassword_st);
+        builder.setView(view);
+
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+        btnEditPassword_st.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pass = txtPassword_st_edit.getText().toString();
+                String conpass =  txtConfirmPassword_st_edit.getText().toString();
+                if (pass.equals(conpass)){
+                    settings_password.setText(txtPassword_st_edit.getText().toString());
+                    dialog.dismiss();
+                    Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(SettingsActivity.this, "Mật khẩu không trùng", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     private void xulyEditProfile() {
@@ -144,14 +186,19 @@ public class SettingsActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_settings_profile, null);
 
-        txtUsername_st_edit = view.findViewById(R.id.txtName_st);
+        txtUsername_st_edit = view.findViewById(R.id.txtUsername_st_edit);
         txtPhone_st_edit= view.findViewById(R.id.txtPhone_st_edit);
         txtAddress_st_edit = view.findViewById(R.id.txtAddress_st_edit);
         btnConfirm_edit = view.findViewById(R.id.btnConfirm_edit);
-
+        txtUsername_st_edit.setText(Prevalent.currentOnlineUser.getName());
+        txtPhone_st_edit.setText(Prevalent.currentOnlineUser.getPhonenumber());
+        txtAddress_st_edit.setText(Prevalent.currentOnlineUser.getAddress());
         builder.setView(view);
-        builder.setCancelable(false);
 
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
         btnConfirm_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,13 +212,10 @@ public class SettingsActivity extends AppCompatActivity {
                 settings_name.setText(txtUsername_st_edit.getText().toString());
                 settings_address.setText(txtAddress_st_edit.getText().toString());
                 settings_phone.setText(txtPhone_st_edit.getText().toString());
-
+                dialog.dismiss();
                 Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
             }
         });
-        AlertDialog dialog = builder.create();
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.show();
     }
 
     @Override
@@ -276,6 +320,7 @@ public class SettingsActivity extends AppCompatActivity {
         profile_image_change_btn = findViewById(R.id.profile_image_change_btn);
         close_settings_btn = findViewById(R.id.close_settings_btn);
         update_settings_btn = findViewById(R.id.update_settings_btn);
-        btnEdit_st = findViewById(R.id.btnEdit_st);
+        btnChagePassword = findViewById(R.id.txtChange);
+        btnEdit_st = findViewById(R.id.btnEditSt);
     }
 }
