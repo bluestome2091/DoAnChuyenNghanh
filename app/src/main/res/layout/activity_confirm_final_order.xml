@@ -120,7 +120,7 @@
         android:id="@+id/txtTongTien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tổng tiền:"
+        android:text="Tổng tiền: "
         android:textSize="30sp"
         android:textColor="@color/red"
         android:layout_marginTop="20dp"

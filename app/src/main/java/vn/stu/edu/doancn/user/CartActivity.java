@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder cartViewHolder, int i, @NonNull Cart cart) {
                 cartViewHolder.txtcart_product_quatity.setText("Quatity: " + cart.getQuatity());
-                cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + "$");
+                cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + " VND");
                 cartViewHolder.txtcart_product_name.setText(cart.getName());
 
                 double oneTypeProductPrice = ((Double.parseDouble(cart.getPrice()))) * Double.parseDouble(cart.getQuatity());
@@ -94,7 +94,20 @@ public class CartActivity extends AppCompatActivity {
                                 }
                                 if (which == 1) {
                                     cartListRef.child("Users").child(Prevalent.currentOnlineUser.getUsers()).child("Products")
-                                            .child(cart.getPid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            .child(cart.getDate() + " " + cart.getTime()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(CartActivity.this, "Item remove seccessfull", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(CartActivity.this, CartActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+                                    });
+
+                                    cartListRef.child("AdminsView").child(Prevalent.currentOnlineUser.getUsers()).child("Products")
+                                            .child(cart.getDate() + " " + cart.getTime()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
@@ -165,7 +178,7 @@ public class CartActivity extends AppCompatActivity {
         btnnext_process.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txttotal_price.setText("Total Price: " + String.valueOf(overTotalPrice) + " VND");
+//                txttotal_price.setText("Total Price: " + String.valueOf(overTotalPrice) + " VND");
                 Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));
                 startActivity(intent);

@@ -69,13 +69,13 @@ public class SearchProductsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Products");
-        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>().setQuery(ref.orderByChild("name").startAt(key), Products.class).build();
+        FirebaseRecyclerOptions<Products> options = new FirebaseRecyclerOptions.Builder<Products>().setQuery(ref.orderByChild("name").endAt(key + "\uf8ff"), Products.class).build();
         FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options){
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i, @NonNull Products products) {
                         productViewHolder.txtProductName.setText(products.getName());
-                        productViewHolder.txtProductPrice.setText("Price: " + products.getPrice() + "VND");
+                        productViewHolder.txtProductPrice.setText("Price: " + products.getPrice() + " VND");
                         productViewHolder.txtDecription.setText(products.getDescription());
                         Picasso.get().load(products.getImage()).into(productViewHolder.imageView);
 
