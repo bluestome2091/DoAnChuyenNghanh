@@ -144,7 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_settings_profile, null);
 
-        txtUsername_st_edit = view.findViewById(R.id.txtUsername_st);
+        txtUsername_st_edit = view.findViewById(R.id.txtName_st);
         txtPhone_st_edit= view.findViewById(R.id.txtPhone_st_edit);
         txtAddress_st_edit = view.findViewById(R.id.txtAddress_st_edit);
         btnConfirm_edit = view.findViewById(R.id.btnConfirm_edit);
@@ -269,7 +269,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void addControls() {
         settings_profile_image = findViewById(R.id.settings_profile_image);
-        settings_name = findViewById(R.id.txtUsername_st);
+        settings_name = findViewById(R.id.txtName_st);
         settings_phone = findViewById(R.id.txtPhone_st);
         settings_address = findViewById(R.id.txtAddress_st);
         settings_password = findViewById(R.id.txtPassword_st);

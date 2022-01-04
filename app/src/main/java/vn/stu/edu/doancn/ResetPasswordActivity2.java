@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 import vn.stu.edu.doancn.model.Users;
 
-public class ResetPasswordActivity extends AppCompatActivity {
+public class ResetPasswordActivity2 extends AppCompatActivity {
     TextInputLayout lbUser, lbPass, lbConfirm, lbPhone;
     TextInputEditText User, Pass, Confirm, Phone;
     TextView ht;
@@ -38,11 +38,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_password);
-//        addControls();
-//        addEvents();
-    }
+        setContentView(R.layout.activity_reset_password2);
+        addControls();
+        addEvents();
 
+    }
     private void addEvents() {
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +69,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     }
                     else {
                         lbConfirm.setError("Mật khẩu không trùng");
-                        Toast.makeText(ResetPasswordActivity.this, "Sai số điện thoại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ResetPasswordActivity2.this, "Sai số điện thoại", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -77,13 +77,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                Intent intent = new Intent(ResetPasswordActivity2.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
-
     private void xulycapnhatmk(String mk, String user) {
         userref = FirebaseDatabase.getInstance().getReference().child("Users");
         HashMap<String, Object> userdataMap = new HashMap<>();
@@ -92,13 +91,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ResetPasswordActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity2.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
-                    Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                    Intent intent = new Intent(ResetPasswordActivity2.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     loadingBar.dismiss();
-                    Toast.makeText(ResetPasswordActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity2.this, "Network error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -122,11 +121,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     }
                     else {
                         loadingBar.dismiss();
-                        Toast.makeText(ResetPasswordActivity.this, "Sai số điện thoại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ResetPasswordActivity2.this, "Sai số điện thoại", Toast.LENGTH_SHORT).show();
                     }
                 }else {
                     loadingBar.dismiss();
-                    Toast.makeText(ResetPasswordActivity.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity2.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -138,7 +137,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
 
     }
-
     private void addControls() {
         ht = findViewById(R.id.tvHienThi);
         loadingBar = new ProgressDialog(this);
@@ -154,10 +152,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
         btnExit = findViewById(R.id.btnForgotPasswordExit);
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        lbConfirm.setVisibility(View.INVISIBLE);
-//        lbPass.setVisibility(View.INVISIBLE);
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        lbConfirm.setVisibility(View.INVISIBLE);
+        lbPass.setVisibility(View.INVISIBLE);
+    }
 }
