@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import vn.stu.edu.doancn.Prevalent.Prevalent;
+import vn.stu.edu.doancn.Prevalent.PrevalentAdmin;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.model.Users;
 
@@ -136,10 +137,14 @@ public class AdapterAccountAdmin extends ArrayAdapter<Users> {
         builder.setPositiveButton(("Có"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ref.child(nv).removeValue();
-                objects.remove(position);
-                notifyDataSetChanged();
-                Toast.makeText(context, "Xóa thành công tài khoảng", Toast.LENGTH_LONG).show();
+                if(nv.equals(PrevalentAdmin.currentOnlineUser.getUsers())){
+                    Toast.makeText(context, "Không thể xóa tài khoản này !!!", Toast.LENGTH_LONG).show();
+                } else {
+                    ref.child(nv).removeValue();
+                    objects.remove(position);
+                    notifyDataSetChanged();
+                    Toast.makeText(context, "Xóa thành công tài khoảng", Toast.LENGTH_LONG).show();
+                }
             }
         });
         builder.setNegativeButton(("Không"), new DialogInterface.OnClickListener() {

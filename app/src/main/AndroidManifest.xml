@@ -17,7 +17,10 @@
         android:theme="@style/Theme.DoAnCN"
         tools:replace="android:theme">
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".admin.AdminShowUserProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminNewOrdersActivity"
             android:exported="false" />
         <activity
             android:name=".admin.AdminManegerAccountActivity2"

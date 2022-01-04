@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user.CartActivity">
+    tools:context=".admin.AdminShowUserProductsActivity">
+
 
     <RelativeLayout
-        android:id="@+id/relativelayout"
+        android:id="@+id/relativelayout3"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true">
@@ -20,53 +21,31 @@
             app:titleTextColor="@color/white">
 
             <ImageButton
-                android:id="@+id/btnTotalPriceExit"
+                android:id="@+id/btnShowProductsExit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:src="@drawable/leftarrow" />
 
             <TextView
-                android:id="@+id/txttotal_price"
+                android:id="@+id/txtproducts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="Total Price: "
+                android:text="Products"
                 android:textColor="@color/white"
-                android:textSize="20dp"
+                android:textSize="30dp"
                 android:textStyle="italic|bold" />
         </com.google.android.material.appbar.MaterialToolbar>
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/txtmsg1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="Congratulations, your final order has been placed successfully. Soon it will be verified"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:visibility="gone" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cart_list"
+        android:id="@+id/show_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btnnext_process"
-        android:layout_below="@+id/relativelayout">
+        android:layout_below="@+id/relativelayout3">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <Button
-        android:id="@+id/btnnext_process"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:text="Next"
-        android:textSize="20sp" />
 
 </RelativeLayout>

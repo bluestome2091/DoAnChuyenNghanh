@@ -35,13 +35,13 @@ import vn.stu.edu.doancn.model.Products;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    //    private FloatingActionButton add_product_to_cart;
     Button btnadd_to_cart;
     ImageButton btnDetalsProductExit;
     ImageView product_image_details;
     ElegantNumberButton number_btn;
     TextView txtProductname_details, txtDescription_details, txtPrice_details;
     Products tamp;
+    String state = "Normal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnadd_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToCartList(productID);
+                if(state.equals("Order Placed") || state.equals("Order Shipped")){
+                    Toast.makeText(ProductDetailsActivity.this, "You can add purchase more products, once your order is shipped or confirmed", Toast.LENGTH_SHORT).show();
+                } else {
+                    addToCartList(productID);
+                }
             }
         });
         btnDetalsProductExit.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +97,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        CheckOrderState();
     }
 
     private void addToCartList(String productID) {
@@ -114,14 +125,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("time", saveCurrentTime);
         cartMap.put("quatity", number_btn.getNumber());
         cartMap.put("discount", "");
+        cartMap.put("user", Prevalent.currentOnlineUser.getUsers());
 
         cartListRef.child("Users").child(Prevalent.currentOnlineUser.getUsers())
-                .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                .child("Products").child(saveCurrentDate + " " +saveCurrentTime).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     cartListRef.child("AdminsView").child(Prevalent.currentOnlineUser.getUsers())
-                            .child("Products").child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            .child("Products").child(saveCurrentDate + " " +saveCurrentTime).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -137,8 +149,32 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void CheckOrderState() {
+        DatabaseReference ordersRef;
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getUsers());
+
+        ordersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String shpippingState = snapshot.child("state").getValue().toString();
+
+                    if (shpippingState.equals("shipped")) {
+                        state = "Order Shipped";
+                    } else if (shpippingState.equals("not shipped")) {
+                        state = "Order Placed";
+                    }   
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void addControls(String productID) {
-//        add_product_to_cart=findViewById(R.id.add_product_to_cart);
         product_image_details = findViewById(R.id.product_image_details);
         number_btn = findViewById(R.id.number_btn);
         txtProductname_details = findViewById(R.id.txtProductname_details);

@@ -101,7 +101,7 @@ public class AdminDetailsProduct extends AppCompatActivity {
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminDetailsProduct.this, AdapterProductAdmin.class);
+                Intent intent = new Intent(AdminDetailsProduct.this, AdminManagerProduct.class);
                 startActivity(intent);
                 finish();
             }

@@ -7,26 +7,53 @@
     tools:context=".admin.AdminCategoryActivity"
     android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/titleQuanLy"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
-        android:text="Quản lý"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="36sp"
-        android:textStyle="bold|italic" />
+        android:layout_height="?attr/actionBarSize"
+        app:titleTextColor="@color/white">
+
+        <TextView
+            android:id="@+id/titleQuanLy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Quản lý cửa hàng"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="italic|bold" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right">
+        <ImageButton
+            android:id="@+id/btnLogoutAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:src="@drawable/logout"
+            android:layout_toRightOf="@+id/txtLogoutAdmin"/>
+
+            <TextView
+                android:id="@+id/txtLogoutAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+        </RelativeLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleQuanLy"
+        android:layout_below="@+id/toolbar"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2">
@@ -88,7 +115,7 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:id="@+id/quanlyhoadon"
+                android:id="@+id/quanlygiohang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -101,7 +128,7 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Hóa đơn"
+                    android:text="Quản lý đơn hàng"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
