@@ -17,7 +17,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
 
     RelativeLayout relativeLogout;
     LinearLayout sanpham, taikhoan, giohang;
-    String checkPermission = "123";
+    String checkPermission = "Admin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
