@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private ImageButton btnconfirm_final_orderExit;
     private Button btnconfirm_final_order;
     private String totalPrice = "";
+    private TextView txtTT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,5 +153,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         shippment_city=findViewById(R.id.shippment_city);
         btnconfirm_final_order=findViewById(R.id.btnconfirm_final_order);
         btnconfirm_final_orderExit=findViewById(R.id.btnconfirm_final_orderExit);
+        txtTT=findViewById(R.id.txtTT);
+
+        txtTT.setText(totalPrice + " VND");
     }
 }

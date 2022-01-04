@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="Please confirm your Shipment Details"
+            android:text="Hóa đơn"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="italic|bold" />
@@ -116,6 +116,25 @@
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/txtTongTien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tổng tiền:"
+        android:textSize="30sp"
+        android:textColor="@color/red"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/lbproduct_city"/>
+
+    <TextView
+        android:id="@+id/txtTT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/red"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/txtTongTien"
+        android:layout_below="@+id/lbproduct_city"/>
 
     <Button
         android:id="@+id/btnconfirm_final_order"
