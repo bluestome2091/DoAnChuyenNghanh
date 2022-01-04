@@ -2,10 +2,9 @@ package vn.stu.edu.doancn.user;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -32,7 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.rey.material.widget.ImageButton;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -48,8 +46,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private CircleImageView settings_profile_image;
     private TextInputEditText settings_name, settings_phone, settings_address, settings_password;
-    private TextView profile_image_change_btn, close_settings_btn, update_settings_btn, txtChange;
-    private Button btnEditSt;
+    private TextView profile_image_change_btn, close_settings_btn, update_settings_btn;
+    private TextInputEditText txtUsername_st_edit, txtAddress_st_edit, txtPhone_st_edit;
+    private Button btnConfirm_edit, btnEdit_st;
 
     private Uri imageUri;
     private String myUrl = "";
@@ -65,10 +64,10 @@ public class SettingsActivity extends AppCompatActivity {
         storageProfileReference = FirebaseStorage.getInstance().getReference().child("Profile pictures");
         addControls();
         addEvents();
-        userInfoDisplay();
+        userInfoDisplay(settings_profile_image, settings_name, settings_phone, settings_address, settings_password);
     }
 
-    private void userInfoDisplay()            {
+    private void userInfoDisplay(CircleImageView settings_profile_image, TextInputEditText settings_name, TextInputEditText settings_phone, TextInputEditText settings_address, TextInputEditText settings_password)            {
         DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getUsers());
         UsersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -76,11 +75,12 @@ public class SettingsActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     if (snapshot.child("image").exists()) {
                         String image = snapshot.child("image").getValue().toString();
-                        String name = snapshot.child("Name").getValue().toString();
-                        String phone = snapshot.child("Phonenumber").getValue().toString();
+                        String name = snapshot.child("name").getValue().toString();
+                        String phone = snapshot.child("phone").getValue().toString();
                         String address = snapshot.child("address").getValue().toString();
-                        String password = snapshot.child("Password").getValue().toString();
-                        Picasso.get().load(image).into(settings_profile_image);
+                        String password = snapshot.child("password").getValue().toString();
+
+                        //Picasso.get().load(image).into(settings_profile_image);
                         settings_name.setText(name);
                         settings_phone.setText(phone);
                         settings_address.setText(address);
@@ -107,7 +107,11 @@ public class SettingsActivity extends AppCompatActivity {
         update_settings_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               thongbaoThaydoi();
+                if (checker.equals("clicked")) {
+                    userInfoUpdated();
+                } else {
+                    updateOnlyUserInfo();
+                }
             }
         });
 
@@ -119,123 +123,55 @@ public class SettingsActivity extends AppCompatActivity {
                         .start(SettingsActivity.this);
             }
         });
-        btnEditSt.setOnClickListener(new View.OnClickListener() {
+
+        btnEdit_st.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                xulyThaydoithongtin();
+                xulyEditProfile();
             }
         });
 
-        txtChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                xulyThaydoiPassword();
-            }
-        });
     }
 
-    private void thongbaoThaydoi() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(SettingsActivity.this);
-        builder.setIcon(R.drawable.iconsbell);
-        builder.setTitle("Thông báo");
-        builder.setMessage("Bạn có chắc muốn cập nhật");
-        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (checker.equals("clicked")) {
-                    userInfoUpdated();
-                } else {
-                    updateOnlyUserInfo();
-                }
-                Toast.makeText(SettingsActivity.this, "Đã cập nhật thành công", Toast.LENGTH_LONG).show();
-            }
-        });
-        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) { }
-        });
-        androidx.appcompat.app.AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+    private void xulyEditProfile() {
+        AlertDialog.Builder builder;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            builder = new AlertDialog.Builder(SettingsActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(SettingsActivity.this);
+        }
 
-    private void xulyThaydoiPassword() {
-        AlertDialog.Builder alert;
-        alert = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialogeditpassword, null);
-        TextInputEditText newpassword = view.findViewById(R.id.txtPassword_edt);
-        TextInputEditText confirmpassword = view.findViewById(R.id.txtConfirmPassword_edt);
-        Button btnSavePassword = view.findViewById(R.id.btnSavePassword);
-        Button btnCanclePassword = view.findViewById(R.id.btnCanclePassword);
+        View view = inflater.inflate(R.layout.dialog_settings_profile, null);
 
-        alert.setView(view);
-        alert.setCancelable(true);
+        txtUsername_st_edit = view.findViewById(R.id.txtUsername_st);
+        txtPhone_st_edit= view.findViewById(R.id.txtPhone_st_edit);
+        txtAddress_st_edit = view.findViewById(R.id.txtAddress_st_edit);
+        btnConfirm_edit = view.findViewById(R.id.btnConfirm_edit);
 
-        AlertDialog dialog = alert.create();
+        builder.setView(view);
+        builder.setCancelable(false);
+
+        btnConfirm_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                Intent intent =getIntent();
+//                //c1:
+//                name = txtUsername_st_edit.getText().toString();
+//                String phone = txtPhone_st_edit.getText().toString();
+//                String address = txtAddress_st_edit.getText().toString();
+                //c2:
+                settings_name.setText(txtUsername_st_edit.getText().toString());
+                settings_address.setText(txtAddress_st_edit.getText().toString());
+                settings_phone.setText(txtPhone_st_edit.getText().toString());
+
+                Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.show();
-
-        btnSavePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String passwordmoi = newpassword.getText().toString();
-                String xacnhanpass = confirmpassword.getText().toString();
-                if(passwordmoi.equals(xacnhanpass)) {
-                    settings_password.setText(passwordmoi);
-                    dialog.dismiss();
-                } else {
-                    Toast.makeText(SettingsActivity.this, "Mật khẩu không trùng khớp, vui lòng nhập lại!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        btnCanclePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-    }
-
-    private void xulyThaydoithongtin() {
-        AlertDialog.Builder alert;
-        alert = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-        LayoutInflater inflater = getLayoutInflater();
-        View view  = inflater.inflate(R.layout.dialogeditprofile, null);
-        TextInputEditText name  = view.findViewById(R.id.txtName_edt);
-        TextInputEditText phone  = view.findViewById(R.id.txtPhone_edt);
-        TextInputEditText addresss  = view.findViewById(R.id.txtAddress_edt);
-        Button btnSave = view.findViewById(R.id.btnSaveProfile);
-        Button btnCancle = view.findViewById(R.id.btnCancleProfile);
-        name.setText(settings_name.getText().toString());
-        phone.setText(settings_phone.getText().toString());
-        addresss.setText(settings_address.getText().toString());
-
-        alert.setView(view);
-        alert.setCancelable(true);
-
-        AlertDialog dialog = alert.create();
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.show();
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String ten = name.getText().toString();
-                String dt = phone.getText().toString();
-                String diachi = addresss.getText().toString();
-                settings_name.setText(ten);
-                settings_phone.setText(dt);
-                settings_address.setText(diachi);
-                dialog.dismiss();
-
-            }
-        });
-        btnCancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
     }
 
     @Override
@@ -255,13 +191,13 @@ public class SettingsActivity extends AppCompatActivity {
     private void updateOnlyUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
         HashMap<String, Object> userMap = new HashMap<>();
-        userMap.put("Name", settings_name.getText().toString());
-        userMap.put("Phone", settings_phone.getText().toString());
+        userMap.put("name", settings_name.getText().toString());
+        userMap.put("phone", settings_phone.getText().toString());
         userMap.put("address", settings_address.getText().toString());
-        userMap.put("Password", settings_password.getText().toString());
+        userMap.put("password", settings_password.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getPhonenumber()).updateChildren(userMap);
-        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
-//        Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -272,6 +208,8 @@ public class SettingsActivity extends AppCompatActivity {
             Toast.makeText(SettingsActivity.this, "Name is address", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(settings_phone.getText().toString())) {
             Toast.makeText(SettingsActivity.this, "Name is phone", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(settings_password.getText().toString())) {
+            Toast.makeText(SettingsActivity.this, "Name is password", Toast.LENGTH_SHORT).show();
         } else if (checker.equals("clicked")) {
             uploadImage();
         }
@@ -303,16 +241,17 @@ public class SettingsActivity extends AppCompatActivity {
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
                         HashMap<String, Object> userMap = new HashMap<>();
-                        userMap.put("Name", settings_name.getText().toString());
-                        userMap.put("Phone", settings_phone.getText().toString());
+                        userMap.put("name", settings_name.getText().toString());
+                        userMap.put("phone", settings_phone.getText().toString());
                         userMap.put("address", settings_address.getText().toString());
+                        userMap.put("password", settings_password.getText().toString());
                         userMap.put("image", myUrl);
 
 
                         ref.child(Prevalent.currentOnlineUser.getUsers()).updateChildren(userMap);
 
                         progressDialog.dismiss();
-                        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
+                        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
                         Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -330,14 +269,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void addControls() {
         settings_profile_image = findViewById(R.id.settings_profile_image);
-        settings_name = findViewById(R.id.txtName_st);
+        settings_name = findViewById(R.id.txtUsername_st);
         settings_phone = findViewById(R.id.txtPhone_st);
         settings_address = findViewById(R.id.txtAddress_st);
         settings_password = findViewById(R.id.txtPassword_st);
         profile_image_change_btn = findViewById(R.id.profile_image_change_btn);
         close_settings_btn = findViewById(R.id.close_settings_btn);
         update_settings_btn = findViewById(R.id.update_settings_btn);
-        btnEditSt = findViewById(R.id.btnEditSt);
-        txtChange = findViewById(R.id.txtChange);
+        btnEdit_st = findViewById(R.id.btnEdit_st);
     }
 }
