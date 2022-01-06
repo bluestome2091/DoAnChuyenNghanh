@@ -49,7 +49,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_details);
         Intent intent = getIntent();
         tamp = (Products) intent.getSerializableExtra("id");
-        String productID = tamp.getId();
+        String productID = null;
+        if(tamp == null ){
+            productID = intent.getStringExtra("pid");
+        }else{
+            productID = tamp.getId();
+        }
+
         addControls(productID);
         addEvents(productID);
         getProductDetails(productID);

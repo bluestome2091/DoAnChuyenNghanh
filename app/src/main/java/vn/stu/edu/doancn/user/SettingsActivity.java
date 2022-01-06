@@ -74,10 +74,10 @@ public class SettingsActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     if (snapshot.child("image").exists()) {
                         String image = snapshot.child("image").getValue().toString();
-                        String name = snapshot.child("name").getValue().toString();
-                        String phone = snapshot.child("phone").getValue().toString();
+                        String name = snapshot.child("Name").getValue().toString();
+                        String phone = snapshot.child("Phonenumber").getValue().toString();
                         String address = snapshot.child("address").getValue().toString();
-                        String password = snapshot.child("password").getValue().toString();
+                        String password = snapshot.child("Password").getValue().toString();
                         Picasso.get().load(image).into(settings_profile_image);
                         //Picasso.get().load(image).into(settings_profile_image);
                         settings_name.setText(name);
@@ -235,11 +235,11 @@ public class SettingsActivity extends AppCompatActivity {
     private void updateOnlyUserInfo() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
         HashMap<String, Object> userMap = new HashMap<>();
-        userMap.put("name", settings_name.getText().toString());
-        userMap.put("phone", settings_phone.getText().toString());
+        userMap.put("Name", settings_name.getText().toString());
+        userMap.put("Phonenumber", settings_phone.getText().toString());
         userMap.put("address", settings_address.getText().toString());
-        userMap.put("password", settings_password.getText().toString());
-        ref.child(Prevalent.currentOnlineUser.getPhonenumber()).updateChildren(userMap);
+        userMap.put("Password", settings_password.getText().toString());
+        ref.child(Prevalent.currentOnlineUser.getUsers()).updateChildren(userMap);
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
         finish();
@@ -285,10 +285,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
                         HashMap<String, Object> userMap = new HashMap<>();
-                        userMap.put("name", settings_name.getText().toString());
-                        userMap.put("phone", settings_phone.getText().toString());
+                        userMap.put("Name", settings_name.getText().toString());
+                        userMap.put("Phonenumber", settings_phone.getText().toString());
                         userMap.put("address", settings_address.getText().toString());
-                        userMap.put("password", settings_password.getText().toString());
+                        userMap.put("Password", settings_password.getText().toString());
                         userMap.put("image", myUrl);
 
 

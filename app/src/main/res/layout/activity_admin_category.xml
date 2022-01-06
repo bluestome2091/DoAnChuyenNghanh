@@ -140,6 +140,7 @@
             android:layout_weight="1">
 
             <LinearLayout
+                android:id="@+id/quanlylichsu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -147,12 +148,12 @@
                 <ImageView
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:src="@drawable/inprocessadmin" />
+                    android:src="@drawable/quanlyhistory" />
 
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Cập nhật thêm"
+                    android:text="Quản lý lịch sử đơn hàng"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />

@@ -16,7 +16,7 @@ import vn.stu.edu.doancn.R;
 public class AdminCategoryActivity extends AppCompatActivity {
 
     RelativeLayout relativeLogout;
-    LinearLayout sanpham, taikhoan, giohang;
+    LinearLayout sanpham, taikhoan, giohang, lichsu;
     String checkPermission = "Admin";
 
     @Override
@@ -55,6 +55,13 @@ public class AdminCategoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        lichsu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminCategoryActivity.this, AdminHistoryOrdersActivity.class);
+                startActivity(intent);
+            }
+        });
         relativeLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +76,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
         sanpham = (LinearLayout) findViewById(R.id.quanlysanpham);
         taikhoan = (LinearLayout) findViewById(R.id.quanlytaikhoan);
         giohang = (LinearLayout) findViewById(R.id.quanlygiohang);
+        lichsu = findViewById(R.id.quanlylichsu);
         relativeLogout = findViewById(R.id.relativeLogout);
     }
 }
