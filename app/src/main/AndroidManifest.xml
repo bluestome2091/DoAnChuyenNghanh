@@ -17,6 +17,9 @@
         android:theme="@style/Theme.DoAnCN"
         tools:replace="android:theme">
         <activity
+            android:name=".admin.AdminManegerAccountUsersActivity"
+            android:exported="false" />
+        <activity
             android:name=".user.UserOrdersActivity"
             android:exported="false" />
         <activity

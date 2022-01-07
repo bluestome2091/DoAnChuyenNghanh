@@ -41,6 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import vn.stu.edu.doancn.MainActivity;
 import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
+import vn.stu.edu.doancn.RegisterActivity;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -85,7 +86,18 @@ public class SettingsActivity extends AppCompatActivity {
                         settings_address.setText(address);
                         settings_password.setText(password);
                     }
+                    else {
+                        String name = snapshot.child("Name").getValue().toString();
+                        String phone = snapshot.child("Phonenumber").getValue().toString();
+                        String address = snapshot.child("address").getValue().toString();
+                        String password = snapshot.child("Password").getValue().toString();
+                        settings_name.setText(name);
+                        settings_phone.setText(phone);
+                        settings_address.setText(address);
+                        settings_password.setText(password);
+                    }
                 }
+
             }
 
             @Override
@@ -164,6 +176,29 @@ public class SettingsActivity extends AppCompatActivity {
                 String conpass =  txtConfirmPassword_st_edit.getText().toString();
                 if (pass.equals(conpass)){
                     settings_password.setText(txtPassword_st_edit.getText().toString());
+                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference();
+                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            HashMap<String, Object> userdataMap = new HashMap<>();
+                            userdataMap.put("Password", txtPassword_st_edit.getText().toString());
+                            userRef.child("Users").child(Prevalent.currentOnlineUser.getUsers()).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(SettingsActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(SettingsActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     dialog.dismiss();
                     Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
                 }
@@ -212,6 +247,31 @@ public class SettingsActivity extends AppCompatActivity {
                 settings_name.setText(txtUsername_st_edit.getText().toString());
                 settings_address.setText(txtAddress_st_edit.getText().toString());
                 settings_phone.setText(txtPhone_st_edit.getText().toString());
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference();
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        HashMap<String, Object> userdataMap = new HashMap<>();
+                        userdataMap.put("Name", txtUsername_st_edit.getText().toString());
+                        userdataMap.put("Phonenumber", txtPhone_st_edit.getText().toString());
+                        userdataMap.put("address", txtAddress_st_edit.getText().toString());
+                        userRef.child("Users").child(Prevalent.currentOnlineUser.getUsers()).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(SettingsActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SettingsActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 dialog.dismiss();
                 Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
             }

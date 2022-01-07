@@ -13,7 +13,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="User"
+        android:hint="Tài khoản"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
         android:textStyle="bold"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="  Password"
+        android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:textColorHint="@color/black"
         android:textStyle="bold"
@@ -60,7 +60,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Phone Number"
+        android:hint="Số điện thoại"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
         android:textStyle="bold"
@@ -82,18 +82,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/buttons"
-        android:text="Confirm"
+        android:text="Đăng ký"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbeditPhoneNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/lbeditTextAddress" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Register"
+        android:text="Đăng lý tài khoản"
         android:textColor="@color/black"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -108,7 +108,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Name"
+        android:hint="Họ và tên"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
         android:textStyle="bold"
@@ -129,7 +129,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Confirm Password"
+        android:hint="Xác nhận mật khẩu"
         android:inputType="textPersonName"
         android:textColorHint="@color/black"
         android:textStyle="bold"
@@ -143,5 +143,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lbeditTextAddress"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Địa chỉ"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/lbeditPhoneNumber">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txteditTextAddress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

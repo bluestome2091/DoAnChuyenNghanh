@@ -28,8 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextInputEditText edtUser, edtPassword, edtConfirmPassword, edtPhuoneNumber, edtName;
-    TextInputLayout lbedtUser, lbedtPassword, lbedtConfirmPassword, lbedtPhuoneNumber, lbedtName;
+    TextInputEditText edtUser, edtPassword, edtConfirmPassword, edtPhuoneNumber, edtName, edtAddress;
+    TextInputLayout lbedtUser, lbedtPassword, lbedtConfirmPassword, lbedtPhuoneNumber, lbedtName, lbedtAddress;
     Button btnConfirm;
     ProgressDialog loadingBar;
 
@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         String password = edtPassword.getText().toString();
         String confirmpassword = edtConfirmPassword.getText().toString();
         String name = edtName.getText().toString();
+        String diachi = edtAddress.getText().toString();
         if (TextUtils.isEmpty(user)) {
             Toast.makeText(RegisterActivity.this, "please write your useraccount", Toast.LENGTH_SHORT).show();
             lbedtUser.setError("Chưa điền thông tin");
@@ -64,6 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(RegisterActivity.this, "please write your password", Toast.LENGTH_SHORT).show();
             lbedtPassword.setError("Chưa điền thông tin");
+        } else if (TextUtils.isEmpty(diachi)) {
+            Toast.makeText(RegisterActivity.this, "please write your address", Toast.LENGTH_SHORT).show();
+            lbedtAddress.setError("Chưa điền thông tin");
         } else if (TextUtils.isEmpty(confirmpassword)) {
             Toast.makeText(RegisterActivity.this, "please confirm your password", Toast.LENGTH_SHORT).show();
             lbedtConfirmPassword.setError("Chưa điền thông tin");
@@ -77,13 +81,13 @@ public class RegisterActivity extends AppCompatActivity {
             loadingBar.setMessage("Please wait, while we are checking!!!");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
-            ValidatephoneNumber(user, password, phone, name);
+            ValidatephoneNumber(user, password, phone, name, diachi);
         }
 
 
     }
 
-    private void ValidatephoneNumber(String user, String password, String phone, String name) {
+    private void ValidatephoneNumber(String user, String password, String phone, String name, String diachi) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -95,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                     userdataMap.put("Password", password);
                     userdataMap.put("Phonenumber", phone);
                     userdataMap.put("Name", name);
+                    userdataMap.put("address", diachi);
                     RootRef.child("Users").child(user).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -161,12 +166,14 @@ public class RegisterActivity extends AppCompatActivity {
         edtPhuoneNumber = findViewById(R.id.editPhoneNumber);
         edtUser = findViewById(R.id.editTextUser);
         edtName = findViewById(R.id.editTextName);
+        edtAddress = findViewById(R.id.txteditTextAddress);
 
         lbedtConfirmPassword =  findViewById(R.id.lbeditTextConfirmPassword);
         lbedtPassword = findViewById(R.id.lbeditTextPassword2);
         lbedtPhuoneNumber = findViewById(R.id.lbeditPhoneNumber);
         lbedtUser = findViewById(R.id.lbeditTextUser);
         lbedtName = findViewById(R.id.lbeditTextName);
+        lbedtAddress = findViewById(R.id.lbeditTextAddress);
 
         btnConfirm = (Button) findViewById(R.id.buttonConfirm);
         loadingBar = new ProgressDialog(this);
