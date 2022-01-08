@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/layoutnguoidatorder"
+        android:id="@+id/layoutnguoidat1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -12,7 +12,7 @@
         android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/txtnguodatorder"
+            android:id="@+id/txtnguodat1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -22,7 +22,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/username_order"
+            android:id="@+id/order_history_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -34,16 +34,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutnguoinhan"
+        android:id="@+id/layoutnguoinhan1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/layoutnguoidatorder">
+        android:layout_below="@+id/layoutnguoidat1">
 
         <TextView
-            android:id="@+id/txtnguoinhanorder"
+            android:id="@+id/txtnguoinhan1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -54,7 +54,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/nguoinhan_order"
+            android:id="@+id/order_history_nguoinhan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -66,16 +66,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutsdtorder"
+        android:id="@+id/layoutdt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/layoutnguoinhan">
+        android:layout_below="@+id/layoutnguoinhan1">
 
         <TextView
-            android:id="@+id/txtphonenumberorder"
+            android:id="@+id/txtphonenumber1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -86,7 +86,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/phonenumber_order"
+            android:id="@+id/order_history_phonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -99,16 +99,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layouttongtienorder"
+        android:id="@+id/layouttongtien1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/layoutsdtorder">
+        android:layout_below="@+id/layoutdt">
 
         <TextView
-            android:id="@+id/txttotalpriceorder"
+            android:id="@+id/txttotalprice1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -119,7 +119,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/totalprice_order"
+            android:id="@+id/order_history_totalprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -132,16 +132,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutdiachiorder"
+        android:id="@+id/layoutdiachi1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/layouttongtienorder">
+        android:layout_below="@+id/layouttongtien1">
 
         <TextView
-            android:id="@+id/txtaddress_cityorder"
+            android:id="@+id/txtaddress_city1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -152,7 +152,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/address_city_order"
+            android:id="@+id/order_history_address_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -165,16 +165,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutthoigiandatorder"
+        android:id="@+id/layoutthoigiandat1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/layoutdiachiorder">
+        android:layout_below="@+id/layoutdiachi1">
 
         <TextView
-            android:id="@+id/txtdatetimeorder"
+            android:id="@+id/txtdatetime1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutdiachi"
@@ -186,7 +186,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/datetime_order"
+            android:id="@+id/order_history_datetime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layoutdiachi"
@@ -200,16 +200,16 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layouttrangthaiorder"
+        android:id="@+id/layouttrangthai1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/layoutthoigiandatorder">
+        android:layout_below="@+id/layoutthoigiandat1">
 
         <TextView
-            android:id="@+id/txttrangthaiorder"
+            android:id="@+id/txttrangthai1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -220,7 +220,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/trangthai_order"
+            android:id="@+id/order_history_trangthai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -233,20 +233,20 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnDeleteOrder"
+        android:id="@+id/btnshow_all_order_products_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layouttrangthaiorder"
+        android:layout_below="@+id/layouttrangthai1"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:text="Hủy đơn hàng"
+        android:text="Show This Orders Products"
         android:textSize="15sp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="@color/black"
-        android:layout_below="@+id/btnDeleteOrder"/>
+        android:layout_below="@+id/btnshow_all_order_products_history"/>
 
 </RelativeLayout>

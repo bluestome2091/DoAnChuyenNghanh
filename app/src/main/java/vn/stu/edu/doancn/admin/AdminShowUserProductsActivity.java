@@ -17,6 +17,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.CartViewHolder;
 import vn.stu.edu.doancn.adapter.AdapterProductAdmin;
@@ -37,7 +38,8 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_show_user_products);
 
         userID=getIntent().getStringExtra("id");
-        cartListRef= FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(userID).child("Products");
+        cartListRef= FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView")
+                .child(Prevalent.currentOnlineUser.getUsers()).child("Products");
 
         addControls();
         addEvents();
@@ -72,7 +74,7 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder cartViewHolder, int i, @NonNull Cart cart) {
                 cartViewHolder.txtcart_product_name.setText(cart.getName());
-                cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + "VND");
+                cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + " VND");
                 cartViewHolder.txtcart_product_quatity.setText("Quantity: " + cart.getQuatity());
             }
 

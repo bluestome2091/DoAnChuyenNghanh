@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".user.UserOrderHistoryActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar6"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white">
+
+            <ImageButton
+                android:id="@+id/btnOrderHistoryExit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:src="@drawable/leftarrow" />
+
+            <TextView
+                android:id="@+id/txtOrdersHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Lịch sử đơn hàng"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:textStyle="italic|bold" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/show_orders_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativelayout6">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

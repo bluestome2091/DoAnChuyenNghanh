@@ -17,12 +17,14 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.AdminHistoryProductViewHolder;
 import vn.stu.edu.doancn.ViewHolder.AdminHistoryViewHolder;
 import vn.stu.edu.doancn.ViewHolder.CartViewHolder;
 import vn.stu.edu.doancn.model.AdminHistoryOrder;
 import vn.stu.edu.doancn.model.AdminHistoryProduct;
+import vn.stu.edu.doancn.model.AdminOrders;
 import vn.stu.edu.doancn.model.Cart;
 
 public class AdminShowProductHistoryActivity extends AppCompatActivity {
@@ -38,7 +40,7 @@ public class AdminShowProductHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_show_product_history);
 
         userID=getIntent().getStringExtra("id");
-        productListHistoryRef = FirebaseDatabase.getInstance().getReference().child("HistoryProduct").child("Products").child(userID);
+        productListHistoryRef = FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(Prevalent.currentOnlineUser.getUsers()).child("Products");
         
         addControls();
         addEvents();
@@ -47,15 +49,15 @@ public class AdminShowProductHistoryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerOptions<AdminHistoryProduct> options = new FirebaseRecyclerOptions.Builder<AdminHistoryProduct>()
-                .setQuery(productListHistoryRef, AdminHistoryProduct.class).build();
+        FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>()
+                .setQuery(productListHistoryRef, Cart.class).build();
 
-        FirebaseRecyclerAdapter<AdminHistoryProduct, AdminHistoryProductViewHolder> adapter = new FirebaseRecyclerAdapter<AdminHistoryProduct, AdminHistoryProductViewHolder>(options) {
+        FirebaseRecyclerAdapter<Cart, AdminHistoryProductViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, AdminHistoryProductViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull AdminHistoryProductViewHolder adminHistoryProductViewHolder, int i, @NonNull AdminHistoryProduct adminhistoryproduct) {
-                adminHistoryProductViewHolder.txthistory_productname.setText(adminhistoryproduct.getUser());
-                adminHistoryProductViewHolder.txthistory_product_price.setText(adminhistoryproduct.getName());
-                adminHistoryProductViewHolder.txthistory_product_quatity.setText(adminhistoryproduct.getQuatity());
+            protected void onBindViewHolder(@NonNull AdminHistoryProductViewHolder adminHistoryProductViewHolder, int i, @NonNull Cart cart) {
+                adminHistoryProductViewHolder.txthistory_productname.setText(cart.getName());
+                adminHistoryProductViewHolder.txthistory_product_price.setText(cart.getPrice() + " VND");
+                adminHistoryProductViewHolder.txthistory_product_quatity.setText(cart.getQuatity());
             }
 
             @NonNull

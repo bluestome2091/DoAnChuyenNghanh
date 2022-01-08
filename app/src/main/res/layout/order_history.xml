@@ -20,8 +20,7 @@
             android:text="Người đặt: "
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/history_username"
@@ -53,8 +52,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:text="Người nhận: "
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/history_nguoinhan"
@@ -86,8 +84,7 @@
             android:text="Số điện thoại: "
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/history_phonenumber"
@@ -120,8 +117,7 @@
             android:gravity="center"
             android:text="Tổng tiền: "
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/history_totalprice"
@@ -154,8 +150,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:text="Địa chỉ: "
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/history_address_city"
@@ -189,8 +184,7 @@
             android:textColor="@color/black"
             android:gravity="center"
             android:text="Thời gian đặt: "
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/history_datetime"
@@ -224,8 +218,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:text="Trạng thái: "
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/history_trangthai"

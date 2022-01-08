@@ -64,7 +64,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull AdminOrdersViewHolder adminOrdersViewHolder, int i, @NonNull AdminOrders adminOrders) {
                 adminOrdersViewHolder.orders_username.setText("Name: " + adminOrders.getName());
                 adminOrdersViewHolder.orders_phonenumber.setText("Phone: " + adminOrders.getPhone());
-                adminOrdersViewHolder.orders_totalprice.setText("Total Price: " + String.valueOf(adminOrders.getTotalPrice()) + "VND");
+                adminOrdersViewHolder.orders_totalprice.setText("Total Price: " + String.valueOf(adminOrders.getTotalPrice()) + " VND");
                 adminOrdersViewHolder.orders_datetime.setText("Order at: " + adminOrders.getDate() + " " + adminOrders.getTime());
                 adminOrdersViewHolder.orders_address_city.setText("Shipping Address: " + adminOrders.getAddress() + "-" + adminOrders.getCity());
                 adminOrdersViewHolder.orders_state.setText("State: " + adminOrders.getState());
@@ -85,31 +85,31 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         CharSequence sequence[] = new CharSequence[]{
-                                "Yes", "No"
+                                "Tiến hành giao hàng", "Hủy đơn hàng"
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(AdminNewOrdersActivity.this);
-                        builder.setTitle("Have you shipped this order  products ?");
+                        builder.setTitle("Bạn muốn tiến hành giao hàng ?");
                         builder.setItems(sequence, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which == 0) {
-                                    DatabaseReference adminordersRef  = FirebaseDatabase.getInstance().getReference().child("Orders");
+                                    DatabaseReference adminordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
                                     adminordersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String uID = getRef(i).getKey();
-                                            for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                                                if(snapshot1.getKey().equals(uID)){
-                                                    HashMap<String, Object> ordersMap =  new HashMap<>();
+                                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                                if (snapshot1.getKey().equals(uID)) {
+                                                    HashMap<String, Object> ordersMap = new HashMap<>();
                                                     ordersMap.put("state", "Đang giao hàng");
 
                                                     adminordersRef.child(uID).updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
-                                                            if(task.isSuccessful()){
+                                                            if (task.isSuccessful()) {
                                                                 Toast.makeText(AdminNewOrdersActivity.this, "Đang giao hàng", Toast.LENGTH_LONG).show();
-                                                            }else {
-                                                                Toast.makeText(AdminNewOrdersActivity.this , "Giao hàng thất bại", Toast.LENGTH_SHORT).show();
+                                                            } else {
+                                                                Toast.makeText(AdminNewOrdersActivity.this, "Giao hàng thất bại", Toast.LENGTH_SHORT).show();
                                                             }
                                                         }
                                                     });
@@ -124,7 +124,38 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                     });
 
                                 } else {
-                                    finish();
+//                                    DatabaseReference adminordersRef  = FirebaseDatabase.getInstance().getReference().child("Orders");
+//                                    adminordersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                                        @Override
+//                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                            String uID = getRef(i).getKey();
+//                                            for(DataSnapshot snapshot1 : snapshot.getChildren()){
+//                                                if(snapshot1.getKey().equals(uID)){
+//                                                    HashMap<String, Object> ordersMap =  new HashMap<>();
+//                                                    ordersMap.put("state", "Đang xử lý");
+//
+//                                                    adminordersRef.child(uID).updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                        @Override
+//                                                        public void onComplete(@NonNull Task<Void> task) {
+//                                                            if(task.isSuccessful()){
+//                                                                finish();
+//                                                                Toast.makeText(AdminNewOrdersActivity.this, "Đã xóa thành công", Toast.LENGTH_LONG).show();
+//                                                            }
+//                                                        }
+//                                                    });
+//                                                }
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                        }
+//                                    });
+
+                                    String uID = getRef(i).getKey();
+                                    RemoverOrder(uID);
+                                    Toast.makeText(AdminNewOrdersActivity.this, "Đã xóa thành công", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

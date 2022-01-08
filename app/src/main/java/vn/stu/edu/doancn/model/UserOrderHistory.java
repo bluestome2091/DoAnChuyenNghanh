@@ -1,20 +1,21 @@
 package vn.stu.edu.doancn.model;
 
-public class AdminHistoryOrder {
-    private String address, city, date, totalPrice, name, phone, state, time;
+public class UserOrderHistory {
+    private String address, city, date, name, phone, state, time, totalPrice, id;
 
-    public AdminHistoryOrder() {
+    public UserOrderHistory() {
     }
 
-    public AdminHistoryOrder(String address, String city, String date, String totalPrice, String name, String phone, String state, String time) {
+    public UserOrderHistory(String address, String city, String date, String name, String phone, String state, String time, String totalPrice, String id) {
         this.address = address;
         this.city = city;
         this.date = date;
-        this.totalPrice = totalPrice;
         this.name = name;
         this.phone = phone;
         this.state = state;
         this.time = time;
+        this.totalPrice = totalPrice;
+        this.id = id;
     }
 
     public String getAddress() {
@@ -39,14 +40,6 @@ public class AdminHistoryOrder {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(String totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public String getName() {
@@ -79,5 +72,21 @@ public class AdminHistoryOrder {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

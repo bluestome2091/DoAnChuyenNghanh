@@ -55,7 +55,7 @@ public class AdminHistoryOrdersActivity extends AppCompatActivity {
                adminHistoryViewHolder.history_username.setText(adminHistoryOrder.getName());
                adminHistoryViewHolder.history_nguoinhan.setText(adminHistoryOrder.getName());
                adminHistoryViewHolder.history_phonenumber.setText(adminHistoryOrder.getPhone());
-               adminHistoryViewHolder.history_totalprice.setText(adminHistoryOrder.getGia());
+               adminHistoryViewHolder.history_totalprice.setText(adminHistoryOrder.getTotalPrice() + " VND");
                adminHistoryViewHolder.history_address_city.setText(adminHistoryOrder.getAddress() + " - " + adminHistoryOrder.getCity());
                adminHistoryViewHolder.history_datetime.setText(adminHistoryOrder.getDate() + " - " + adminHistoryOrder.getTime());
                adminHistoryViewHolder.history_trangthai.setText(adminHistoryOrder.getState());
