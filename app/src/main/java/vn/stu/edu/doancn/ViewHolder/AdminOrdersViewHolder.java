@@ -11,7 +11,7 @@ import vn.stu.edu.doancn.R;
 
 public class AdminOrdersViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView orders_username, orders_phonenumber, orders_totalprice, orders_address_city, orders_datetime;
+    public TextView orders_username, orders_phonenumber, orders_totalprice, orders_address_city, orders_datetime, orders_state;
     public Button btnshow_all_products;
 
     public AdminOrdersViewHolder(@NonNull View itemView) {
@@ -22,6 +22,7 @@ public class AdminOrdersViewHolder extends RecyclerView.ViewHolder {
         orders_address_city = itemView.findViewById(R.id.orders_address_city);
         orders_totalprice = itemView.findViewById(R.id.orders_totalprice);
         orders_datetime = itemView.findViewById(R.id.orders_datetime);
+        orders_state=itemView.findViewById(R.id.orders_state);
         btnshow_all_products = itemView.findViewById(R.id.btnshow_all_products);
 
     }

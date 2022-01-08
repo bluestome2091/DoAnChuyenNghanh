@@ -44,20 +44,34 @@
         <entry key="..\:/DoanChuyenNganh/DoAnChuyenNghanh/app/src/main/res/layout/products_items_layout.xml" value="0.19882246376811594" />
         <entry key="..\:/DoanChuyenNganh/DoAnChuyenNghanh/app/src/main/res/menu/activity_main_drawer.xml" value="0.275" />
         <entry key="..\:/DoanChuyenNganh/DoAnChuyenNghanh/app/src/main/res/menu/home.xml" value="0.275" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_add_product.xml" value="0.19927536231884058" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_category.xml" value="0.23867753623188406" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_details_product.xml" value="0.19927536231884058" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_history_orders.xml" value="0.2341485507246377" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_manager_product.xml" value="0.2341485507246377" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_maneger_account2.xml" value="0.19927536231884058" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_new_orders.xml" value="0.2078804347826087" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_show_history.xml" value="0.2341485507246377" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_show_product_history.xml" value="0.23867753623188406" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_admin_show_user_products.xml" value="0.2341485507246377" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_cart.xml" value="0.2078804347826087" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_confirm_final_order.xml" value="0.2078804347826087" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_create_account_admin.xml" value="0.19927536231884058" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_home.xml" value="0.2078804347826087" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_main.xml" value="0.2078804347826087" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_product_details.xml" value="0.2078804347826087" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_reset_password.xml" value="0.19927536231884058" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_reset_password2.xml" value="0.19927536231884058" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_search_products.xml" value="0.19927536231884058" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_settings.xml" value="0.19927536231884058" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/activity_user_orders.xml" value="0.23550724637681159" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/app_bar_home.xml" value="0.19927536231884058" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/cart_item_layout.xml" value="0.2078804347826087" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/demo.xml" value="0.19927536231884058" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/dialog_settings_password.xml" value="0.19927536231884058" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/dialog_settings_profile.xml" value="0.19927536231884058" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/dialogeditpassword.xml" value="0.19927536231884058" />
+        <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/dialogsuaaccountadmin.xml" value="0.19927536231884058" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/history_item_product.xml" value="0.23867753623188406" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/order_history.xml" value="0.2" />
         <entry key="..\:/HocTap/Mon Hoc/Do An Chuyen Nganh_nam4HK1/DoAnChuyenNghanh/app/src/main/res/layout/orders_layout.xml" value="0.2078804347826087" />

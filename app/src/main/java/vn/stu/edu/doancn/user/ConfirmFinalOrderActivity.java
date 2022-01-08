@@ -103,7 +103,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
         final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(Prevalent.currentOnlineUser.getUsers());
+                .child(saveCurrentDate + " " + saveCurrentTime);
 
         final HashMap<String, Object> ordersMap =  new HashMap<>();
         ordersMap.put("totalPrice", totalPrice);
@@ -113,7 +113,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         ordersMap.put("city", shippment_city.getText().toString());
         ordersMap.put("date", saveCurrentDate);
         ordersMap.put("time", saveCurrentTime);
-        ordersMap.put("state", "not shipped");
+        ordersMap.put("state", "Đang xử lý");
         ordersMap.put("id",Prevalent.currentOnlineUser.getUsers());
 
         orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {

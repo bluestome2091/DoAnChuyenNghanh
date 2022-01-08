@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
+import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.AdminOrdersViewHolder;
 import vn.stu.edu.doancn.adapter.AdapterProductAdmin;
@@ -66,6 +67,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                 adminOrdersViewHolder.orders_totalprice.setText("Total Price: " + String.valueOf(adminOrders.getTotalPrice()) + "VND");
                 adminOrdersViewHolder.orders_datetime.setText("Order at: " + adminOrders.getDate() + " " + adminOrders.getTime());
                 adminOrdersViewHolder.orders_address_city.setText("Shipping Address: " + adminOrders.getAddress() + "-" + adminOrders.getCity());
+                adminOrdersViewHolder.orders_state.setText("State: " + adminOrders.getState());
 
                 adminOrdersViewHolder.btnshow_all_products.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -91,33 +93,27 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which == 0) {
-                                    DatabaseReference AdminViewHistory = FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView")
-                                            .child(getRef(i).getKey().toString()).child("Products");
-                                    AdminViewHistory.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    DatabaseReference adminordersRef  = FirebaseDatabase.getInstance().getReference().child("Orders");
+                                    adminordersRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            DatabaseReference historyProduct = FirebaseDatabase.getInstance().getReference();
-                                            for (DataSnapshot n : snapshot.getChildren()) {
-                                                HashMap<String, Object> showproduct = new HashMap<>();
-                                                showproduct.put("date", n.child("date").getValue());
-                                                showproduct.put("time", n.child("time").getValue());
-                                                showproduct.put("name", n.child("name").getValue());
-                                                showproduct.put("pid", n.child("pid").getValue());
-                                                showproduct.put("quatity", n.child("quatity").getValue());
-                                                showproduct.put("user", n.child("user").getValue());
-                                                showproduct.put("discount", n.child("discount").getValue());
+                                            String uID = getRef(i).getKey();
+                                            for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                                                if(snapshot1.getKey().equals(uID)){
+                                                    HashMap<String, Object> ordersMap =  new HashMap<>();
+                                                    ordersMap.put("state", "Đang giao hàng");
 
-                                                historyProduct.child("HistoryProduct").child("Products").child(adminOrders.getDate() + " " + adminOrders.getTime()).child(n.getKey()).updateChildren(showproduct)
-                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-
-                                                                } else {
-                                                                    Toast.makeText(AdminNewOrdersActivity.this, "Kết nối bị lỗi", Toast.LENGTH_SHORT).show();
-                                                                }
+                                                    adminordersRef.child(uID).updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if(task.isSuccessful()){
+                                                                Toast.makeText(AdminNewOrdersActivity.this, "Đang giao hàng", Toast.LENGTH_LONG).show();
+                                                            }else {
+                                                                Toast.makeText(AdminNewOrdersActivity.this , "Giao hàng thất bại", Toast.LENGTH_SHORT).show();
                                                             }
-                                                        });
+                                                        }
+                                                    });
+                                                }
                                             }
                                         }
 
@@ -126,42 +122,6 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
 
                                         }
                                     });
-
-                                    DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference();
-                                    historyRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            HashMap<String, Object> historyOrder = new HashMap<>();
-                                            historyOrder.put("name", adminOrders.getName());
-                                            historyOrder.put("phone", adminOrders.getPhone());
-                                            historyOrder.put("address", adminOrders.getAddress());
-                                            historyOrder.put("gia", adminOrders.getTotalPrice());
-                                            historyOrder.put("date", adminOrders.getDate());
-                                            historyOrder.put("time", adminOrders.getTime());
-                                            historyOrder.put("city", adminOrders.getCity());
-                                            historyOrder.put("state", "Đã giao");
-
-                                            historyRef.child("HistoryOrder").child(adminOrders.getDate() + " " + adminOrders.getTime()).updateChildren(historyOrder)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                String uID = getRef(i).getKey();
-                                                                RemoverOrder(uID);
-                                                                Toast.makeText(AdminNewOrdersActivity.this, "Tiến hành giao thành công", Toast.LENGTH_SHORT).show();
-                                                            } else {
-                                                                Toast.makeText(AdminNewOrdersActivity.this, "Kết nối bị lỗi", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }
-                                                    });
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-
 
                                 } else {
                                     finish();
