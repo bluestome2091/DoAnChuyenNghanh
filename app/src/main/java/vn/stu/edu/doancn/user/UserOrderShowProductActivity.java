@@ -34,6 +34,8 @@ public class UserOrderShowProductActivity extends AppCompatActivity {
     private DatabaseReference uershowproductRef;
     private ImageButton btnShowUserProductsHistoryExit;
     private String uID = "";
+
+    private String hid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
