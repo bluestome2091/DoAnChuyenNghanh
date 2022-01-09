@@ -40,7 +40,7 @@ public class AdminShowProductHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_show_product_history);
 
         userID=getIntent().getStringExtra("id");
-        productListHistoryRef = FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(Prevalent.currentOnlineUser.getUsers()).child("Products");
+        productListHistoryRef = FirebaseDatabase.getInstance().getReference().child("HistoryProduct").child(userID).child("Products");
         
         addControls();
         addEvents();
