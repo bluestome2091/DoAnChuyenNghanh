@@ -95,7 +95,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.getKey().equals(Prevalent.currentOnlineUser.getUsers()))
+                            if (state.equals("false"))
                             {
                                 Toast.makeText(ProductDetailsActivity.this, "Đơn hàng trước của bạn đang chờ xử lý, vui lòng đợi", Toast.LENGTH_SHORT).show();
                             }
@@ -175,20 +175,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void CheckOrderState() {
         DatabaseReference ordersRef;
-        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getUsers());
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
 
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String shpippingState = snapshot.child("state").getValue().toString();
-
-                    if (shpippingState.equals("Đang xử lý")) {
-                        state = "Order Shipped";
-                    } else if (shpippingState.equals("Đang giao hàng")) {
-                        state = "Order Placed";
-                    }   
-                }
+               for (DataSnapshot n : snapshot.getChildren()){
+                   if (n.child("id").getValue().equals(Prevalent.currentOnlineUser.getUsers())){
+                       state = "false";
+                       break;
+                   }
+               }
             }
 
             @Override
