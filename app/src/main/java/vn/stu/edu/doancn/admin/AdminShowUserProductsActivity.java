@@ -30,7 +30,7 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
     private DatabaseReference cartListRef;
     private ImageButton btnShowProductsExit;
     private String userID="";
-
+    String user = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,9 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_show_user_products);
 
         userID=getIntent().getStringExtra("id");
+        user = getIntent().getStringExtra("user");
         cartListRef= FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView")
-                .child(Prevalent.currentOnlineUser.getUsers()).child("Products");
+                .child(user).child("Products");
 
         addControls();
         addEvents();

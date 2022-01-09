@@ -149,7 +149,7 @@ public class UserOrdersActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()){
                                                         FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(Prevalent.currentOnlineUser.getUsers())
-                                                                .child("Products").child(usersOrders.getDate() + " " +usersOrders.getTime()).removeValue()
+                                                                .child("Products").removeValue()
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {

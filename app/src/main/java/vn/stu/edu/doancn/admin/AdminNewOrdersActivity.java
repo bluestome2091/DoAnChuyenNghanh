@@ -76,6 +76,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(AdminNewOrdersActivity.this, AdminShowUserProductsActivity.class);
                         intent.putExtra("id", uID);
+                        intent.putExtra("user", adminOrders.getId());
                         startActivity(intent);
                     }
                 });

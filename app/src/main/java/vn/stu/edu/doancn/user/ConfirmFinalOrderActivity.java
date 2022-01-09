@@ -17,8 +17,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -101,44 +104,61 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
-
-        final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders")
-                .child(saveCurrentDate + " " + saveCurrentTime);
-
-        final HashMap<String, Object> ordersMap =  new HashMap<>();
-        ordersMap.put("totalPrice", totalPrice);
-        ordersMap.put("name", shippment_name.getText().toString());
-        ordersMap.put("phone", shippment_phone_number.getText().toString());
-        ordersMap.put("address", shippment_address.getText().toString());
-        ordersMap.put("city", shippment_city.getText().toString());
-        ordersMap.put("date", saveCurrentDate);
-        ordersMap.put("time", saveCurrentTime);
-        ordersMap.put("state", "Đang xử lý");
-        ordersMap.put("id",Prevalent.currentOnlineUser.getUsers());
-
-        orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+        final  DatabaseReference checkOrdersRef = FirebaseDatabase.getInstance().getReference().child("CardList").child("AdminsView")
+                .child(Prevalent.currentOnlineUser.getUsers()).child("Products");
+        checkOrdersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    FirebaseDatabase.getInstance().getReference().child("CartList").child("Users")
-                            .child(Prevalent.currentOnlineUser.getUsers()).removeValue()
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(ConfirmFinalOrderActivity.this, "Your final order has been placed successfully", Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    Toast.makeText(ConfirmFinalOrderActivity.this, "Đơn hàng trước của bạn đang chờ xử lý, vui lòng đợi", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference().child("Orders")
+                            .child(saveCurrentDate + " " + saveCurrentTime);
 
-                                        Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
-                            });
+                    final HashMap<String, Object> ordersMap =  new HashMap<>();
+                    ordersMap.put("totalPrice", totalPrice);
+                    ordersMap.put("name", shippment_name.getText().toString());
+                    ordersMap.put("phone", shippment_phone_number.getText().toString());
+                    ordersMap.put("address", shippment_address.getText().toString());
+                    ordersMap.put("city", shippment_city.getText().toString());
+                    ordersMap.put("date", saveCurrentDate);
+                    ordersMap.put("time", saveCurrentTime);
+                    ordersMap.put("state", "Đang xử lý");
+                    ordersMap.put("id",Prevalent.currentOnlineUser.getUsers());
 
+                    orderRef.updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                FirebaseDatabase.getInstance().getReference().child("CartList").child("Users")
+                                        .child(Prevalent.currentOnlineUser.getUsers()).removeValue()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(ConfirmFinalOrderActivity.this, "Your final order has been placed successfully", Toast.LENGTH_SHORT).show();
+
+                                                    Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
+                                        });
+
+                            }
+                        }
+                    });
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
+
     }
 
     private void addControls() {

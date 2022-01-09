@@ -1,12 +1,12 @@
 package vn.stu.edu.doancn.model;
 
 public class AdminOrders {
-    private String name, phone, address, city, state, date, time, totalPrice;
+    private String name, phone, address, city, state, date, time, totalPrice, id;
 
     public AdminOrders() {
     }
 
-    public AdminOrders(String name, String phone, String address, String city, String state, String date, String time, String totalPrice) {
+    public AdminOrders(String name, String phone, String address, String city, String state, String date, String time, String totalPrice, String id) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -15,6 +15,16 @@ public class AdminOrders {
         this.date = date;
         this.time = time;
         this.totalPrice = totalPrice;
+        this.id = id;
+
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

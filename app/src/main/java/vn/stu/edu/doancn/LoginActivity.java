@@ -30,7 +30,7 @@ import vn.stu.edu.doancn.admin.AdminCategoryActivity;
 import vn.stu.edu.doancn.model.Users;
 import vn.stu.edu.doancn.user.HomeActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class    LoginActivity extends AppCompatActivity {
     TextInputEditText edtuser, edtpassword;
     TextInputLayout lbedtuser, lbedtpassword;
     MaterialButton buttonLogin;

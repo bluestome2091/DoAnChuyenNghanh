@@ -91,7 +91,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 if(state.equals("Order Placed") || state.equals("Order Shipped")){
                     Toast.makeText(ProductDetailsActivity.this, "You can add purchase more products, once your order is shipped or confirmed", Toast.LENGTH_SHORT).show();
                 } else {
-                    addToCartList(productID);
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("CardList").child("AdminsView").child(Prevalent.currentOnlineUser.getUsers());
+                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.getKey().equals(Prevalent.currentOnlineUser.getUsers()))
+                            {
+                                Toast.makeText(ProductDetailsActivity.this, "Đơn hàng trước của bạn đang chờ xử lý, vui lòng đợi", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                addToCartList(productID);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
             }
         });
@@ -165,9 +183,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     String shpippingState = snapshot.child("state").getValue().toString();
 
-                    if (shpippingState.equals("shipped")) {
+                    if (shpippingState.equals("Đang xử lý")) {
                         state = "Order Shipped";
-                    } else if (shpippingState.equals("not shipped")) {
+                    } else if (shpippingState.equals("Đang giao hàng")) {
                         state = "Order Placed";
                     }   
                 }

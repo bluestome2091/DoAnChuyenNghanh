@@ -64,6 +64,7 @@ public class UserOrderHistoryActivity extends AppCompatActivity {
                             String oID = getRef(i).getKey();
                             Intent intent = new Intent(UserOrderHistoryActivity.this, UserOrderShowProductActivity.class);
                             intent.putExtra("oID", oID);
+                            intent.putExtra("user", userOrderHistory.getId());
                             startActivity(intent);
                         }
                     });
