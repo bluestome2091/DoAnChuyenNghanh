@@ -131,7 +131,7 @@ public class AdminDetailsProduct extends AppCompatActivity {
             lbInputProductId.setError("Chưa điền mã giày");
         } else if (TextUtils.isEmpty(size)) {
             Toast.makeText(AdminDetailsProduct.this, "Chưa điền kích thước của giày....", Toast.LENGTH_SHORT).show();
-            lbInputProductSize.setError("Chưa điền kích thứcapp:boxStrokeColor=\"@color/black\"\n" +
+            lbInputProductSize.setError("Chưa điền kích thước app:boxStrokeColor=\"@color/black\"\n" +
                     "        app:hintTextColor=\"@color/black\"");
         } else {
             StorageProductInformation();
@@ -141,7 +141,7 @@ public class AdminDetailsProduct extends AppCompatActivity {
 
     private void StorageProductInformation() {
         loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Please wait, while we are checking!!!");
+        loadingBar.setMessage("Vui lòng đợi, trong khi chúng tôi đang kiểm tra.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
         Calendar calendar = Calendar.getInstance();
@@ -162,12 +162,12 @@ public class AdminDetailsProduct extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     String message = e.toString();
-                    Toast.makeText(AdminDetailsProduct.this, "Error" + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminDetailsProduct.this, "Lỗi." + message, Toast.LENGTH_SHORT).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(AdminDetailsProduct.this, "Tải ảnh thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminDetailsProduct.this, "Tải ảnh thành công.", Toast.LENGTH_SHORT).show();
                     Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                         @Override
                         public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -182,7 +182,7 @@ public class AdminDetailsProduct extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) {
                                 downloadImageURL = task.getResult().toString();
-                                Toast.makeText(AdminDetailsProduct.this, "Ảnh sản phẩm đã lưu vào database", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminDetailsProduct.this, "Ảnh sản phẩm đã lưu vào cơ sở dữ liệu.", Toast.LENGTH_SHORT).show();
                                 updateProductInformation();
                             }
                         }
@@ -216,10 +216,10 @@ public class AdminDetailsProduct extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Intent intent = new Intent(AdminDetailsProduct.this, AdminManagerProduct.class);
                     startActivity(intent);
-                    Toast.makeText(AdminDetailsProduct.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminDetailsProduct.this, "Cập nhật thành công.", Toast.LENGTH_SHORT).show();
                 } else {
                     String message = task.getException().toString();
-                    Toast.makeText(AdminDetailsProduct.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminDetailsProduct.this, "Lỗi: " + message, Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -69,8 +69,8 @@ public class CartActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder cartViewHolder, int i, @NonNull Cart cart) {
-                cartViewHolder.txtcart_product_quatity.setText("Quatity: " + cart.getQuatity());
-                cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + " VND");
+                cartViewHolder.txtcart_product_quatity.setText(cart.getQuatity());
+                cartViewHolder.txtcart_product_price.setText(cart.getPrice() + " VND");
                 cartViewHolder.txtcart_product_name.setText(cart.getName());
 
                 double oneTypeProductPrice = ((Double.parseDouble(cart.getPrice()))) * Double.parseDouble(cart.getQuatity());
@@ -80,10 +80,10 @@ public class CartActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         CharSequence options[] = new CharSequence[]{
-                                "Edit", "Remove"
+                                "Thay đổi", "Xóa sản phẩm"
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-                        builder.setTitle("Cart Options: ");
+                        builder.setTitle("Tùy chọn");
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -98,7 +98,7 @@ public class CartActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(CartActivity.this, "Item remove seccessfull", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(CartActivity.this, "Xóa thành công.", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(CartActivity.this, CartActivity.class);
                                                 startActivity(intent);
                                                 finish();
@@ -111,7 +111,7 @@ public class CartActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(CartActivity.this, "Item remove seccessfull", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(CartActivity.this, "Đã xóa.", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(CartActivity.this, CartActivity.class);
                                                 startActivity(intent);
                                                 finish();
@@ -151,18 +151,18 @@ public class CartActivity extends AppCompatActivity {
                     String userName = snapshot.child("name").getValue().toString();
 
                     if (shpippingState.equals("shipped")) {
-                        txttotal_price.setText("Dear " + userName + "\n order is shipped successfully");
+                        txttotal_price.setText("Xin chào " + userName + "\n đơn hàng được chuyển thành công.");
                         recyclerView.setVisibility(View.GONE);
                         txtmsg1.setVisibility(View.VISIBLE);
-                        txtmsg1.setText("Congratulations, your final order has been Shipped successfully. Soon you will received your order at your door step");
+                        txtmsg1.setText("Đang hàng đang được vận chuyển. Bạn sẽ sớm nhận được hàng.");
                         btnnext_process.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "you can purchase more products, once you received your first final order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CartActivity.this, "Bạn có thể mua sản phẩm khi nhận được hàng của đơn đặt hàng trước.", Toast.LENGTH_SHORT).show();
                     } else if (shpippingState.equals("not shipped")) {
                         txttotal_price.setText("Shipped State = Not Shipped");
                         recyclerView.setVisibility(View.GONE);
                         txtmsg1.setVisibility(View.VISIBLE);
                         btnnext_process.setVisibility(View.GONE);
-                        Toast.makeText(CartActivity.this, "you can purchase more products, once you received your first final order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CartActivity.this, "Bạn có thể mua sản phẩm khi nhận được hàng của đơn đặt hàng trước.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

@@ -94,7 +94,7 @@ public class AdminCategoryActivity extends AppCompatActivity {
                     Toast.makeText(AdminCategoryActivity.this, checkPermission, Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 } else {
-                    Toast.makeText(AdminCategoryActivity.this, "Không có quyền truy cập", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AdminCategoryActivity.this, "Không có quyền truy cập.", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
 

@@ -93,30 +93,30 @@ public class AdminAddProductActivity extends AppCompatActivity {
         Count = InputProductCount.getText().toString();
         Description = InputProductDescription.getText().toString();
         if (ImageUri == null) {
-            Toast.makeText(AdminAddProductActivity.this, "Please select image....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminAddProductActivity.this, "Chọn hình....", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(Name)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền tên sản phẩm....", Toast.LENGTH_SHORT).show();
-            lbInputProductName.setError("Chưa điền tên giày");
+            lbInputProductName.setError("Chưa điền tên giày.");
         } else if (TextUtils.isEmpty(Price)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền giá sản phẩm....", Toast.LENGTH_SHORT).show();
-            lbInputProductPrice.setError("Chưa điền giá");
+            lbInputProductPrice.setError("Chưa điền giá.");
             lbInputProductName.setErrorEnabled(false);
         } else if (TextUtils.isEmpty(Count)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền số lượng sản phẩm....", Toast.LENGTH_SHORT).show();
-            lbInputProductCount.setError("Chưa điền số lượng");
+            lbInputProductCount.setError("Chưa điền số lượng.");
             lbInputProductName.setErrorEnabled(false);
             lbInputProductPrice.setErrorEnabled(false);
         } else if (TextUtils.isEmpty(Description)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền mô tả sản phẩm....", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(id)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền mã sản phẩm....", Toast.LENGTH_SHORT).show();
-            lbInputProductId.setError("Chưa điền mã giày");
+            lbInputProductId.setError("Chưa điền mã giày.");
             lbInputProductName.setErrorEnabled(false);
             lbInputProductPrice.setErrorEnabled(false);
             lbInputProductCount.setErrorEnabled(false);
         } else if (TextUtils.isEmpty(size)) {
             Toast.makeText(AdminAddProductActivity.this, "Chưa điền kích thước của giày....", Toast.LENGTH_SHORT).show();
-            lbInputProductSize.setError("Chưa điền kích thứ");
+            lbInputProductSize.setError("Chưa điền kích thứ.");
             lbInputProductName.setErrorEnabled(false);
             lbInputProductPrice.setErrorEnabled(false);
             lbInputProductCount.setErrorEnabled(false);
@@ -134,7 +134,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
 
     private void StorageProductInformation() {
         loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Please wait, while we are checking!!!");
+        loadingBar.setMessage("Vui lòng đợi, trong khi chúng tôi đang kiểm tra !");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
         Calendar calendar = Calendar.getInstance();
@@ -158,12 +158,12 @@ public class AdminAddProductActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             String message = e.toString();
-                            Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminAddProductActivity.this, "Đã xảy ra lỗi." + message, Toast.LENGTH_SHORT).show();
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(AdminAddProductActivity.this, "Tải ảnh thành công", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminAddProductActivity.this, "Tải ảnh thành công.", Toast.LENGTH_SHORT).show();
                             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                 @Override
                                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -178,7 +178,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         downloadImageURL = task.getResult().toString();
-                                        Toast.makeText(AdminAddProductActivity.this, "Ảnh sản phẩm đã lưu vào database", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AdminAddProductActivity.this, "Ảnh sản phẩm đã lưu vào cơ sở dữ liệu.", Toast.LENGTH_SHORT).show();
                                         saveProductInformation();
                                     }
                                 }
@@ -186,7 +186,7 @@ public class AdminAddProductActivity extends AppCompatActivity {
                         }
                     });
                 }else {
-                    lbInputProductId.setError("Mã đã tồn tại");
+                    lbInputProductId.setError("Mã đã tồn tại.");
                     loadingBar.dismiss();
                 }
             }
@@ -221,18 +221,18 @@ public class AdminAddProductActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Intent intent = new Intent(AdminAddProductActivity.this, AdminManagerProduct.class);
                                 startActivity(intent);
-                                Toast.makeText(AdminAddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminAddProductActivity.this, "Thêm sản phẩm thành công.", Toast.LENGTH_SHORT).show();
                                 finish();
                                 loadingBar.dismiss();
                             } else {
                                 String message = task.getException().toString();
-                                Toast.makeText(AdminAddProductActivity.this, "Error" + message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AdminAddProductActivity.this, "Lỗi." + message, Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
                         }
                     });
                 }else {
-                    lbInputProductId.setError("Mã đã tồn tại");
+                    lbInputProductId.setError("Mã đã tồn tại.");
                     loadingBar.dismiss();
                 }
             }

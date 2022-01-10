@@ -81,7 +81,7 @@ public class UserOrdersActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             if (usersOrders.getState().equals("Đang giao hàng")) {
-                                Toast.makeText(UserOrdersActivity.this, "Đã nhận hàng", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserOrdersActivity.this, "Đã nhận hàng.", Toast.LENGTH_SHORT).show();
                                 DatabaseReference historyorder = FirebaseDatabase.getInstance().getReference().child("HistoryOrder").child(usersOrders.getDate() + " " + usersOrders.getTime());
                                 HashMap<String, Object> historyorderMap = new HashMap<>();
                                 historyorderMap.put("address", usersOrders.getAddress());
@@ -110,7 +110,7 @@ public class UserOrdersActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if (task.isSuccessful()) {
-                                                                    Toast.makeText(UserOrdersActivity.this, "Đã lưu vào lịch sử đơn hàng", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(UserOrdersActivity.this, "Đã lưu vào lịch sử đơn hàng.", Toast.LENGTH_SHORT).show();
                                                                 }
                                                             }
                                                         });
@@ -176,7 +176,7 @@ public class UserOrdersActivity extends AppCompatActivity {
                             } else if (usersOrders.getState().equals("Đang xử lý")) {
                                 String userorderID = getRef(i).getKey();
                                 RemoverUserOrder(userorderID);
-                                Toast.makeText(UserOrdersActivity.this, "Hủy đơn hàng thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserOrdersActivity.this, "Hủy đơn hàng thành công.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

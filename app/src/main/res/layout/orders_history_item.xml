@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <LinearLayout
         android:id="@+id/layoutnguoidat1"
@@ -39,7 +40,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/layoutnguoidat1">
 
         <TextView
@@ -71,7 +71,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/layoutnguoinhan1">
 
         <TextView
@@ -104,7 +103,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/layoutdt">
 
         <TextView
@@ -137,7 +135,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/layouttongtien1">
 
         <TextView
@@ -170,7 +167,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/layoutdiachi1">
 
         <TextView
@@ -205,7 +201,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/layoutthoigiandat1">
 
         <TextView

@@ -186,9 +186,9 @@ public class SettingsActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(SettingsActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SettingsActivity.this, "Cập nhật thành công.", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(SettingsActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SettingsActivity.this, "Cập nhật lỗi.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -200,7 +200,6 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     });
                     dialog.dismiss();
-                    Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(SettingsActivity.this, "Mật khẩu không trùng", Toast.LENGTH_SHORT).show();
@@ -261,7 +260,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(SettingsActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(SettingsActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SettingsActivity.this, "Cập nhật lỗi", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -273,7 +272,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 });
                 dialog.dismiss();
-                Toast.makeText(SettingsActivity.this, "Update Sucessfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingsActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -286,7 +285,7 @@ public class SettingsActivity extends AppCompatActivity {
             imageUri = result.getUri();
             settings_profile_image.setImageURI(imageUri);
         } else {
-            Toast.makeText(SettingsActivity.this, "Error, Try Again !!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingsActivity.this, "Lỗi, vui lòng thử lại !", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
             finish();
         }
@@ -301,19 +300,19 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("Password", settings_password.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getUsers()).updateChildren(userMap);
         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-        Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SettingsActivity.this, "Cập nhật thông tin hồ sơ thành công.", Toast.LENGTH_SHORT).show();
         finish();
     }
 
     private void userInfoUpdated() {
         if (TextUtils.isEmpty(settings_name.getText().toString())) {
-            Toast.makeText(SettingsActivity.this, "Name is mandatory", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingsActivity.this, "Họ tên.", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(settings_address.getText().toString())) {
-            Toast.makeText(SettingsActivity.this, "Name is address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingsActivity.this, "Địa chỉ.", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(settings_phone.getText().toString())) {
-            Toast.makeText(SettingsActivity.this, "Name is phone", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingsActivity.this, "Số điện thoại.", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(settings_password.getText().toString())) {
-            Toast.makeText(SettingsActivity.this, "Name is password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingsActivity.this, "Mật khẩu.", Toast.LENGTH_SHORT).show();
         } else if (checker.equals("clicked")) {
             uploadImage();
         }
@@ -321,8 +320,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(SettingsActivity.this);
-        progressDialog.setTitle("Upload Profile");
-        progressDialog.setMessage("Please wait, while we are updating your account information");
+        progressDialog.setTitle("Upload Profile.");
+        progressDialog.setMessage("Vui lòng đợi, trong khi chúng tôi cập nhật thông tin tài khoản của bạn.");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
         if (imageUri != null) {
@@ -356,18 +355,18 @@ public class SettingsActivity extends AppCompatActivity {
 
                         progressDialog.dismiss();
                         startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-                        Toast.makeText(SettingsActivity.this, "Profile Info update successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SettingsActivity.this, "Cập nhật thông tin hồ sơ thành công.", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     else {
                         progressDialog.dismiss();
-                        Toast.makeText(SettingsActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SettingsActivity.this, "Lỗi cập nhật.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
         else {
-            Toast.makeText(SettingsActivity.this, "image is not selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SettingsActivity.this, "Hình ảnh không được chọn", Toast.LENGTH_SHORT).show();
         }
     }
 

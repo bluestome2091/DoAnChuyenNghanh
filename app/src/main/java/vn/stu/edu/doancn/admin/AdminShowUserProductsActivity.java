@@ -75,8 +75,8 @@ public class AdminShowUserProductsActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder cartViewHolder, int i, @NonNull Cart cart) {
                 cartViewHolder.txtcart_product_name.setText(cart.getName());
-                cartViewHolder.txtcart_product_price.setText("Price: " + cart.getPrice() + " VND");
-                cartViewHolder.txtcart_product_quatity.setText("Quantity: " + cart.getQuatity());
+                cartViewHolder.txtcart_product_price.setText(cart.getPrice() + " VND");
+                cartViewHolder.txtcart_product_quatity.setText(cart.getQuatity());
             }
 
             @NonNull

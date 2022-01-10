@@ -8,32 +8,32 @@
             android:id="@+id/nav_settings"
             android:icon="@drawable/editprofile"
             android:iconTint="@android:color/white"
-            android:title="Profile" />
+            android:title="Hồ sơ cá nhân" />
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/search"
             android:iconTint="@android:color/white"
-            android:title="Search" />
+            android:title="Tìm kiếm" />
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/nav_cart"
             android:iconTint="@android:color/white"
-            android:title="Cart" />
+            android:title="Giỏ hàng" />
         <item
             android:id="@+id/nav_order"
-            android:icon="@drawable/nav_cart"
+            android:icon="@drawable/bill2"
             android:iconTint="@android:color/white"
-            android:title="Order" />
+            android:title="Đơn hàng" />
         <item
             android:id="@+id/nav_historyorder"
-            android:icon="@drawable/nav_cart"
+            android:icon="@drawable/bill3"
             android:iconTint="@android:color/white"
-            android:title="Order History" />
+            android:title="Lịch sử đơn hàng" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
             android:iconTint="@android:color/white"
-            android:title="Logout" />
+            android:title="Đăng xuất" />
 
 
     </group>

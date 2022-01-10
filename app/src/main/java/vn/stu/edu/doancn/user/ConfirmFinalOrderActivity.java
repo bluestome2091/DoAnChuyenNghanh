@@ -46,7 +46,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm_final_order);
 
         totalPrice = getIntent().getStringExtra("Total Price");
-        Toast.makeText(this, "Total Price: " + totalPrice + " VND", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Tổng tiền: " + totalPrice + " VND", Toast.LENGTH_SHORT).show();
 
         addControls();
         addEvents();
@@ -73,19 +73,19 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private void Check() {
         if(TextUtils.isEmpty(shippment_name.getText().toString())){
-            Toast.makeText(this, "Please provide your full name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập tên.", Toast.LENGTH_SHORT).show();
             lbproduct_name.setError("Chưa nhập tên");
         } else if(TextUtils.isEmpty(shippment_phone_number.getText().toString())){
-            Toast.makeText(this, "Please provide your phone number", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập số điện thoại.", Toast.LENGTH_SHORT).show();
             lbproduct_phone.setError("Chưa nhập số điện thoại");
             lbproduct_name.setErrorEnabled(false);
         } else if(TextUtils.isEmpty(shippment_address.getText().toString())){
-            Toast.makeText(this, "Please provide your address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập địa chỉ nhà.", Toast.LENGTH_SHORT).show();
             lbproduct_address.setError("Chưa nhập địa chỉ nhà");
             lbproduct_name.setErrorEnabled(false);
             lbproduct_phone.setErrorEnabled(false);
         } else if(TextUtils.isEmpty(shippment_city.getText().toString())){
-            Toast.makeText(this, "Please provide your city name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập tên thành phố.", Toast.LENGTH_SHORT).show();
             lbproduct_city.setError("Chưa nhập thành phố");
             lbproduct_name.setErrorEnabled(false);
             lbproduct_phone.setErrorEnabled(false);
@@ -137,7 +137,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
-                                                    Toast.makeText(ConfirmFinalOrderActivity.this, "Your final order has been placed successfully", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(ConfirmFinalOrderActivity.this, "Đơn hàng của bạn đã được đặt thành công.", Toast.LENGTH_SHORT).show();
 
                                                     Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

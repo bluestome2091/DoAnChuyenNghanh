@@ -89,7 +89,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(state.equals("Order Placed") || state.equals("Order Shipped")){
-                    Toast.makeText(ProductDetailsActivity.this, "You can add purchase more products, once your order is shipped or confirmed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetailsActivity.this, "Bạn có thể thêm mua nhiều sản phẩm hơn sau khi đơn hàng của bạn được xác nhận giao hàng.", Toast.LENGTH_SHORT).show();
                 } else {
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("CardList").child("AdminsView").child(Prevalent.currentOnlineUser.getUsers());
                     ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,7 +97,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (state.equals("false"))
                             {
-                                Toast.makeText(ProductDetailsActivity.this, "Đơn hàng trước của bạn đang chờ xử lý, vui lòng đợi", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductDetailsActivity.this, "Đơn hàng trước của bạn đang chờ xử lý, vui lòng đợi.", Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 addToCartList(productID);
@@ -161,7 +161,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(ProductDetailsActivity.this, "Added to cart list", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductDetailsActivity.this, "Thêm thành công.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                 startActivity(intent);
                             }

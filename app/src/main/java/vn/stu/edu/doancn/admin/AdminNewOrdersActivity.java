@@ -62,12 +62,12 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull AdminOrdersViewHolder adminOrdersViewHolder, int i, @NonNull AdminOrders adminOrders) {
-                adminOrdersViewHolder.orders_username.setText("Name: " + adminOrders.getName());
-                adminOrdersViewHolder.orders_phonenumber.setText("Phone: " + adminOrders.getPhone());
-                adminOrdersViewHolder.orders_totalprice.setText("Total Price: " + String.valueOf(adminOrders.getTotalPrice()) + " VND");
-                adminOrdersViewHolder.orders_datetime.setText("Order at: " + adminOrders.getDate() + " " + adminOrders.getTime());
-                adminOrdersViewHolder.orders_address_city.setText("Shipping Address: " + adminOrders.getAddress() + "-" + adminOrders.getCity());
-                adminOrdersViewHolder.orders_state.setText("State: " + adminOrders.getState());
+                adminOrdersViewHolder.orders_username.setText(adminOrders.getName());
+                adminOrdersViewHolder.orders_phonenumber.setText(adminOrders.getPhone());
+                adminOrdersViewHolder.orders_totalprice.setText(String.valueOf(adminOrders.getTotalPrice()) + " VND");
+                adminOrdersViewHolder.orders_datetime.setText(adminOrders.getDate() + " " + adminOrders.getTime());
+                adminOrdersViewHolder.orders_address_city.setText(adminOrders.getAddress() + "-" + adminOrders.getCity());
+                adminOrdersViewHolder.orders_state.setText(adminOrders.getState());
 
                 adminOrdersViewHolder.btnshow_all_products.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -108,9 +108,9 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
-                                                                Toast.makeText(AdminNewOrdersActivity.this, "Đang giao hàng", Toast.LENGTH_LONG).show();
+                                                                Toast.makeText(AdminNewOrdersActivity.this, "Đang giao hàng.", Toast.LENGTH_LONG).show();
                                                             } else {
-                                                                Toast.makeText(AdminNewOrdersActivity.this, "Giao hàng thất bại", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(AdminNewOrdersActivity.this, "Giao hàng thất bại.", Toast.LENGTH_SHORT).show();
                                                             }
                                                         }
                                                     });
@@ -125,38 +125,9 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                     });
 
                                 } else {
-//                                    DatabaseReference adminordersRef  = FirebaseDatabase.getInstance().getReference().child("Orders");
-//                                    adminordersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                                        @Override
-//                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                            String uID = getRef(i).getKey();
-//                                            for(DataSnapshot snapshot1 : snapshot.getChildren()){
-//                                                if(snapshot1.getKey().equals(uID)){
-//                                                    HashMap<String, Object> ordersMap =  new HashMap<>();
-//                                                    ordersMap.put("state", "Đang xử lý");
-//
-//                                                    adminordersRef.child(uID).updateChildren(ordersMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                        @Override
-//                                                        public void onComplete(@NonNull Task<Void> task) {
-//                                                            if(task.isSuccessful()){
-//                                                                finish();
-//                                                                Toast.makeText(AdminNewOrdersActivity.this, "Đã xóa thành công", Toast.LENGTH_LONG).show();
-//                                                            }
-//                                                        }
-//                                                    });
-//                                                }
-//                                            }
-//                                        }
-//
-//                                        @Override
-//                                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                        }
-//                                    });
-
                                     String uID = getRef(i).getKey();
                                     RemoverOrder(uID);
-                                    Toast.makeText(AdminNewOrdersActivity.this, "Đã xóa thành công", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AdminNewOrdersActivity.this, "Đã xóa thành công.", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -180,7 +151,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
         ordersRef.child(uID).removeValue();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(uID).child("Products");
         reference.removeValue();
-        Toast.makeText(AdminNewOrdersActivity.this, "Đã xử lý", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AdminNewOrdersActivity.this, "Đã xử lý.", Toast.LENGTH_SHORT).show();
     }
 
     private void addEvents() {

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
+    android:background="@color/white"
     app:cardElevation="15dp">
 
     <RelativeLayout
@@ -18,8 +19,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/black"
             android:text="Tên sản phẩm: "
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
         <TextView
             android:id="@+id/txtcart_product_name"
             android:layout_width="match_parent"
@@ -40,8 +40,7 @@
             android:layout_marginRight="5dp"
             android:text="Số lượng: "
             android:layout_below="@+id/txtcart_product_name"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txtcart_product_quatity"
@@ -66,8 +65,7 @@
             android:gravity="center"
             android:text="Giá sản phẩm: "
             android:textColor="@color/red"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/txtcart_product_price"

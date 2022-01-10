@@ -70,22 +70,22 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
         if (!taikhoan.isEmpty()) {
         }
         if (taikhoan.equals("")) {
-            lbuser.setError("Chưa điền thông tin");
+            lbuser.setError("Chưa điền thông tin.");
         } else if (pass.equals("")) {
-            lbpassword.setError("Chưa điền thông tin");
+            lbpassword.setError("Chưa điền thông tin.");
             lbuser.setErrorEnabled(false);
         } else if (ten.equals("")) {
-            lbname.setError("Chưa điền thông tin");
+            lbname.setError("Chưa điền thông tin.");
             lbuser.setErrorEnabled(false);
             lbpassword.setErrorEnabled(false);
         } else if (phone.equals("")) {
-            lbsdt.setError("Chưa điền thông tin");
+            lbsdt.setError("Chưa điền thông tin.");
             lbuser.setErrorEnabled(false);
             lbpassword.setErrorEnabled(false);
             lbname.setErrorEnabled(false);
         } else {
-            loadingBar.setTitle("Đang xử lý");
-            loadingBar.setMessage("Vui lòng đợi trong giây lát!!!");
+            loadingBar.setTitle("Đang xử lý.");
+            loadingBar.setMessage("Vui lòng đợi trong giây lát!");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
             themAccout(taikhoan, pass, ten, phone);
@@ -108,20 +108,20 @@ public class CreateAccountAdminActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(CreateAccountAdminActivity.this, "Your Account is created", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CreateAccountAdminActivity.this, "Tài khoản của bạn đã được tạo.", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(CreateAccountAdminActivity.this, AdminManegerAccountActivity2.class);
                                 startActivity(intent);
                             } else {
                                 loadingBar.dismiss();
-                                Toast.makeText(CreateAccountAdminActivity.this, "Network error", Toast.LENGTH_LONG).show();
+                                Toast.makeText(CreateAccountAdminActivity.this, "Đã xảy ra lỗi.", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
                 } else {
-                    Toast.makeText(CreateAccountAdminActivity.this, "This user is exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateAccountAdminActivity.this, "Người dùng này đang tồn tại.", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
-                    Toast.makeText(CreateAccountAdminActivity.this, "Please use another User", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateAccountAdminActivity.this, "Vui lòng sử dụng người dùng khác.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(CreateAccountAdminActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
