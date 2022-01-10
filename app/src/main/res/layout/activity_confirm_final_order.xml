@@ -120,8 +120,10 @@
         android:id="@+id/txtTongTien"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="Tổng tiền: "
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textColor="@color/red"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/lbproduct_city"/>
@@ -130,9 +132,10 @@
         android:id="@+id/txtTT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textColor="@color/red"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_toRightOf="@+id/txtTongTien"
         android:layout_below="@+id/lbproduct_city"/>
 
@@ -142,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:text="Confirm"
+        android:text="Xác nhận đặt hàng"
         android:textSize="20sp" />
 
 

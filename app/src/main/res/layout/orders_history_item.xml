@@ -240,7 +240,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:text="Show This Orders Products"
+        android:text="Hiển thị sản phẩm"
         android:textSize="15sp"/>
 
     <TextView

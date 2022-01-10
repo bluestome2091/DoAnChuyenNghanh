@@ -12,13 +12,34 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/txtproduct_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            android:text="Tên sản phẩm: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
             android:id="@+id/txtcart_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/txtproduct_name"
             android:textColor="@color/black"
             android:textAlignment="center"
-            android:text="Product Name "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtproduct_quatity"
+            android:layout_width="wrap_content"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Số lượng: "
+            android:layout_below="@+id/txtcart_product_name"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -27,12 +48,24 @@
             android:layout_width="match_parent"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
-
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Product Quantity "
+            android:layout_toRightOf="@+id/txtproduct_quatity"
             android:textAlignment="center"
             android:layout_below="@+id/txtcart_product_name"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtproduct_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtcart_product_quatity"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Giá sản phẩm: "
+            android:textColor="@color/red"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -40,11 +73,11 @@
             android:id="@+id/txtcart_product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/txtproduct_price"
             android:layout_below="@+id/txtcart_product_quatity"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Product Pice "
             android:textColor="@color/red"
             android:textSize="20sp"
             android:textStyle="bold" />

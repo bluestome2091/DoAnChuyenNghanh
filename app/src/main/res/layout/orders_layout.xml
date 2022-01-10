@@ -10,78 +10,148 @@
         android:layout_margin="10dp">
 
         <TextView
+            android:id="@+id/ordersusername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Họ tên: "
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
             android:id="@+id/orders_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ordersusername"
             android:layout_marginLeft="5dp"
-            android:text="UserName "
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/orders_phonenumber"
-            android:layout_width="match_parent"
+            android:id="@+id/ordersphonenumber"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orders_username"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Phone Number "
+            android:text="Số điện thoại: "
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/orders_phonenumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ordersphonenumber"
+            android:layout_below="@+id/orders_username"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/orders_totalprice"
-            android:layout_width="match_parent"
+            android:id="@+id/orderstotalprice"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orders_phonenumber"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/black"
-            android:text="Total Price "
+            android:text="Giá sản phẩm: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/orders_totalprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/orderstotalprice"
+            android:layout_below="@+id/orders_phonenumber"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/orders_address_city"
-            android:layout_width="match_parent"
+            android:id="@+id/ordersaddresscity"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orders_totalprice"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/black"
-            android:text="Address - City "
+            android:text="Địa chỉ: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/orders_address_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ordersaddresscity"
+            android:layout_below="@+id/orders_totalprice"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/orders_datetime"
-            android:layout_width="match_parent"
+            android:id="@+id/ordersdatetime"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orders_address_city"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Date Time "
+            android:text="Thời gian đặt: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/orders_datetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ordersdatetime"
+            android:layout_below="@+id/orders_address_city"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/orders_state"
-            android:layout_width="match_parent"
+            android:id="@+id/ordersstate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orders_datetime"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Date Time "
+            android:text="Trạng thái: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/orders_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ordersstate"
+            android:layout_below="@+id/orders_datetime"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -93,7 +163,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:text="Show This Orders Products"
+            android:text="Hiển thị sản phẩm"
             android:textSize="15sp"/>
 
     </RelativeLayout>
