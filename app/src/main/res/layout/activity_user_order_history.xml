@@ -40,12 +40,12 @@
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/show_orders_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/relativelayout6">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </ListView>
 
 </RelativeLayout>

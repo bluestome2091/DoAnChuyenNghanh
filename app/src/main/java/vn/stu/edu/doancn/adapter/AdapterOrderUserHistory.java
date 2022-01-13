@@ -26,11 +26,11 @@ import vn.stu.edu.doancn.model.UsersOrders;
 import vn.stu.edu.doancn.user.UserOrderHistoryActivity;
 import vn.stu.edu.doancn.user.UserOrderShowProductActivity;
 
-public class AdapterOrderUserHistory extends ArrayAdapter<UsersOrders> {
+public class AdapterOrderUserHistory extends ArrayAdapter<UserOrderHistory> {
     private Activity context;
     private int resource;
-    private List<UsersOrders> objects;
-    public AdapterOrderUserHistory(Activity context, int resource, List<UsersOrders> objects){
+    private List<UserOrderHistory> objects;
+    public AdapterOrderUserHistory(Activity context, int resource, List<UserOrderHistory> objects){
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -48,7 +48,7 @@ public class AdapterOrderUserHistory extends ArrayAdapter<UsersOrders> {
         TextView txtTGD = item.findViewById(R.id.order_history_datetime);
         TextView txtTrangThai = item.findViewById(R.id.order_history_trangthai);
         Button btnSetTT = item.findViewById(R.id.btnshow_all_order_products_history);
-        final UsersOrders sp = objects.get(position);
+        final UserOrderHistory sp = objects.get(position);
         txtND.setText(sp.getName());
         txtNN.setText(sp.getName());
         txtSDT.setText(sp.getPhone());

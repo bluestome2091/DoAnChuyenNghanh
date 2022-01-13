@@ -37,7 +37,7 @@ public class UserOrderHistoryActivity extends AppCompatActivity {
     private RecyclerView show_orders_history;
     private DatabaseReference orderhistoryRef;
     ImageButton btnOrderHistoryExit;
-    ArrayList<UsersOrders> dsHoaDonLichsu;
+    ArrayList<UserOrderHistory> dsHoaDonLichsu;
     AdapterOrderUserHistory adapter;
     ListView lv;
 
@@ -70,7 +70,7 @@ public class UserOrderHistoryActivity extends AppCompatActivity {
                         String state = n.child("state").getValue().toString();
                         String time = n.child("time").getValue().toString();
                         String totalPrice = n.child("totalPrice").getValue().toString();
-                        dsHoaDonLichsu.add(new UsersOrders(address, city, date, name, phone, state, time, totalPrice, id));
+                        dsHoaDonLichsu.add(new UserOrderHistory(address, city, date, name, phone, state, time, totalPrice, id));
 
                     }
                 }

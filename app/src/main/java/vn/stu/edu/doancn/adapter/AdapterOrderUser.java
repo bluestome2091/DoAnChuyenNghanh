@@ -74,7 +74,7 @@ public class AdapterOrderUser extends ArrayAdapter<UsersOrders> {
                     notifyDataSetChanged();
                 }
                 else {
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("HistoryOder");
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("HistoryOrder");
                     HashMap<String, Object> userMap = new HashMap<>();
                     userMap.put("address", sp.getAddress());
                     userMap.put("name", sp.getName());
