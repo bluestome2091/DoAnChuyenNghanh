@@ -10,24 +10,36 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import vn.stu.edu.doancn.Prevalent.Prevalent;
 import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.ViewHolder.AdminOrdersViewHolder;
 import vn.stu.edu.doancn.ViewHolder.OrderHistoryProductViewHolder;
+import vn.stu.edu.doancn.adapter.AdapterOrderUserHistory;
 import vn.stu.edu.doancn.model.UserOrderHistory;
+import vn.stu.edu.doancn.model.UsersOrders;
 
 public class UserOrderHistoryActivity extends AppCompatActivity {
 
     private RecyclerView show_orders_history;
     private DatabaseReference orderhistoryRef;
     ImageButton btnOrderHistoryExit;
+    ArrayList<UsersOrders> dsHoaDonLichsu;
+    AdapterOrderUserHistory adapter;
+    ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,44 +55,33 @@ public class UserOrderHistoryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<UserOrderHistory>().setQuery(orderhistoryRef, UserOrderHistory.class).build();
-        FirebaseRecyclerAdapter<UserOrderHistory, OrderHistoryProductViewHolder> adapter = new FirebaseRecyclerAdapter<UserOrderHistory, OrderHistoryProductViewHolder>(options) {
+        orderhistoryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            protected void onBindViewHolder(@NonNull OrderHistoryProductViewHolder orderHistoryProductViewHolder, int i, @NonNull UserOrderHistory userOrderHistory) {
-                if(userOrderHistory.getId().equals(Prevalent.currentOnlineUser.getUsers())){
-                    orderHistoryProductViewHolder.order_history_username.setText(userOrderHistory.getName());
-                    orderHistoryProductViewHolder.order_history_address_city.setText(userOrderHistory.getAddress() + " " + userOrderHistory.getCity());
-                    orderHistoryProductViewHolder.order_history_datetime.setText(userOrderHistory.getDate() + " " + userOrderHistory.getTime());
-                    orderHistoryProductViewHolder.order_history_nguoinhan.setText(userOrderHistory.getName());
-                    orderHistoryProductViewHolder.order_history_totalprice.setText(userOrderHistory.getTotalPrice() + " VND");
-                    orderHistoryProductViewHolder.order_history_trangthai.setText(userOrderHistory.getState());
-                    orderHistoryProductViewHolder.order_history_phonenumber.setText(userOrderHistory.getPhone());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dsHoaDonLichsu.clear();
+                for (DataSnapshot n : snapshot.getChildren()){
+                    String id = n.child("id").getValue().toString();
+                    if (id.equals(Prevalent.currentOnlineUser.getUsers())) {
+                        String address = n.child("address").getValue().toString();
+                        String name = n.child("name").getValue().toString();
+                        String phone = n.child("phone").getValue().toString();
+                        String date = n.child("date").getValue().toString();
+                        String city = n.child("city").getValue().toString();
+                        String state = n.child("state").getValue().toString();
+                        String time = n.child("time").getValue().toString();
+                        String totalPrice = n.child("totalPrice").getValue().toString();
+                        dsHoaDonLichsu.add(new UsersOrders(address, city, date, name, phone, state, time, totalPrice, id));
 
-
-                    orderHistoryProductViewHolder.btnshow_all_order_products_history.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String oID = getRef(i).getKey();
-                            Intent intent = new Intent(UserOrderHistoryActivity.this, UserOrderShowProductActivity.class);
-                            intent.putExtra("oID", oID);
-                            intent.putExtra("user", userOrderHistory.getId());
-                            startActivity(intent);
-                        }
-                    });
-
+                    }
                 }
+                adapter.notifyDataSetChanged();
             }
 
-            @NonNull
             @Override
-            public OrderHistoryProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.orders_history_item, parent, false);
-                return new OrderHistoryProductViewHolder(view);
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
-        };
-        show_orders_history.setAdapter(adapter);
-        adapter.startListening();
+        });
     }
 
     private void addEvents() {
@@ -96,7 +97,9 @@ public class UserOrderHistoryActivity extends AppCompatActivity {
 
     private void addControls() {
         btnOrderHistoryExit=findViewById(R.id.btnOrderHistoryExit);
-        show_orders_history=findViewById(R.id.show_orders_history);
-        show_orders_history.setLayoutManager(new LinearLayoutManager(this));
+        lv = findViewById(R.id.show_orders_history);
+        dsHoaDonLichsu = new ArrayList<>();
+        adapter=new AdapterOrderUserHistory(this, R.layout.orders_history_item, dsHoaDonLichsu);
+        lv.setAdapter(adapter);
     }
 }

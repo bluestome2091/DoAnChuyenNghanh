@@ -27,6 +27,7 @@ import vn.stu.edu.doancn.R;
 import vn.stu.edu.doancn.admin.AdminDetailsProduct;
 import vn.stu.edu.doancn.model.Products;
 import vn.stu.edu.doancn.model.UsersOrders;
+import vn.stu.edu.doancn.user.UserOrderHistoryActivity;
 
 public class AdapterOrderUser extends ArrayAdapter<UsersOrders> {
     private Activity context;
@@ -82,7 +83,7 @@ public class AdapterOrderUser extends ArrayAdapter<UsersOrders> {
                     userMap.put("city", sp.getCity());
                     userMap.put("state", "Đã nhận hàng");
                     userMap.put("id", sp.getId());
-                    userMap.put("time", sp.getId());
+                    userMap.put("time", sp.getTime());
                     userMap.put("totalPrice", sp.getTotalPrice());
                     ref.child(sp.getDate()+ " "+ sp.getTime()).updateChildren(userMap);
                     DatabaseReference refProduct = FirebaseDatabase.getInstance().getReference().child("CartList").child("AdminsView").child(sp.getId()).child("Products");
@@ -101,6 +102,14 @@ public class AdapterOrderUser extends ArrayAdapter<UsersOrders> {
                                 userMap1.put("price", n.child("price").getValue());
                                 refHistoryProduct.child(sp.getDate()+ " "+ sp.getTime()).child(n.child("date").getValue ()+ " " + n.child("time").getValue()).updateChildren(userMap1);
                             }
+
+                            refProduct.child(sp.getId()).removeValue();
+                            userRef.child(sp.getDate()+ " "+ sp.getTime()).removeValue();
+                            objects.remove(position);
+                            notifyDataSetChanged();
+
+                            Intent intent = new Intent(context, UserOrderHistoryActivity.class);
+                            context.startActivity(intent);
                         }
 
                         @Override

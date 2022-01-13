@@ -81,6 +81,8 @@ public class UserOrdersActivity extends AppCompatActivity {
                         String time = n.child("time").getValue().toString();
                         String totalPrice = n.child("totalPrice").getValue().toString();
                         dsHoaDon.add(new UsersOrders(address, city, date, name, phone, state, time, totalPrice, id));
+
+                        
                     }
                 }
                 adapter.notifyDataSetChanged();

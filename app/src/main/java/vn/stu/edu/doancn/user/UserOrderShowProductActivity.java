@@ -35,14 +35,13 @@ public class UserOrderShowProductActivity extends AppCompatActivity {
     private ImageButton btnShowUserProductsHistoryExit;
     private String uID = "";
 
-    private String hid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_order_show_product);
 
         uID = getIntent().getStringExtra("oID");
-        uershowproductRef= FirebaseDatabase.getInstance().getReference().child("HistoryProduct").child(uID).child("Products");
+        uershowproductRef= FirebaseDatabase.getInstance().getReference().child("HistoryProduct").child(uID);
 
         addControls();
         addEvents();
