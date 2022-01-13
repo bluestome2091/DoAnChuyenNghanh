@@ -63,7 +63,7 @@ public class UserOrdersActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<UsersOrders, UserOrderViewHolder> adapter = new FirebaseRecyclerAdapter<UsersOrders, UserOrderViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull UserOrderViewHolder userOrderViewHolder, int i, @NonNull UsersOrders usersOrders) {
-                if (usersOrders.getId().equals(Prevalent.currentOnlineUser.getUsers())) {
+                if (usersOrders.getId().equals(Prevalent.currentOnlineUser.getUsers()) && usersOrders.getState().equals("Đang giao hàng")){
                     userOrderViewHolder.username_order.setText(usersOrders.getName());
                     userOrderViewHolder.nguoinhan_order.setText(usersOrders.getName());
                     userOrderViewHolder.phonenumber_order.setText(usersOrders.getPhone());
@@ -184,9 +184,8 @@ public class UserOrdersActivity extends AppCompatActivity {
 
             }
 
-            @NonNull
             @Override
-            public UserOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public UserOrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_item_orders, parent, false);
                 return new UserOrderViewHolder(view);
             }
