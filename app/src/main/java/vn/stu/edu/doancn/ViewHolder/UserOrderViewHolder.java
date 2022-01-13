@@ -14,6 +14,7 @@ public class UserOrderViewHolder extends RecyclerView.ViewHolder{
     public TextView username_order, nguoinhan_order, phonenumber_order, totalprice_order, 
             address_city_order, datetime_order, trangthai_order;
     public Button btnDeleteOrder;
+
     public UserOrderViewHolder(@NonNull View itemView) {
         super(itemView);
         
